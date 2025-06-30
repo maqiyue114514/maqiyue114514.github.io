@@ -44,7 +44,7 @@
     }
   
     function i(e) {
-      for (var a = 0; a < 25; a++) { // 每次点击生成50个粒子
+      for (var a = 0; a < 15; a++) { // 每次点击生成50个粒子
         var p = t.createElement("div");
         p.className = "particle";
         
@@ -56,7 +56,7 @@
           size: Math.random() * 8 + 2,
           vx: (Math.random() - 0.5) * 10,
           vy: (Math.random() - 0.5) * 10,
-          gravity: 0.1,
+          gravity: 1,
           alpha: 1,
           color: `hsl(${Math.random() * 360}, 100%, 70%)`
         };
