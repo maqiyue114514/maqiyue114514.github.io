@@ -28,6 +28,8 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
   
   <title>maqiyue&#39;s blog</title>
 
@@ -195,7 +197,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/images/bg.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -261,11 +263,176 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A2%98%E8%A7%A3/" class="category-chain-item">题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E9%A2%98%E8%A7%A3/">#题解</a>
+            
+              <a href="/tags/%E6%A0%91/">#树</a>
+            
+              <a href="/tags/GESP/">#GESP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/22/%E5%9F%BA%E7%A1%80%E8%8E%AB%E9%98%9F/" target="_self">
+          基础莫队
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/22/%E5%9F%BA%E7%A1%80%E8%8E%AB%E9%98%9F/" target="_self">
+        <div>
+          更洛谷的观感体验。 今天讲一下基础的莫队算法。 算法思路 暴力每次统计每个数有几次，再累加，时间复杂度为 $O(nm)$。0分（全 TLE） 不是这题卡这么紧。 #include&lt;bits/stdc++.h> using namespace std; int n,m,k,a[50010];  int main() &#123; 	cin >> n >> m >> k; 	for(int i
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-22 18:16" pubdate>
+              2024-12-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%99%E7%A8%8B/%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/" class="category-chain-item">特殊技巧</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+            
+              <a href="/tags/%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/">#特殊技巧</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/15/Tarjan/" target="_self">
+          Tarjan
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/15/Tarjan/" target="_self">
+        <div>
+          今天来讲一下 Tarjan。 应用场景割点缩点。 dfn 和 low思路先上一个图：Tarjan是这样操作的：首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。换一个说法，就是不经过从起点到这个点已经经过的点，可
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-15 13:29" pubdate>
+              2024-12-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%99%E7%A8%8B/%E5%9B%BE%E8%AE%BA/" class="category-chain-item">图论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+            
+              <a href="/tags/%E5%9B%BE/">#图</a>
             
           </div>
         
@@ -301,6 +468,104 @@
           </div>
         
         
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%99%E7%A8%8B/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+            
+              <a href="/tags/%E6%A0%91/">#树</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/07/27/P5731%E3%80%90%E6%B7%B1%E5%9F%BA5-%E4%B9%A06%E3%80%91%E8%9B%87%E5%BD%A2%E6%96%B9%E9%98%B5-%E9%A2%98%E8%A7%A3/" target="_self">
+          P5731【深基5.习6】蛇形方阵 题解
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/P5731%E3%80%90%E6%B7%B1%E5%9F%BA5-%E4%B9%A06%E3%80%91%E8%9B%87%E5%BD%A2%E6%96%B9%E9%98%B5-%E9%A2%98%E8%A7%A3/" target="_self">
+        <div>
+          题目题目传送门。没什么可说的，直接跳过。 做法思路仔细观察输出，可以发现输出可以当做输出几个方框。 这样我们只要画出每个正方形就可以了。 Code实现首先输入不用说了吧。 不会真有人不会吧 #include&lt;bits/stdc++.h>//万能头启动 using namespace std; int main() &#123;   int n;//不用说了吧，跟题目中名字一样   cin >
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-27 22:02" pubdate>
+              2024-07-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A2%98%E8%A7%A3/" class="category-chain-item">题解</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">#题解</a>
+            
+          </div>
         
       </div>
     </article>
