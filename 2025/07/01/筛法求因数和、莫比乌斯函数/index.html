@@ -19,25 +19,24 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="美好的一天从写题解开始。 感谢 @jhdrgfj 的思路 思路很显然，设 $f_{i,j}$ 为在第 $i$ 天造成 $j$ 点伤害。 但是，每一天都是一个 01 背包，任意两天的魔力值都是互不影响的，所以考虑每一天一次 dp。设 $f_i$ 为将魔力值提高到 $i$ 的最小花费（当天），就是求 01 背包。 code#include&lt;bits&#x2F;stdc++.h&gt; using namespa">
+    <meta name="description" content="更洛谷的观感体验。 好吧，也是不鸽了，上篇文章的续集来了。 筛法求因数和给定 $n$，求 $1\text{\textasciitilde}n$ 的因数和。 前置芝士补充根据唯一分解定理，一个数 $n$ 为：$$n&#x3D;\prod_{i&#x3D;1}^s p_i^{a_i}$$一个质数 $p_i^{a_i}$ 的因数有 $p_i^0,p_i^1,p_i^2,…,p_i{a_i}$，共有 $a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="题解：P10316[SHUPC 2024]为美好的世界献上爆焰!">
-<meta property="og:url" content="https://maqiyue114514.github.io/2025/04/10/%E9%A2%98%E8%A7%A3%EF%BC%9AP10316-SHUPC-2024-%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%88%86%E7%84%B0/index.html">
+<meta property="og:title" content="筛法求因数和、莫比乌斯函数">
+<meta property="og:url" content="https://maqiyue114514.github.io/2025/07/01/%E7%AD%9B%E6%B3%95%E6%B1%82%E5%9B%A0%E6%95%B0%E5%92%8C%E3%80%81%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
-<meta property="og:description" content="美好的一天从写题解开始。 感谢 @jhdrgfj 的思路 思路很显然，设 $f_{i,j}$ 为在第 $i$ 天造成 $j$ 点伤害。 但是，每一天都是一个 01 背包，任意两天的魔力值都是互不影响的，所以考虑每一天一次 dp。设 $f_i$ 为将魔力值提高到 $i$ 的最小花费（当天），就是求 01 背包。 code#include&lt;bits&#x2F;stdc++.h&gt; using namespa">
+<meta property="og:description" content="更洛谷的观感体验。 好吧，也是不鸽了，上篇文章的续集来了。 筛法求因数和给定 $n$，求 $1\text{\textasciitilde}n$ 的因数和。 前置芝士补充根据唯一分解定理，一个数 $n$ 为：$$n&#x3D;\prod_{i&#x3D;1}^s p_i^{a_i}$$一个质数 $p_i^{a_i}$ 的因数有 $p_i^0,p_i^1,p_i^2,…,p_i{a_i}$，共有 $a">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-04-10T08:39:00.000Z">
-<meta property="article:modified_time" content="2025-07-01T05:02:56.327Z">
+<meta property="article:published_time" content="2025-07-01T08:19:11.000Z">
+<meta property="article:modified_time" content="2025-07-01T08:21:44.994Z">
 <meta property="article:author" content="maqiyue">
-<meta property="article:tag" content="题解">
-<meta property="article:tag" content="动态规划(dp)">
+<meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>题解：P10316[SHUPC 2024]为美好的世界献上爆焰! - maqiyue&#39;s blog</title>
+  <title>筛法求因数和、莫比乌斯函数 - maqiyue&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -217,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="题解：P10316[SHUPC 2024]为美好的世界献上爆焰!"></span>
+            <span id="subtitle" data-typed-text="筛法求因数和、莫比乌斯函数"></span>
           
         </div>
 
@@ -233,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-10 16:39" pubdate>
-          2025年4月10日 下午
+        <time datetime="2025-07-01 16:19" pubdate>
+          2025年7月1日 下午
         </time>
       </span>
     
@@ -245,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          277 字
+          661 字
         
       </span>
     
@@ -256,7 +255,7 @@
         
         
         
-          3 分钟
+          6 分钟
         
       </span>
     
@@ -302,49 +301,85 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">题解：P10316[SHUPC 2024]为美好的世界献上爆焰!</h1>
+            <h1 id="seo-header">筛法求因数和、莫比乌斯函数</h1>
             
             
               <div class="markdown-body">
                 
-                <p>美好的一天从写题解开始。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">感谢 @jhdrgfj 的思路<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>很显然，设 $f_{i,j}$ 为在第 $i$ 天造成 $j$ 点伤害。</p>
-<p>但是，每一天都是一个 01 背包，任意两天的魔力值都是互不影响的，所以考虑每一天一次 dp。<br>设 $f_i$ 为将魔力值提高到 $i$ 的最小花费（当天），就是求 01 背包。</p>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">int</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAX</span> <span class="token expression"><span class="token number">1145141818810ll</span></span></span>
-<span class="token comment">//照楼上</span>
-<span class="token keyword">int</span> n<span class="token punctuation">,</span> x<span class="token punctuation">,</span> s<span class="token punctuation">,</span> m<span class="token punctuation">,</span> f1<span class="token punctuation">[</span><span class="token number">5010</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f2<span class="token punctuation">[</span><span class="token number">5010</span><span class="token punctuation">]</span><span class="token punctuation">,</span> w<span class="token punctuation">[</span><span class="token number">5010</span><span class="token punctuation">]</span><span class="token punctuation">,</span> v<span class="token punctuation">[</span><span class="token number">5010</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">signed</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/qz5ztwz1">更洛谷的观感体验</a>。</p>
+<p>好吧，也是不鸽了，<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/8ciz1cdo">上篇文章</a>的续集来了。</p>
+<h1 id="筛法求因数和"><a href="#筛法求因数和" class="headerlink" title="筛法求因数和"></a>筛法求因数和</h1><p>给定 $n$，求 $1\text{\textasciitilde}n$ 的因数和。</p>
+<h2 id="前置芝士补充"><a href="#前置芝士补充" class="headerlink" title="前置芝士补充"></a>前置芝士补充</h2><p>根据唯一分解定理，一个数 $n$ 为：<br>$$n&#x3D;\prod_{i&#x3D;1}^s p_i^{a_i}$$<br>一个质数 $p_i^{a_i}$ 的因数有 $p_i^0,p_i^1,p_i^2,…,p_i{a_i}$，共有 $a_i+1$ 个因数，质数 $p_i^{a_i}$ 的因数和为：<br>$$f(p_i^{a_i})&#x3D;\sum^{a_i}<em>{j&#x3D;0}p_i^j$$<br>因为 $n$ 有多个这个因数，所以 $n$ 的因数和为：<br>$$f(n)&#x3D;\prod^s</em>{i&#x3D;1}\sum^{a_i}_{j &#x3D; 0}p_i^j$$</p>
+<h2 id="筛法实现"><a href="#筛法实现" class="headerlink" title="筛法实现"></a>筛法实现</h2><p>定义两个数组 $g,f$，分别记录<strong>最小质因子不同次幂的和</strong>和约束和。</p>
+<p>分为两种情况。</p>
+<ol>
+<li>$i\mod p_j&#x3D;0$<br>$p_j$ 是 $i$ 的最小质因子，设 $i$ 中 $p_j$ 的指数为 $a_j$，则：<br>$$g_i&#x3D;\sum^{a_j}<em>{k&#x3D;0}p_j^k$$<br>标记的数 $m&#x3D;p_j\times i$ 中的指数为 $a_j+1$，则：<br>$$g_m&#x3D;\sum^{a_j+1}</em>{k&#x3D;0}p_j^k$$<br>$$f_m&#x3D;\frac{f_i\times g_m}{g_i}$$</li>
+<li>$i\mod p_j\not&#x3D;0$<br>$i$ 不包含质因子 $p_j$：<br>$$g_m&#x3D;1+p_j$$<br>其中的 $1$ 是 $p_j^0$。<br>$$f_m&#x3D;g_m\times f_i$$</li>
+</ol>
+<p>还有，如果 $i$ 为质数，则：<br>$$g_i&#x3D;f_i&#x3D;1+i$$</p>
+<h2 id="texttt-Code"><a href="#texttt-Code" class="headerlink" title="$\texttt{Code}$"></a>$\texttt{Code}$</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> p<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">,</span> g<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">get_f</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
-	cin <span class="token operator">>></span> n <span class="token operator">>></span> x <span class="token operator">>></span> s <span class="token operator">>></span> m<span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> x<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		f1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> MAX<span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	g<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> s<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token comment">//f2需要每次清理</span>
-			f2<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> MAX<span class="token punctuation">;</span>
-		<span class="token keyword">int</span> N<span class="token punctuation">,</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-		cin <span class="token operator">>></span> N<span class="token punctuation">;</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> N<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
-			cin <span class="token operator">>></span> v<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> N<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
-			cin <span class="token operator">>></span> w<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> sum <span class="token operator">+=</span> w<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-		sum <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>sum <span class="token operator">+</span> m<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">/*更新f2*/</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> N<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
-			<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> sum<span class="token punctuation">;</span> k <span class="token operator">>=</span> w<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span> k<span class="token operator">--</span><span class="token punctuation">)</span>
-				f2<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>f2<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> f2<span class="token punctuation">[</span>k <span class="token operator">-</span> w<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">+</span> v<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">/*更新f1*/</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> x<span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span>
-			<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> m<span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> sum<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
-				f1<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>f1<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f1<span class="token punctuation">[</span><span class="token function">max</span><span class="token punctuation">(</span>j <span class="token operator">-</span> k<span class="token punctuation">,</span> <span class="token number">0ll</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">+</span> f2<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//max(j - k, 0ll)防止可能出现负数</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>vis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+			p<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">,</span> g<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">int</span> m <span class="token operator">=</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> i<span class="token punctuation">;</span>
+			vis<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">%</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				g<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> g<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+				f<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">/</span> g<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> g<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">;</span>
+				<span class="token keyword">break</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			g<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+			f<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> g<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
 	<span class="token punctuation">&#125;</span>
-	cout <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>f1<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">==</span> MAX <span class="token operator">?</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">:</span> f1<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h1 id="筛法求莫比乌斯函数"><a href="#筛法求莫比乌斯函数" class="headerlink" title="筛法求莫比乌斯函数"></a>筛法求莫比乌斯函数</h1><p>给定 $n$，求 $\mu(1)\text{\textasciitilde}\mu(n)$</p>
+<h2 id="前置知识补充"><a href="#前置知识补充" class="headerlink" title="前置知识补充"></a>前置知识补充</h2><p>根据唯一分解定理，一个数 $n$ 为：<br>$$n&#x3D;\prod_{i&#x3D;1}^s p_i^{a_i}$$<br>$$\mu(n)&#x3D;\begin{cases}1&amp;n&#x3D;1\0&amp;n\texttt{含有相同质因子}\(-1)^s&amp;s\texttt{为}n\texttt{的不同质因子个数}\end{cases}$$</p>
+<h2 id="筛法实现-1"><a href="#筛法实现-1" class="headerlink" title="筛法实现"></a>筛法实现</h2><p>$p$ 为质数则 $\mu(p)&#x3D;-1$。<br>定义数组 $mu$，$mu_i&#x3D;\mu(i)$，定义 $m&#x3D;i\times p_j$</p>
+<ol>
+<li>$i\mod p_j&#x3D;0$<br>$i$ 包含质因子 $p_j$，则 $mu_m&#x3D;0$（因为第 $2$ 条规则）。</li>
+<li>$i\mod p_j\not&#x3D;0$<br>$m$ 比 $i$ 多一个质因子 $p_j$，则：<br>$$mu_m&#x3D;-mu_i$$</li>
+</ol>
+<h2 id="texttt-Code-1"><a href="#texttt-Code-1" class="headerlink" title="$\texttt{Code}$"></a>$\texttt{Code}$</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> p<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">,</span> mu<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">bool</span> vis<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">get_mu</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	mu<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>vis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+			p<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">,</span> mu<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>  
+		<span class="token punctuation">&#123;</span>
+			<span class="token keyword">int</span> m <span class="token operator">=</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> i<span class="token punctuation">;</span>
+			vis<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">%</span> p<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+			<span class="token punctuation">&#123;</span>
+				mu<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+				<span class="token keyword">break</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span>
+			<span class="token keyword">else</span>
+				mu<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>mu<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次我们学习了筛法求因数和、莫比乌斯函数。</p>
+<p>筛法可以求：</p>
+<ul>
+<li>质数</li>
+<li>欧拉函数（$\varphi$）</li>
+<li>因数个数</li>
+<li>因数和</li>
+<li>莫比乌斯函数（$\mu$）</li>
+</ul>
+<p>还有，欢迎来到<a href="https://maqiyue114514.github.io/">我的博客</a>玩哦！</p>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
@@ -378,8 +413,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%A2%98%E8%A7%A3/" class="category-chain-item">题解</a>
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%99%E7%A8%8B/%E6%95%B0%E8%AE%BA/" class="category-chain-item">数论</a>
+  
+  
+
   
 
       </span>
@@ -393,9 +435,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%A2%98%E8%A7%A3/" class="print-no-link">#题解</a>
-      
-        <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-dp/" class="print-no-link">#动态规划(dp)</a>
+        <a href="/tags/%E6%95%B0%E8%AE%BA/" class="print-no-link">#数论</a>
       
     </div>
   
@@ -407,8 +447,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>题解：P10316[SHUPC 2024]为美好的世界献上爆焰!</div>
-      <div>https://maqiyue114514.github.io/2025/04/10/题解：P10316-SHUPC-2024-为美好的世界献上爆焰/</div>
+      <div>筛法求因数和、莫比乌斯函数</div>
+      <div>https://maqiyue114514.github.io/2025/07/01/筛法求因数和、莫比乌斯函数/</div>
     </div>
     <div class="license-meta">
       
@@ -420,7 +460,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年4月10日</div>
+          <div>2025年7月1日</div>
         </div>
       
       
@@ -457,18 +497,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/19/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/" title="树链剖分">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树链剖分</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/01/20/%E9%A2%98%E8%A7%A3%EF%BC%9AP1752-%E7%82%B9%E8%8F%9C/" title="题解：P1752 点菜">
-                        <span class="hidden-mobile">题解：P1752 点菜</span>
+                      <a href="/2025/07/01/%E7%AD%9B%E6%B3%95%E3%80%81%E7%AD%9B%E6%B3%95%E6%B1%82%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E3%80%81%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0/" title="筛法、筛法求欧拉函数、因数个数">
+                        <span class="hidden-mobile">筛法、筛法求欧拉函数、因数个数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
