@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="maqiyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="更加洛谷的观感感受写数论文章写爽了。 矩阵快速幂矩阵乘法矩阵乘法要求设 $A$ 为 $m \times p$ 的矩阵。$B$ 为 $p\times n$ 的矩阵。矩阵乘法必须第一个矩阵的列数等于第二个矩阵的行数。$A\times B$ 是一个 $m \times n$ 的矩阵。 矩阵乘法定义设 $A\times B&#x3D;C$，则 $C_{i,j}$ 为：$$C_{i,j}&#x3D;\sum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵快速幂、矩阵加速递推">
+<meta property="og:url" content="https://maqiyue114514.github.io/2025/07/01/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82%E3%80%81%E7%9F%A9%E9%98%B5%E5%8A%A0%E9%80%9F%E9%80%92%E6%8E%A8/index.html">
+<meta property="og:site_name" content="maqiyue&#39;s blog">
+<meta property="og:description" content="更加洛谷的观感感受写数论文章写爽了。 矩阵快速幂矩阵乘法矩阵乘法要求设 $A$ 为 $m \times p$ 的矩阵。$B$ 为 $p\times n$ 的矩阵。矩阵乘法必须第一个矩阵的列数等于第二个矩阵的行数。$A\times B$ 是一个 $m \times n$ 的矩阵。 矩阵乘法定义设 $A\times B&#x3D;C$，则 $C_{i,j}$ 为：$$C_{i,j}&#x3D;\sum">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-01T11:01:26.000Z">
+<meta property="article:modified_time" content="2025-07-01T11:15:46.182Z">
+<meta property="article:author" content="maqiyue">
+<meta property="article:tag" content="数论">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>矩阵快速幂、矩阵加速递推 - maqiyue&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>maqiyue&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/images/bg.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="矩阵快速幂、矩阵加速递推"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        maqiyue
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-01 19:01" pubdate>
+          2025年7月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">矩阵快速幂、矩阵加速递推</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/39ymiefd">更加洛谷的观感感受</a><br><del>写数论文章写爽了</del>。</p>
+<h1 id="矩阵快速幂"><a href="#矩阵快速幂" class="headerlink" title="矩阵快速幂"></a>矩阵快速幂</h1><h2 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h2><h3 id="矩阵乘法要求"><a href="#矩阵乘法要求" class="headerlink" title="矩阵乘法要求"></a>矩阵乘法要求</h3><p>设 $A$ 为 $m \times p$ 的矩阵。$B$ 为 $p\times n$ 的矩阵。<br><strong>矩阵乘法必须第一个矩阵的列数等于第二个矩阵的行数。</strong><br>$A\times B$ 是一个 $m \times n$ 的矩阵。</p>
+<h3 id="矩阵乘法定义"><a href="#矩阵乘法定义" class="headerlink" title="矩阵乘法定义"></a>矩阵乘法定义</h3><p>设 $A\times B&#x3D;C$，则 $C_{i,j}$ 为：<br>$$C_{i,j}&#x3D;\sum^p_{k&#x3D;1}A_{i,k}\times B_{k,j}$$</p>
+<h3 id="矩阵乘法示例"><a href="#矩阵乘法示例" class="headerlink" title="矩阵乘法示例"></a>矩阵乘法示例</h3><p>假如：<br>$$A&#x3D;\begin{bmatrix}<br>   1 &amp; 2 &amp; 3 \<br>   4 &amp; 5 &amp; 6<br>\end{bmatrix},B&#x3D;\begin{bmatrix}<br>   1 &amp; 2 \<br>   3 &amp; 4 \<br>   5 &amp; 6<br>\end{bmatrix}$$<br>请你计算 $A \times B &#x3D; C$ 的值，请你在草稿纸上计算出来后再翻到下面。<br>$\newline\textcolor{blue}{\rule{0cm}{20cm}}$</p>
+<p>我们一起计算一下：<br>$$C_{1, 1}&#x3D;1\times1+2\times2+3\times 3&#x3D;14$$<br>$$C_{1, 2}&#x3D;1\times 4+2\times 5+3\times 6&#x3D;32$$<br>$$C_{2, 1}&#x3D;4\times 1 + 5\times 2+6\times 3&#x3D;32$$<br>$$C_{2,2}&#x3D;4\times4+5\times5+6\times6&#x3D;77$$<br>即：<br>$$C&#x3D;\begin{bmatrix}14 &amp; 32\<br>32 &amp; 77\end{bmatrix}$$</p>
+<h2 id="矩阵的幂运算"><a href="#矩阵的幂运算" class="headerlink" title="矩阵的幂运算"></a>矩阵的幂运算</h2><p>计算 $C&#x3D;\begin{bmatrix}1 &amp; 2\<br>2 &amp; 1\end{bmatrix}^3$：  </p>
+<ol>
+<li>先算二次幂：<br>$$\begin{bmatrix}1 &amp; 2\2 &amp; 1\end{bmatrix}^2&#x3D;\begin{bmatrix}1 &amp; 2\2 &amp; 1\end{bmatrix}\times\begin{bmatrix}1 &amp; 2\2 &amp; 1\end{bmatrix}&#x3D;\begin{bmatrix}5 &amp; 4\4 &amp; 5\end{bmatrix}$$  </li>
+<li>再算三次幂：<br>$$\begin{bmatrix}5 &amp; 4\4 &amp; 5\end{bmatrix}\times\begin{bmatrix}1 &amp; 2\2 &amp; 1\end{bmatrix}&#x3D;\begin{bmatrix}13 &amp; 14\14 &amp; 13\end{bmatrix}$$</li>
+</ol>
+<h2 id="单位矩阵"><a href="#单位矩阵" class="headerlink" title="单位矩阵"></a>单位矩阵</h2><p>单位矩阵 $I&#x3D;\begin{bmatrix}1 &amp; 0\0 &amp; 1\end{bmatrix}$，与任意矩阵相乘不改变其值。</p>
+<p>一个 $n \times n$ 的单位矩阵为左对角线改为 $1$，其他为 $0$ 即可。</p>
+<h2 id="矩阵快速幂的实现"><a href="#矩阵快速幂的实现" class="headerlink" title="矩阵快速幂的实现"></a>矩阵快速幂的实现</h2><p>比较简单，建立一个矩阵结构体封装即可。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">matrix</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token function">matrix</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token operator">:</span><span class="token function">n</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">memset</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">int</span><span class="token operator">*</span> <span class="token keyword">operator</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">int</span> t<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> c<span class="token punctuation">[</span>t<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//建立单位矩阵</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+			c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> n<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+	<span class="token keyword">int</span> c<span class="token punctuation">[</span><span class="token number">110</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">110</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+matrix <span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span>matrix x<span class="token punctuation">,</span> matrix y<span class="token punctuation">)</span><span class="token comment">//矩阵乘法</span>
+<span class="token punctuation">&#123;</span>
+	matrix ans<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> n <span class="token operator">=</span> x<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+			<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
+				ans<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+=</span> x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">*</span> y<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+matrix <span class="token function">quick_pow</span><span class="token punctuation">(</span>matrix x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token comment">//矩阵快速幂</span>
+<span class="token punctuation">&#123;</span>
+	matrix ans<span class="token punctuation">;</span>
+	ans<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//注意这里需要是单位矩阵</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>y <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> ans <span class="token operator">=</span> ans <span class="token operator">*</span> x<span class="token punctuation">;</span>
+		y <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+		x <span class="token operator">=</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>时间复杂度为：$O(n^3\times\log n )$，其中 $y$ 为指数， $n$ 为矩阵长度。</p>
+<h1 id="矩阵加速递推"><a href="#矩阵加速递推" class="headerlink" title="矩阵加速递推"></a>矩阵加速递推</h1><p>求斐波那契数列（<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1962">P1962 斐波那契数列</a>）：<br>$$F_n&#x3D;\begin{cases}1 &amp; (n \leq2)\<br>F_{n-1}+F_{n-2} &amp; (n &gt; 2)\end{cases}$$<br>$$1\leq n \leq2^{63}$$</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="构造矩阵"><a href="#构造矩阵" class="headerlink" title="构造矩阵"></a>构造矩阵</h3><p>我们把斐波那契数列的相邻两项表示为一个矩阵 $\begin{bmatrix}F_n &amp; F_{n - 1}\end{bmatrix}$，我们希望通过 $\begin{bmatrix}F_{n - 1} &amp; F_{n - 2}\end{bmatrix}$ 推出 $\begin{bmatrix}F_n &amp; F_{n - 1}\end{bmatrix}$。</p>
+<h3 id="构造转移矩阵"><a href="#构造转移矩阵" class="headerlink" title="构造转移矩阵"></a>构造转移矩阵</h3><p>我们构造一个矩阵 $A$，使得：<br>$$\begin{bmatrix}F_{n - 1} &amp; F_{n - 2}\end{bmatrix}\times A&#x3D;\begin{bmatrix}F_n &amp; F_{n - 1}\end{bmatrix}$$<br>根据递推关系：<br>$$\begin{cases}F_n&#x3D;F_{n-1}\times 1+F_{n-2}\times 1\<br>F_{n-1}&#x3D;F_{n-1}\times 1+F_{n-2}\times 0\end{cases}$$<br>观察可得：<br>$$A&#x3D;\begin{bmatrix}1 &amp; 1\1 &amp; 0\end{bmatrix}$$</p>
+<h3 id="递推"><a href="#递推" class="headerlink" title="递推"></a>递推</h3><p>我们发现：<br>$$\begin{bmatrix}F_{2} &amp; F_{1}\end{bmatrix}\times A^{n-2}&#x3D;\begin{bmatrix}F_n &amp; F_{n - 1}\end{bmatrix}$$</p>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>矩阵快速幂为 $O(n^3 \log y)$，而矩阵的长度为 $2$，$y$ 为题目中的 $n - 2$，所以时间复杂度为 $O(8\log n)$，就是 $O(\log n)$。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">int</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> mod <span class="token operator">=</span> <span class="token number">1e9</span> <span class="token operator">+</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">matrix</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> c<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token function">matrix</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">memset</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+			c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+matrix <span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span>matrix x<span class="token punctuation">,</span> matrix y<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	matrix ans<span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+			<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
+				ans<span class="token punctuation">.</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>ans<span class="token punctuation">.</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span> x<span class="token punctuation">.</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">*</span> y<span class="token punctuation">.</span>c<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">%</span> mod<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+matrix <span class="token function">quick_pow</span><span class="token punctuation">(</span>matrix x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	matrix ans<span class="token punctuation">;</span>
+	ans<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>y <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> ans <span class="token operator">=</span> ans <span class="token operator">*</span> x<span class="token punctuation">;</span>
+		y <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+		x <span class="token operator">=</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">signed</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> m<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> m<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>m <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> cout <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    matrix a<span class="token punctuation">;</span>
+    a<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    matrix b<span class="token punctuation">;</span>
+    b<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> b<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    b <span class="token operator">=</span> <span class="token function">quick_pow</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> m <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    matrix ans <span class="token operator">=</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> ans<span class="token punctuation">.</span>c<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><p>已知一个函数为：<br>$$f(n)&#x3D;\begin{cases}1 &amp;(n \leq 3)\<br>f(n - 1) \times f(n - 2) \times f(n-3) &amp; (n &gt; 3)\end{cases}$$<br>给出 $n(1\leq n\leq10^{18})$ 求出 $f(n)\mod 114514$。</p>
+<div class="giscus"></div>
+<script src="https://giscus.app/client.js"
+        data-repo="maqiyue114514/maqiyue114514.github.io"
+        data-repo-id="R_kgDOO_BDlA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO_BDlM4Crztf"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%99%E7%A8%8B/%E6%95%B0%E8%AE%BA/" class="category-chain-item">数论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E8%AE%BA/" class="print-no-link">#数论</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>矩阵快速幂、矩阵加速递推</div>
+      <div>https://maqiyue114514.github.io/2025/07/01/矩阵快速幂、矩阵加速递推/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>maqiyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年7月1日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/07/01/%E9%A2%98%E8%A7%A3%EF%BC%9AP11996-%E6%88%91%E6%98%AF%E9%BB%84%E8%89%B2%E6%81%90%E9%BE%99%E5%A4%A7%E5%B0%86%E5%86%9B/" title="题解：P11996 我是黄色恐龙大将军">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">题解：P11996 我是黄色恐龙大将军</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/01/%E7%AD%9B%E6%B3%95%E6%B1%82%E5%9B%A0%E6%95%B0%E5%92%8C%E3%80%81%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0/" title="筛法求因数和、莫比乌斯函数">
+                        <span class="hidden-mobile">筛法求因数和、莫比乌斯函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/cursor/particle-explosion.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
