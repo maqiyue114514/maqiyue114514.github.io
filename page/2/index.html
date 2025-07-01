@@ -59,6 +59,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/-/css/custom.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -76,7 +80,11 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+
+</script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -249,7 +257,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/01/18/%E9%A2%98%E8%A7%A3%EF%BC%9AAT-tkppc6-2-a/" target="_self">
         <div>
-          AT_tkppc6_2_a &gt;_&lt; 题解题意把一个 ${1,2,3,…,n}$ 的数列 $P$，重新组合，询问满足以下要求的重组序列的数量。对于每一个 $i$（$2\le i \le n$），满足 $P_i$ 是 $P_{1 \sim i}$ 中最小的值或是最大的值。 思路考虑最后一位，因为最后一位一定是 $P$ 中最小的值或最大的值，所以一定是 $1,n$。我们发现，选后 $n -
+          AT_tkppc6_2_a &gt;_&lt; 题解  题意 把一个 {1,2,3,…,n}\{1,2,3,…,n\}{1,2,3,…,n} 的数列 PPP，重新组合，询问满足以下要求的重组序列的数量。 对于每一个 iii（2≤i≤n2\le i \le n2≤i≤n），满足 PiP_iPi​ 是 P1∼iP_{1 \sim i}P1∼i​ 中最小的值或是最大的值。  思路 考虑最后一位，因为最
         </div>
       </a>
 
@@ -312,7 +320,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/12/22/%E5%9F%BA%E7%A1%80%E8%8E%AB%E9%98%9F/" target="_self">
         <div>
-          更洛谷的观感体验。 今天讲一下基础的莫队算法。 算法思路 暴力每次统计每个数有几次，再累加，时间复杂度为 $O(nm)$。0分（全 TLE） 不是这题卡这么紧。 #include&lt;bits/stdc++.h> using namespace std; int n,m,k,a[50010];  int main() &#123; 	cin >> n >> m >> k; 	for(int i
+          更洛谷的观感体验。 今天讲一下基础的莫队算法。  算法思路   暴力 每次统计每个数有几次，再累加，时间复杂度为 O(nm)O(nm)O(nm)。 0分（全 TLE） 不是这题卡这么紧。 #include&lt;bits&#x2F;stdc++.h&gt; using namespace std; int n,m,k,a[50010];  int main() &#123; 	cin &gt;&g
         </div>
       </a>
 
@@ -382,7 +390,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/12/15/Tarjan/" target="_self">
         <div>
-          今天来讲一下 Tarjan。 应用场景割点缩点。 dfn 和 low思路先上一个图：Tarjan是这样操作的：首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。换一个说法，就是不经过从起点到这个点已经经过的点，可
+          今天来讲一下 Tarjan。  应用场景 割点缩点。  dfn 和 low  思路 先上一个图：  Tarjan是这样操作的： 首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：  再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。 什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。 换一个说法，就是不经过从起
         </div>
       </a>
 
@@ -452,7 +460,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/11/17/%E5%A0%86/" target="_self">
         <div>
-          今天来讲一下 堆（优先队列）。 应用场景求最值问题。 算法思路模板题：P3378 【模板】堆 。 带入让我们复习一下学过的最值问题。   ($l$ 为数组的长度)  暴力 时间复杂度 $O(n l)$ 线段树 用不了(无法增删) 单调队列 用不了(太惨了) 倍增(ST表) 用不了(只能处理静态的区间最值)  很显然，没有算法可以AC这道题，我们需要新的算法。 处理我们使用一种叫 堆（优先队列）的数
+          今天来讲一下 堆（优先队列）。  应用场景 求最值问题。  算法思路 模板题：P3378 【模板】堆 。  带入 让我们复习一下学过的最值问题。 (lll 为数组的长度)  暴力 时间复杂度 O(nl)O(n l)O(nl) 线段树 用不了(无法增删) 单调队列 用不了(太惨了) 倍增(ST表) 用不了(只能处理静态的区间最值)  很显然，没有算法可以AC这道题，我们需要新的算法。  处理 我们使
         </div>
       </a>
 
@@ -524,7 +532,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/P5731%E3%80%90%E6%B7%B1%E5%9F%BA5-%E4%B9%A06%E3%80%91%E8%9B%87%E5%BD%A2%E6%96%B9%E9%98%B5-%E9%A2%98%E8%A7%A3/" target="_self">
         <div>
-          题目题目传送门。没什么可说的，直接跳过。 做法思路仔细观察输出，可以发现输出可以当做输出几个方框。 这样我们只要画出每个正方形就可以了。 Code实现首先输入不用说了吧。 不会真有人不会吧 #include&lt;bits/stdc++.h>//万能头启动 using namespace std; int main() &#123;   int n;//不用说了吧，跟题目中名字一样   cin >
+          题目 题目传送门。 没什么可说的，直接跳过。  做法  思路 仔细观察输出，可以发现输出可以当做输出几个方框。 这样我们只要画出每个正方形就可以了。  Code实现 首先输入不用说了吧。 不会真有人不会吧 #include&lt;bits&#x2F;stdc++.h&gt;&#x2F;&#x2F;万能头启动 using namespace std; int main() &#123;   int
         </div>
       </a>
 

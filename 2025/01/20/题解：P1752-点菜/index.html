@@ -19,12 +19,12 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这题是一道绝世好题。为什么咩？因为它代码长。因为它没有运用什么高级算法，但用低级算法组成了一道紫题。 题意转化读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天） 思路首先，根据算法标签我们得知应该使用二分，因为算法标签天数越多越容易每种菜都吃一遍，反之越少越不容易。">
+    <meta name="description" content="这题是一道绝世好题。 为什么咩？ 因为它代码长。 因为它没有运用什么高级算法，但用低级算法组成了一道紫题。  题意转化 读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。 换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天）  思路 首先，根据算法标签我们得知应该使用二分，因为算法标签天数越多越容易每种菜都吃一遍，反之">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解：P1752 点菜">
 <meta property="og:url" content="https://maqiyue114514.github.io/2025/01/20/%E9%A2%98%E8%A7%A3%EF%BC%9AP1752-%E7%82%B9%E8%8F%9C/index.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
-<meta property="og:description" content="这题是一道绝世好题。为什么咩？因为它代码长。因为它没有运用什么高级算法，但用低级算法组成了一道紫题。 题意转化读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天） 思路首先，根据算法标签我们得知应该使用二分，因为算法标签天数越多越容易每种菜都吃一遍，反之越少越不容易。">
+<meta property="og:description" content="这题是一道绝世好题。 为什么咩？ 因为它代码长。 因为它没有运用什么高级算法，但用低级算法组成了一道紫题。  题意转化 读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。 换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天）  思路 首先，根据算法标签我们得知应该使用二分，因为算法标签天数越多越容易每种菜都吃一遍，反之">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/oeizu2p7.png">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/k8txyorp.png">
@@ -32,8 +32,8 @@
 <meta property="article:modified_time" content="2025-07-01T01:28:08.593Z">
 <meta property="article:author" content="maqiyue">
 <meta property="article:tag" content="题解">
-<meta property="article:tag" content="二分">
 <meta property="article:tag" content="堆">
+<meta property="article:tag" content="二分">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/oeizu2p7.png">
   
@@ -54,6 +54,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -77,6 +79,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/-/css/custom.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -94,7 +100,11 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+
+</script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -249,7 +259,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -260,7 +270,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -311,119 +321,131 @@
             
               <div class="markdown-body">
                 
-                <p>这题是一道绝世好题。<br>为什么咩？<br><del>因为它代码长。</del><br>因为它没有运用什么高级算法，但用低级算法组成了一道紫题。</p>
-<h1 id="题意转化"><a href="#题意转化" class="headerlink" title="题意转化"></a>题意转化</h1><p>读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。<br>换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天）</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>首先，<del>根据算法标签</del>我们得知应该使用二分，因为<del>算法标签</del>天数越多越容易每种菜都吃一遍，反之越少越不容易。</p>
-<p>现在问题就变为了如何判断 $k$ 天能否每种菜都吃一遍。</p>
-<p>很容易发现应该用贪心。 </p>
-<h2 id="证明贪心"><a href="#证明贪心" class="headerlink" title="证明贪心"></a>证明贪心</h2><p>我们贪的做法是：让挑剔的人在他<strong>能吃的菜中吃最贵的</strong>，穷人也是一样，从他<strong>能吃的菜中吃最不美味的</strong>。<br>为什么这么做呢？因为<del>谁叫他们这么挑剔</del>挑剔的人是没有钱的限制的，所以尽量让他吃最贵的，把便宜的留给穷人吃。穷人也是一样，吃不美味的，把美味的留给挑剔的人吃。</p>
-<h3 id="既是最便宜又是最美味的菜"><a href="#既是最便宜又是最美味的菜" class="headerlink" title="既是最便宜又是最美味的菜"></a>既是最便宜又是最美味的菜</h3><p>聪明的读者可能会想到，如果一种菜既是最便宜又是最美味的，这种应该给挑剔的人吃开始给穷人吃呢？<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/oeizu2p7.png" srcset="/img/loading.gif" lazyload><br>其实要根据挑剔的人可以吃的数量还是穷人可以吃的数量确定，但是这不影响，因为我们不是让挑剔的人吃最美味的，或者让穷人吃最便宜的。</p>
-<h3 id="给挑剔的人还是给穷人"><a href="#给挑剔的人还是给穷人" class="headerlink" title="给挑剔的人还是给穷人"></a>给挑剔的人还是给穷人</h3><p>如果穷人所有能吃的挑剔的人也能吃，那给谁呢？<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/k8txyorp.png" srcset="/img/loading.gif" lazyload><br>其实不影响，因为题目的目的不是给谁吃。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>思路讲完了，代码又该怎么实现呢（天数为 $k$）？</p>
-<p>首先，如果 $(n-p-q)\times k \geq m$ 那么一定可以吃完，因为如果普通的人吃 $k$ 天都能吃完那算上有限制的人也一定能吃完。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">(</span>n <span class="token operator">-</span> cn <span class="token operator">-</span> pn<span class="token punctuation">)</span> <span class="token operator">*</span> k <span class="token operator">>=</span> m<span class="token punctuation">)</span><span class="token comment">//注意使用long long</span>
-	<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
-
-<p>然后，枚举挑剔的人能吃的菜，从中选出<strong>最贵</strong>给挑剔的人吃掉。<br>其中，选出最贵的菜可以使用优先队列（<code>priority_queue</code>）。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">priority_queue <span class="token operator">&lt;</span>point<span class="token operator">></span> q<span class="token punctuation">;</span>
-<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> cn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span>sum <span class="token operator">&lt;=</span> m <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">[</span>sum<span class="token punctuation">]</span><span class="token punctuation">.</span>x <span class="token operator">>=</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-		q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>sum<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> k <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-
+                <p>这题是一道绝世好题。<br />
+为什么咩？<br />
+<s>因为它代码长。</s><br />
+因为它没有运用什么高级算法，但用低级算法组成了一道紫题。</p>
+<h1 id="题意转化"><a class="markdownIt-Anchor" href="#题意转化"></a> 题意转化</h1>
+<p>读完题后，我们可以发现，重复吃菜是对题目没有贡献的，所以即使没有能吃并且没有吃过的的菜，也不重复吃。<br />
+换一种讲法，就是每种菜只有一盘，问最少要吃多少天。（原本是周，以下为了方便说成天）</p>
+<h1 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h1>
+<p>首先，<s>根据算法标签</s>我们得知应该使用二分，因为<s>算法标签</s>天数越多越容易每种菜都吃一遍，反之越少越不容易。</p>
+<p>现在问题就变为了如何判断 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 天能否每种菜都吃一遍。</p>
+<p>很容易发现应该用贪心。</p>
+<h2 id="证明贪心"><a class="markdownIt-Anchor" href="#证明贪心"></a> 证明贪心</h2>
+<p>我们贪的做法是：让挑剔的人在他<strong>能吃的菜中吃最贵的</strong>，穷人也是一样，从他<strong>能吃的菜中吃最不美味的</strong>。<br />
+为什么这么做呢？因为<s>谁叫他们这么挑剔</s>挑剔的人是没有钱的限制的，所以尽量让他吃最贵的，把便宜的留给穷人吃。穷人也是一样，吃不美味的，把美味的留给挑剔的人吃。</p>
+<h3 id="既是最便宜又是最美味的菜"><a class="markdownIt-Anchor" href="#既是最便宜又是最美味的菜"></a> 既是最便宜又是最美味的菜</h3>
+<p>聪明的读者可能会想到，如果一种菜既是最便宜又是最美味的，这种应该给挑剔的人吃开始给穷人吃呢？<br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/oeizu2p7.png" srcset="/img/loading.gif" lazyload alt="" /><br />
+其实要根据挑剔的人可以吃的数量还是穷人可以吃的数量确定，但是这不影响，因为我们不是让挑剔的人吃最美味的，或者让穷人吃最便宜的。</p>
+<h3 id="给挑剔的人还是给穷人"><a class="markdownIt-Anchor" href="#给挑剔的人还是给穷人"></a> 给挑剔的人还是给穷人</h3>
+<p>如果穷人所有能吃的挑剔的人也能吃，那给谁呢？<br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/k8txyorp.png" srcset="/img/loading.gif" lazyload alt="" /><br />
+其实不影响，因为题目的目的不是给谁吃。</p>
+<h1 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h1>
+<p>思路讲完了，代码又该怎么实现呢（天数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>）？</p>
+<p>首先，如果 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mi>p</mi><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>×</mo><mi>k</mi><mo>≥</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">(n-p-q)\times k \geq m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83041em;vertical-align:-0.13597em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> 那么一定可以吃完，因为如果普通的人吃 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 天都能吃完那算上有限制的人也一定能吃完。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if((long long)(n - cn - pn) * k &gt;&#x3D; m)&#x2F;&#x2F;注意使用long long
+	return true; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>然后，枚举挑剔的人能吃的菜，从中选出<strong>最贵</strong>给挑剔的人吃掉。<br />
+其中，选出最贵的菜可以使用优先队列（<code>priority_queue</code>）。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">priority_queue &lt;point&gt; q;
+int sum &#x3D; 1;
+for(int i &#x3D; 1; i &lt;&#x3D; cn; i++)
+&#123;
+	while(sum &lt;&#x3D; m &amp;&amp; a[sum].x &gt;&#x3D; c[i])
+		q.push(a[sum++]);
+	for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; (!q.empty()); j++) q.pop(); 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>选出剩下的菜和挑剔的人不能吃的菜放到一个数组里。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	s<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> 
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> sum<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-	s<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int cnt &#x3D; 0;
+while(!q.empty())
+&#123;
+	s[++cnt] &#x3D; q.top();
+	q.pop();
+&#125; 
+for(int i &#x3D; sum; i &lt;&#x3D; m; i++)
+	s[++cnt] &#x3D; a[i];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>按价格排序，在剩下的菜把穷人能吃的给穷人吃。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">sort</span><span class="token punctuation">(</span>s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> s <span class="token operator">+</span> cnt <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> top <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> pn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span>top <span class="token operator">&lt;=</span> cnt <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>top<span class="token punctuation">]</span><span class="token punctuation">.</span>y <span class="token operator">&lt;=</span> p<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>top<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> k <span class="token operator">&amp;&amp;</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-
-
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">sort(s + 1, s + cnt + 1);
+int top &#x3D; 1;
+for(int i &#x3D; 1; i &lt;&#x3D; pn; i++)
+&#123;
+	while(top &lt;&#x3D; cnt &amp;&amp; s[top].y &lt;&#x3D; p[i]) q.push(s[top++]);
+	for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; q.size(); j++) q.pop();
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>判断剩下的菜普通人能否吃完。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> res <span class="token operator">=</span> qq<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> cnt <span class="token operator">-</span> top <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">return</span><span class="token punctuation">(</span>res <span class="token operator">&lt;=</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> p <span class="token operator">-</span> q<span class="token punctuation">)</span> <span class="token operator">*</span> k<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
-<h1 id="最终代码"><a href="#最终代码" class="headerlink" title="最终代码"></a>最终代码</h1><figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span> <span class="token expression">I AK IOI<span class="token punctuation">.</span></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">,</span> cn<span class="token punctuation">,</span> pn<span class="token punctuation">,</span> c<span class="token punctuation">[</span><span class="token number">50010</span><span class="token punctuation">]</span><span class="token punctuation">,</span> p<span class="token punctuation">[</span><span class="token number">50010</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">struct</span> <span class="token class-name">point</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
-	<span class="token keyword">bool</span> <span class="token keyword">operator</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span>point t<span class="token punctuation">)</span> <span class="token keyword">const</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> y <span class="token operator">&lt;</span> t<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>a<span class="token punctuation">[</span><span class="token number">200010</span><span class="token punctuation">]</span><span class="token punctuation">,</span> s<span class="token punctuation">[</span><span class="token number">200010</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int res &#x3D; qq.size() + cnt - top + 1;
+return(res &lt;&#x3D; (n - p - q) * k);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<h1 id="最终代码"><a class="markdownIt-Anchor" href="#最终代码"></a> 最终代码</h1>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt; I AK IOI.
+using namespace std;
+int n, m, cn, pn, c[50010], p[50010];
+struct point&#123;
+	int x, y;
+	bool operator &lt; (point t) const
+	&#123;
+		return y &lt; t.y;
+	&#125;
+&#125;a[200010], s[200010];
 
-<span class="token keyword">bool</span> <span class="token function">cmp</span><span class="token punctuation">(</span>point x<span class="token punctuation">,</span> point y<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> x<span class="token punctuation">.</span>x <span class="token operator">></span> y<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">bool</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span><span class="token punctuation">)</span><span class="token punctuation">(</span>n <span class="token operator">-</span> cn <span class="token operator">-</span> pn<span class="token punctuation">)</span> <span class="token operator">*</span> k <span class="token operator">>=</span> m<span class="token punctuation">)</span>
-		<span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
-	priority_queue <span class="token operator">&lt;</span>point<span class="token operator">></span> q<span class="token punctuation">;</span>
-	<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> cn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">while</span><span class="token punctuation">(</span>sum <span class="token operator">&lt;=</span> m <span class="token operator">&amp;&amp;</span> a<span class="token punctuation">[</span>sum<span class="token punctuation">]</span><span class="token punctuation">.</span>x <span class="token operator">>=</span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>sum<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> k <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-	<span class="token punctuation">&#125;</span>
+bool cmp(point x, point y)&#123;
+	return x.x &gt; y.x;
+&#125;
+bool check(int k)
+&#123;
+	if((long long)(n - cn - pn) * k &gt;&#x3D; m)
+		return true; 
+	priority_queue &lt;point&gt; q;
+	int sum &#x3D; 1;
+	for(int i &#x3D; 1; i &lt;&#x3D; cn; i++)
+	&#123;
+		while(sum &lt;&#x3D; m &amp;&amp; a[sum].x &gt;&#x3D; c[i]) q.push(a[sum++]);
+		for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; (!q.empty()); j++) q.pop(); 
+	&#125;
 	
-	<span class="token keyword">int</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		s<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span> 
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> sum<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		s<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token function">sort</span><span class="token punctuation">(</span>s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> s <span class="token operator">+</span> cnt <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">int</span> top <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> pn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">while</span><span class="token punctuation">(</span>top <span class="token operator">&lt;=</span> cnt <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>top<span class="token punctuation">]</span><span class="token punctuation">.</span>y <span class="token operator">&lt;=</span> p<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>top<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> k <span class="token operator">&amp;&amp;</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">int</span> res <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> cnt <span class="token operator">-</span> top <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span><span class="token punctuation">(</span>res <span class="token operator">&lt;=</span> <span class="token punctuation">(</span>n <span class="token operator">-</span> cn <span class="token operator">-</span> pn<span class="token punctuation">)</span> <span class="token operator">*</span> k<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	cin <span class="token operator">>></span> n <span class="token operator">>></span> m <span class="token operator">>></span> cn <span class="token operator">>></span> pn<span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> cin <span class="token operator">>></span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>x <span class="token operator">>></span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> cn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> cin <span class="token operator">>></span> c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> pn<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> cin <span class="token operator">>></span> p<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	int cnt &#x3D; 0;
+	while(!q.empty())
+	&#123;
+		s[++cnt] &#x3D; q.top();
+		q.pop();
+	&#125; 
+	for(int i &#x3D; sum; i &lt;&#x3D; m; i++)
+		s[++cnt] &#x3D; a[i];
+	sort(s + 1, s + cnt + 1);
+	int top &#x3D; 1;
+	for(int i &#x3D; 1; i &lt;&#x3D; pn; i++)
+	&#123;
+		while(top &lt;&#x3D; cnt &amp;&amp; s[top].y &lt;&#x3D; p[i]) q.push(s[top++]);
+		for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; q.size(); j++) q.pop();
+	&#125;
+	int res &#x3D; q.size() + cnt - top + 1;
+	return(res &lt;&#x3D; (n - cn - pn) * k);
+&#125;
+int main()
+&#123;
+	cin &gt;&gt; n &gt;&gt; m &gt;&gt; cn &gt;&gt; pn;
+	for(int i &#x3D; 1; i &lt;&#x3D; m; i++) cin &gt;&gt; a[i].x &gt;&gt; a[i].y;
+	for(int i &#x3D; 1; i &lt;&#x3D; cn; i++) cin &gt;&gt; c[i];
+	for(int i &#x3D; 1; i &lt;&#x3D; pn; i++) cin &gt;&gt; p[i];
 	
-	<span class="token function">sort</span><span class="token punctuation">(</span>a <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> a <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sort(a + 1, a + m + 1, cmp);
 	
-	<span class="token function">sort</span><span class="token punctuation">(</span>c <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> c <span class="token operator">+</span> cn <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">greater</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sort(c + 1, c + cn + 1, greater&lt;int&gt;());
 	
-	<span class="token function">sort</span><span class="token punctuation">(</span>p <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> p <span class="token operator">+</span> pn <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	sort(p + 1, p + pn + 1);
 	
-	<span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">=</span> m<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> ans <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span>l <span class="token operator">&lt;=</span> r<span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		mid <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">;</span>
-		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">check</span><span class="token punctuation">(</span>mid<span class="token punctuation">)</span><span class="token punctuation">)</span> ans <span class="token operator">=</span> mid<span class="token punctuation">,</span> r <span class="token operator">=</span> mid <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-		<span class="token keyword">else</span> l <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	cout <span class="token operator">&lt;&lt;</span> ans<span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+	int l &#x3D; 1, r &#x3D; m, mid, ans &#x3D; -1;
+	while(l &lt;&#x3D; r)
+	&#123;
+		mid &#x3D; (l + r) &gt;&gt; 1;
+		if(check(mid)) ans &#x3D; mid, r &#x3D; mid - 1;
+		else l &#x3D; mid + 1;
+	&#125;
+	cout &lt;&lt; ans;
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
@@ -474,9 +496,9 @@
       
         <a href="/tags/%E9%A2%98%E8%A7%A3/" class="print-no-link">#题解</a>
       
-        <a href="/tags/%E4%BA%8C%E5%88%86/" class="print-no-link">#二分</a>
-      
         <a href="/tags/%E5%A0%86/" class="print-no-link">#堆</a>
+      
+        <a href="/tags/%E4%BA%8C%E5%88%86/" class="print-no-link">#二分</a>
       
     </div>
   
@@ -610,7 +632,6 @@
 
   
   
-
 
 
 
@@ -806,49 +827,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

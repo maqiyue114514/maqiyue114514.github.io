@@ -19,12 +19,12 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="今天来讲一下 Tarjan。 应用场景割点缩点。 dfn 和 low思路先上一个图：Tarjan是这样操作的：首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。换一个说法，就是不经过从起点到这个点已经经过的点，可">
+    <meta name="description" content="今天来讲一下 Tarjan。  应用场景 割点缩点。  dfn 和 low  思路 先上一个图：  Tarjan是这样操作的： 首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：  再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。 什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。 换一个说法，就是不经过从起">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarjan">
 <meta property="og:url" content="https://maqiyue114514.github.io/2024/12/15/Tarjan/index.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
-<meta property="og:description" content="今天来讲一下 Tarjan。 应用场景割点缩点。 dfn 和 low思路先上一个图：Tarjan是这样操作的：首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。换一个说法，就是不经过从起点到这个点已经经过的点，可">
+<meta property="og:description" content="今天来讲一下 Tarjan。  应用场景 割点缩点。  dfn 和 low  思路 先上一个图：  Tarjan是这样操作的： 首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为dfn），每个点的时间戳如下（每个点右上角的数字为该点的 dfn）：  再定义一个数组 low，为不经过其父亲能到达的最小的时间戳。 什么意思？其实不懂也没有关系 本蒟蒻开始读也没读懂。 换一个说法，就是不经过从起">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://oi-wiki.org/graph/images/cut1.svg">
 <meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/99x6rete.png">
@@ -59,6 +59,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -81,6 +83,10 @@
 
 
 
+  
+<link rel="stylesheet" href="/-/css/custom.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -98,7 +104,11 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+
+</script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -253,7 +263,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.3k 字
         
       </span>
     
@@ -264,7 +274,7 @@
         
         
         
-          10 分钟
+          11 分钟
         
       </span>
     
@@ -316,203 +326,227 @@
               <div class="markdown-body">
                 
                 <p>今天来讲一下 <code>Tarjan</code>。</p>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>割点缩点。</p>
-<h1 id="dfn-和-low"><a href="#dfn-和-low" class="headerlink" title="dfn 和 low"></a><code>dfn</code> 和 <code>low</code></h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>先上一个图：<br><img src="https://oi-wiki.org/graph/images/cut1.svg" srcset="/img/loading.gif" lazyload><br>Tarjan是这样操作的：<br>首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为<code>dfn</code>），每个点的时间戳如下（每个点右上角的数字为该点的 <code>dfn</code>）：<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/99x6rete.png" srcset="/img/loading.gif" lazyload><br>再定义一个数组 <code>low</code>，为不经过其父亲能到达的最小的时间戳。<br>什么意思？其实不懂也没有关系 <del>本蒟蒻开始读也没读懂</del>。<br>换一个说法，就是不经过从起点到这个点已经经过的点，可以走到的最小时间戳。<br>步骤如下：（每个点右上角为该点的 <code>dfn,low</code>）<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/l3vsewzh.png" srcset="/img/loading.gif" lazyload>  </p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="更新-low"><a href="#更新-low" class="headerlink" title="更新 low"></a>更新 <code>low</code></h3><p>如何实现更新 <code>low</code>?<br>我们发现，上图的点有 $3$ 种 <code>low</code> ：  </p>
+<h1 id="应用场景"><a class="markdownIt-Anchor" href="#应用场景"></a> 应用场景</h1>
+<p>割点缩点。</p>
+<h1 id="dfn-和-low"><a class="markdownIt-Anchor" href="#dfn-和-low"></a> <code>dfn</code> 和 <code>low</code></h1>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>先上一个图：<br />
+<img src="https://oi-wiki.org/graph/images/cut1.svg" srcset="/img/loading.gif" lazyload alt="" /><br />
+Tarjan是这样操作的：<br />
+首先，用dfs遍历图，按照遍历的顺序给每个点打上时间戳（为<code>dfn</code>），每个点的时间戳如下（每个点右上角的数字为该点的 <code>dfn</code>）：<br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/99x6rete.png" srcset="/img/loading.gif" lazyload alt="" /><br />
+再定义一个数组 <code>low</code>，为不经过其父亲能到达的最小的时间戳。<br />
+什么意思？其实不懂也没有关系 <s>本蒟蒻开始读也没读懂</s>。<br />
+换一个说法，就是不经过从起点到这个点已经经过的点，可以走到的最小时间戳。<br />
+步骤如下：（每个点右上角为该点的 <code>dfn,low</code>）<br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/l3vsewzh.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h2 id="实现"><a class="markdownIt-Anchor" href="#实现"></a> 实现</h2>
+<h3 id="更新-low"><a class="markdownIt-Anchor" href="#更新-low"></a> 更新 <code>low</code></h3>
+<p>如何实现更新 <code>low</code>?<br />
+我们发现，上图的点有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn></mrow><annotation encoding="application/x-tex">3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span> 种 <code>low</code> ：</p>
 <ul>
-<li>是下一个节点的 <code>dfn</code>（图中的 $3,6$）</li>
-<li>是下一个节点的 <code>low</code>（图中的 $2,4,5$）</li>
-<li>为 $1$（图中的 $1$）</li>
+<li>是下一个节点的 <code>dfn</code>（图中的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mo separator="true">,</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">3,6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">6</span></span></span></span>）</li>
+<li>是下一个节点的 <code>low</code>（图中的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo separator="true">,</mo><mn>4</mn><mo separator="true">,</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">2,4,5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">5</span></span></span></span>）</li>
+<li>为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>（图中的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>）</li>
 </ul>
-<p>分别满足以下条件:  </p>
+<p>分别满足以下条件:</p>
 <ul>
 <li>下一个节点是自己的父节点（已经经过的点）</li>
 <li>下一个节点是自己的子节点（还未到达过的点）</li>
 <li>是图的根</li>
 </ul>
 <p>实现代码：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//u为当前边的起点，v为终点，root为根</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-	low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">!=</span> root<span class="token punctuation">)</span>
-	low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">else</span>
-  low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<p>我们发现当点是根时，不需要特判，因为 $1$ 是图中最小的 <code>low</code> 和 <code>dfn</code>。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//u为当前边的起点，v为终点，root为根</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-	low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">else</span>
-	low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h3 id="实现初始化-dfn-和-low"><a href="#实现初始化-dfn-和-low" class="headerlink" title="实现初始化 dfn 和 low"></a>实现初始化 <code>dfn</code> 和 <code>low</code></h3><p>因为可能是非连通图，所以可能有多个根，调用时的代码如下：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;u为当前边的起点，v为终点，root为根
+if (!dfn[u])
+	low[u] &#x3D; min(low[u], low[v]);
+else if (u !&#x3D; root)
+	low[u] &#x3D; min(low[u], dfn[v]);
+else
+  low[u] &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>我们发现当点是根时，不需要特判，因为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 是图中最小的 <code>low</code> 和 <code>dfn</code>。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;u为当前边的起点，v为终点，root为根
+if (!dfn[u])
+	low[u] &#x3D; min(low[u], low[v]);
+else
+	low[u] &#x3D; min(low[u], dfn[v]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h3 id="实现初始化-dfn-和-low"><a class="markdownIt-Anchor" href="#实现初始化-dfn-和-low"></a> 实现初始化 <code>dfn</code> 和 <code>low</code></h3>
+<p>因为可能是非连通图，所以可能有多个根，调用时的代码如下：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main()
+&#123;
+	&#x2F;&#x2F;……
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (!dfn[i])
+			tarjan(i, i);
+	&#x2F;&#x2F;……
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>用链式前向星存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//hd[i]为最后一条以i点为起点的边的编号</span>
-<span class="token comment">//e[i].v为编号为i这条边的终点</span>
-<span class="token comment">//e[i].nxt为下一条以i这条边的起点为起点的边</span>
-<span class="token keyword">void</span> <span class="token function">tarjan</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span><span class="token keyword">int</span> root<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>cnt<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> hd<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span> i<span class="token punctuation">;</span> i <span class="token operator">=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>nxt<span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">int</span> v <span class="token operator">=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#123;</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//因为这个点还未更新</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">else</span>
-		<span class="token punctuation">&#123;</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">//……</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;hd[i]为最后一条以i点为起点的边的编号
+&#x2F;&#x2F;e[i].v为编号为i这条边的终点
+&#x2F;&#x2F;e[i].nxt为下一条以i这条边的起点为起点的边
+void tarjan(int u,int root)
+&#123;
+	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
+	for (int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)
+	&#123;
+		int v &#x3D; e[i].v;
+		if (!dfn[u])
+		&#123;
+			tarjan(v, root);&#x2F;&#x2F;因为这个点还未更新
+			low[u] &#x3D; min(low[u], low[v]);
+		&#125;
+		else
+		&#123;
+			low[u] &#x3D; min(low[u], dfn[v]);
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;……
+int main()
+&#123;
+	&#x2F;&#x2F;……
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (!dfn[i])
+			tarjan(i, i);
+	&#x2F;&#x2F;……
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p>用 <code>vector</code> 存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//e[u][i]为起点为u的第i条边的终点</span>
-<span class="token keyword">void</span> <span class="token function">tarjan</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span><span class="token keyword">int</span> root<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>cnt<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> v <span class="token operator">:</span> e<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#123;</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//因为这个点还未更新，所以遍历这个点</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">else</span>
-		<span class="token punctuation">&#123;</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">//……</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token comment">//……</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<h1 id="割点"><a href="#割点" class="headerlink" title="割点"></a>割点</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3388"><img src="https://img.shields.io/badge/%E6%A8%A1%E6%9D%BF%E9%A2%98-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%89%B2%E7%82%B9%EF%BC%88%E5%89%B2%E9%A1%B6%EF%BC%89-blue" srcset="/img/loading.gif" lazyload> <img src="https://img.shields.io/badge/%E9%9A%BE%E5%BA%A6-%E6%99%AE%E5%8F%8A+/%E6%8F%90%E9%AB%98-green" srcset="/img/loading.gif" lazyload></a>  </p>
-<h2 id="判定割点"><a href="#判定割点" class="headerlink" title="判定割点"></a>判定割点</h2><p>那满足什么是割点呢？<br>($u$ 为当前边的起点，$v$ 为终点，$root$ 为根，$sum$ 为子节点数量)<br>割点满足 $\begin{cases}dfn_u &gt; low_v &amp; \text{if} &amp; u \not &#x3D; root \ sum &gt; 1 &amp; \text{if} &amp; u &#x3D; root\end{cases}$<br>情况是这样的：<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/80gcv3te.png" srcset="/img/loading.gif" lazyload><br><img src="https://cdn.luogu.com.cn/upload/image_hosting/gejydkn2.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><p>用链式前向星存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">20010</span><span class="token punctuation">,</span> M <span class="token operator">=</span> <span class="token number">100010</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">,</span> hd<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> tot<span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">;</span>
-<span class="token keyword">bool</span> iscut<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//为i这个点是否为割点</span>
-<span class="token keyword">struct</span> <span class="token class-name">edge</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">int</span> v<span class="token punctuation">,</span> nxt<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>e<span class="token punctuation">[</span>M <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">void</span> <span class="token function">add_edge</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	e<span class="token punctuation">[</span><span class="token operator">++</span>tot<span class="token punctuation">]</span> <span class="token operator">=</span> edge<span class="token punctuation">&#123;</span> v<span class="token punctuation">,</span>hd<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-	hd<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> tot<span class="token punctuation">;</span>
-	e<span class="token punctuation">[</span><span class="token operator">++</span>tot<span class="token punctuation">]</span> <span class="token operator">=</span> edge<span class="token punctuation">&#123;</span> u<span class="token punctuation">,</span>hd<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-	hd<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> tot<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">void</span> <span class="token function">tarjan</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> root<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>cnt<span class="token punctuation">;</span>
-	<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> hd<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span> i<span class="token punctuation">;</span> i <span class="token operator">=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>nxt<span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">int</span> v <span class="token operator">=</span> e<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>v<span class="token punctuation">;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#123;</span>
-			sum<span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment">//子节点+1</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">!=</span> root <span class="token operator">&amp;&amp;</span> dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> iscut<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">else</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">==</span> root <span class="token operator">&amp;&amp;</span> sum <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> iscut<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	cin <span class="token operator">>></span> n <span class="token operator">>></span> m<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> u<span class="token punctuation">,</span> v<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>u<span class="token punctuation">,</span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">add_edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		ans <span class="token operator">+=</span> iscut<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>iscut<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/195364463">AC记录</a><br>用 <code>vector</code> 存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;bits/stdc++.h></span></span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">20010</span><span class="token punctuation">,</span> M <span class="token operator">=</span> <span class="token number">100010</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">;</span>
-<span class="token keyword">bool</span> iscut<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
-vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> e<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">void</span> <span class="token function">add_edge</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	e<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	e<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">void</span> <span class="token function">tarjan</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> root<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>cnt<span class="token punctuation">;</span>
-	<span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> v <span class="token operator">:</span> e<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#123;</span>
-			sum<span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment">//子节点+1</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">!=</span> root <span class="token operator">&amp;&amp;</span> dfn<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> low<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span> iscut<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-		<span class="token keyword">else</span>
-			low<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>low<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">,</span> dfn<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>u <span class="token operator">==</span> root <span class="token operator">&amp;&amp;</span> sum <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> iscut<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-	cin <span class="token operator">>></span> n <span class="token operator">>></span> m<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> u<span class="token punctuation">,</span> v<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>u<span class="token punctuation">,</span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">add_edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dfn<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			<span class="token function">tarjan</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		ans <span class="token operator">+=</span> iscut<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>iscut<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-			cout <span class="token operator">&lt;&lt;</span> i <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
-
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;e[u][i]为起点为u的第i条边的终点
+void tarjan(int u,int root)
+&#123;
+	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
+	for (auto v : e[u])
+	&#123;
+		if (!dfn[u])
+		&#123;
+			tarjan(v, root);&#x2F;&#x2F;因为这个点还未更新，所以遍历这个点
+			low[u] &#x3D; min(low[u], low[v]);
+		&#125;
+		else
+		&#123;
+			low[u] &#x3D; min(low[u], dfn[v]);
+		&#125;
+	&#125;
+&#125;
+&#x2F;&#x2F;……
+int main()
+&#123;
+	&#x2F;&#x2F;……
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (!dfn[i])
+			tarjan(i, i);
+	&#x2F;&#x2F;……
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h1 id="割点"><a class="markdownIt-Anchor" href="#割点"></a> 割点</h1>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3388"><img src="https://img.shields.io/badge/%E6%A8%A1%E6%9D%BF%E9%A2%98-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%89%B2%E7%82%B9%EF%BC%88%E5%89%B2%E9%A1%B6%EF%BC%89-blue" srcset="/img/loading.gif" lazyload alt="" /> <img src="https://img.shields.io/badge/%E9%9A%BE%E5%BA%A6-%E6%99%AE%E5%8F%8A+/%E6%8F%90%E9%AB%98-green" srcset="/img/loading.gif" lazyload alt="" /></a></p>
+<h2 id="判定割点"><a class="markdownIt-Anchor" href="#判定割点"></a> 判定割点</h2>
+<p>那满足什么是割点呢？<br />
+(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span> 为当前边的起点，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> 为终点，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">root</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">o</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span></span></span></span> 为根，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span></span></span></span> 为子节点数量)<br />
+割点满足 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mi>f</mi><msub><mi>n</mi><mi>u</mi></msub><mo>&gt;</mo><mi>l</mi><mi>o</mi><msub><mi>w</mi><mi>v</mi></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>if</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>u</mi><mo>≠</mo><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mo>&gt;</mo><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mtext>if</mtext></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>u</mi><mo>=</mo><mi>r</mi><mi>o</mi><mi>o</mi><mi>t</mi></mrow></mstyle></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{cases}dfn_u &gt; low_v &amp; \text{if} &amp; u \not = root \\ sum &gt; 1 &amp; \text{if} &amp; u = root\end{cases}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord text"><span class="mord">if</span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord text"><span class="mord">if</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">o</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">o</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br />
+情况是这样的：<br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/80gcv3te.png" srcset="/img/loading.gif" lazyload alt="" /><br />
+<img src="https://cdn.luogu.com.cn/upload/image_hosting/gejydkn2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h2 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h2>
+<p>用链式前向星存图的童鞋看这：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+const int N &#x3D; 20010, M &#x3D; 100010;
+int n, m, hd[N], tot, dfn[N], low[N], cnt;
+bool iscut[N];&#x2F;&#x2F;为i这个点是否为割点
+struct edge &#123;
+	int v, nxt;
+&#125;e[M &lt;&lt; 1];
+void add_edge(int u, int v)
+&#123;
+	e[++tot] &#x3D; edge&#123; v,hd[u] &#125;;
+	hd[u] &#x3D; tot;
+	e[++tot] &#x3D; edge&#123; u,hd[v] &#125;;
+	hd[v] &#x3D; tot;
+&#125;
+void tarjan(int u, int root)
+&#123;
+	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
+	int sum &#x3D; 0;
+	for (int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)
+	&#123;
+		int v &#x3D; e[i].v;
+		if (!dfn[v])
+		&#123;
+			sum++;&#x2F;&#x2F;子节点+1
+			tarjan(v, root), low[u] &#x3D; min(low[u], low[v]);
+			if (u !&#x3D; root &amp;&amp; dfn[u] &lt;&#x3D; low[v]) iscut[u] &#x3D; true;
+		&#125;
+		else
+			low[u] &#x3D; min(low[u], dfn[v]);
+	&#125;
+	if (u &#x3D;&#x3D; root &amp;&amp; sum &gt; 1) iscut[u] &#x3D; true;
+&#125;
+int main()
+&#123;
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int i &#x3D; 1, u, v; i &lt;&#x3D; m; i++)
+		scanf(&quot;%d%d&quot;, &amp;u, &amp;v), add_edge(u, v);
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (!dfn[i])
+			tarjan(i, i);
+	int ans &#x3D; 0;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		ans +&#x3D; iscut[i];
+	cout &lt;&lt; ans &lt;&lt; endl;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (iscut[i])
+			cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/195364463">AC记录</a><br />
+用 <code>vector</code> 存图的童鞋看这：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt;
+using namespace std;
+const int N &#x3D; 20010, M &#x3D; 100010;
+int n, m, dfn[N], low[N], cnt;
+bool iscut[N];
+vector&lt;int&gt; e[N];
+void add_edge(int u, int v)
+&#123;
+	e[u].push_back(v);
+	e[v].push_back(u);
+&#125;
+void tarjan(int u, int root)
+&#123;
+	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
+	int sum &#x3D; 0;
+	for (auto v : e[u])
+	&#123;
+		if (!dfn[v])
+		&#123;
+			sum++;&#x2F;&#x2F;子节点+1
+			tarjan(v, root), low[u] &#x3D; min(low[u], low[v]);
+			if (u !&#x3D; root &amp;&amp; dfn[u] &lt;&#x3D; low[v]) iscut[u] &#x3D; true;
+		&#125;
+		else
+			low[u] &#x3D; min(low[u], dfn[v]);
+	&#125;
+	if (u &#x3D;&#x3D; root &amp;&amp; sum &gt; 1) iscut[u] &#x3D; true;
+&#125;
+int main()
+&#123;
+	cin &gt;&gt; n &gt;&gt; m;
+	for (int i &#x3D; 1, u, v; i &lt;&#x3D; m; i++)
+		scanf(&quot;%d%d&quot;, &amp;u, &amp;v), add_edge(u, v);
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (!dfn[i])
+			tarjan(i, i);
+	int ans &#x3D; 0;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		ans +&#x3D; iscut[i];
+	cout &lt;&lt; ans &lt;&lt; endl;
+	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
+		if (iscut[i])
+			cout &lt;&lt; i &lt;&lt; &quot; &quot;;
+	return 0;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/195364698">AC记录</a></p>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
@@ -713,7 +747,6 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
 
 
 
-
     
 
     
@@ -901,49 +934,6 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
