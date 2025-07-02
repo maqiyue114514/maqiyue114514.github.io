@@ -60,7 +60,7 @@
 
 
   
-<link rel="stylesheet" href="/-/css/custom.css">
+<link rel="stylesheet" href="/css/glassBg.css">
 
 
 
@@ -97,7 +97,7 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 
-<body>
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
   
 
   <header>
@@ -215,7 +215,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/images/bg.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/null') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -571,9 +571,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%A0%91/">#树</a>
-            
               <a href="/tags/%E9%A2%98%E8%A7%A3/">#题解</a>
+            
+              <a href="/tags/%E6%A0%91/">#树</a>
             
               <a href="/tags/GESP/">#GESP</a>
             
@@ -938,6 +938,26 @@
   
   
   
+  <div class="runtime-counter">
+    <span id="timeDate">载入天数...</span>
+    <span id="times">载入时分秒...</span>
+    <script>
+      function createtime() {
+        const grt = new Date("2025-7-2");
+        const now = new Date();
+        const diff = now - grt;
+        
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+        const minutes = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+        const seconds = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+  
+        document.getElementById("timeDate").innerHTML = `🚀 已运行 ${days} 天`;
+        document.getElementById("times").innerHTML = `${hours} 时 ${minutes} 分 ${seconds} 秒`;
+      }
+      setInterval(createtime, 1000);
+    </script>
+  </div>
 </div>
 
   </footer>
@@ -994,6 +1014,7 @@
 
   
 <script src="/js/cursor/particle-explosion.js"></script>
+<script src="/js/backgroundisze.js"></script>
 
 
 
@@ -1007,5 +1028,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-</body>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
 </html>
