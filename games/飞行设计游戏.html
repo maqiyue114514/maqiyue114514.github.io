@@ -19,11 +19,15 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://maqiyue114514.github.io/archives/2025/07/index.html">
+    <meta name="description" content="太空射击游戏                太空射击游戏         开始游戏                      使用方向键 ↑ ↓ ← → 移动飞船             空格键发射子弹             击落敌机获得分数             被敌机撞到3次游戏结束                        分数: 0          游戏结束!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="飞行设计游戏">
+<meta property="og:url" content="https://maqiyue114514.github.io/games/%E9%A3%9E%E8%A1%8C%E8%AE%BE%E8%AE%A1%E6%B8%B8%E6%88%8F.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
+<meta property="og:description" content="太空射击游戏                太空射击游戏         开始游戏                      使用方向键 ↑ ↓ ← → 移动飞船             空格键发射子弹             击落敌机获得分数             被敌机撞到3次游戏结束                        分数: 0          游戏结束!">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-02T14:52:00.000Z">
+<meta property="article:modified_time" content="2025-07-02T14:52:43.905Z">
 <meta property="article:author" content="maqiyue">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -31,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>归档 - maqiyue&#39;s blog</title>
+  <title>飞行设计游戏 - maqiyue&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -233,7 +237,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="飞行设计游戏"></span>
           
         </div>
 
@@ -260,41 +264,295 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 15 篇文章</p>
-  <hr>
+<article class="page-content">
   
-  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>太空射击游戏</title>
+</head>
+<body>
+    <div id="startScreen">
+        <div id="title">太空射击游戏</div>
+        <button id="startBtn">开始游戏</button>
+        <div id="instructions">
+            使用方向键 ↑ ↓ ← → 移动飞船<br>
+            空格键发射子弹<br>
+            击落敌机获得分数<br>
+            被敌机撞到3次游戏结束
+        </div>
+    </div>
     
-      
-      <p class="h5">2025</p>
-    
-    <a href="/2025/07/01/%E9%A2%98%E8%A7%A3%EF%BC%9AP11996-%E6%88%91%E6%98%AF%E9%BB%84%E8%89%B2%E6%81%90%E9%BE%99%E5%A4%A7%E5%B0%86%E5%86%9B/" class="list-group-item list-group-item-action">
-      <time>07-01</time>
-      <div class="list-group-item-title">题解：P11996 我是黄色恐龙大将军</div>
-    </a>
-  
-    
-    <a href="/2025/07/01/%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82%E3%80%81%E7%9F%A9%E9%98%B5%E5%8A%A0%E9%80%9F%E9%80%92%E6%8E%A8/" class="list-group-item list-group-item-action">
-      <time>07-01</time>
-      <div class="list-group-item-title">矩阵快速幂、矩阵加速递推</div>
-    </a>
-  
-    
-    <a href="/2025/07/01/%E7%AD%9B%E6%B3%95%E6%B1%82%E5%9B%A0%E6%95%B0%E5%92%8C%E3%80%81%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%87%BD%E6%95%B0/" class="list-group-item list-group-item-action">
-      <time>07-01</time>
-      <div class="list-group-item-title">筛法求因数和、莫比乌斯函数</div>
-    </a>
-  
-    
-    <a href="/2025/07/01/%E7%AD%9B%E6%B3%95%E3%80%81%E7%AD%9B%E6%B3%95%E6%B1%82%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E3%80%81%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0/" class="list-group-item list-group-item-action">
-      <time>07-01</time>
-      <div class="list-group-item-title">筛法、筛法求欧拉函数、因数个数</div>
-    </a>
-  
-</div>
+    <div id="score">分数: 0</div>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="gameOver">游戏结束!</div>
+    <button id="restartBtn">重新开始</button>
+
+    <script>
+        // 获取Canvas元素和上下文
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const gameOverElement = document.getElementById('gameOver');
+        const restartBtn = document.getElementById('restartBtn');
+        const startScreen = document.getElementById('startScreen');
+        const startBtn = document.getElementById('startBtn');
+
+        // 游戏状态
+        let gameRunning = false;
+        let score = 0;
+        let lives = 3;
+
+        // 玩家飞机
+        const player = {
+            x: canvas.width / 2 - 25,
+            y: canvas.height - 80,
+            width: 50,
+            height: 50,
+            speed: 8,
+            color: '#3498db'
+        };
+
+        // 子弹数组
+        let bullets = [];
+        const bulletSpeed = 10;
+        const bulletWidth = 4;
+        const bulletHeight = 15;
+
+        // 敌机数组
+        let enemies = [];
+        const enemySpeed = 3;
+        const enemyWidth = 40;
+        const enemyHeight = 40;
+
+        // 按键状态
+        const keys = {
+            ArrowLeft: false,
+            ArrowRight: false,
+            ArrowUp: false,
+            ArrowDown: false,
+            Space: false
+        };
+
+        // 监听按键按下
+        document.addEventListener('keydown', (e) => {
+            if (gameRunning && e.code in keys) {
+                keys[e.code] = true;
+                e.preventDefault();
+            }
+        });
+
+        // 监听按键释放
+        document.addEventListener('keyup', (e) => {
+            if (gameRunning && e.code in keys) {
+                keys[e.code] = false;
+            }
+        });
+
+        // 开始游戏
+        startBtn.addEventListener('click', () => {
+            startGame();
+        });
+
+        // 重新开始游戏
+        restartBtn.addEventListener('click', () => {
+            startGame();
+        });
+
+        // 开始游戏函数
+        function startGame() {
+            gameRunning = true;
+            score = 0;
+            lives = 3;
+            bullets = [];
+            enemies = [];
+            player.x = canvas.width / 2 - 25;
+            player.y = canvas.height - 80;
+            
+            startScreen.style.display = 'none';
+            gameOverElement.style.display = 'none';
+            restartBtn.style.display = 'none';
+            canvas.style.display = 'block';
+            scoreElement.style.display = 'block';
+            scoreElement.textContent = `分数: ${score}`;
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 绘制玩家飞机
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            
+            // 绘制飞机细节
+            ctx.fillStyle = '#2980b9';
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.width / 2, player.y);
+            ctx.lineTo(player.x, player.y + player.height);
+            ctx.lineTo(player.x + player.width, player.y + player.height);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // 更新玩家位置
+        function updatePlayer() {
+            if (keys.ArrowLeft && player.x > 0) {
+                player.x -= player.speed;
+            }
+            if (keys.ArrowRight && player.x < canvas.width - player.width) {
+                player.x += player.speed;
+            }
+            if (keys.ArrowUp && player.y > 0) {
+                player.y -= player.speed;
+            }
+            if (keys.ArrowDown && player.y < canvas.height - player.height) {
+                player.y += player.speed;
+            }
+            if (keys.Space) {
+                shoot();
+                keys.Space = false;
+            }
+        }
+
+        // 发射子弹
+        function shoot() {
+            bullets.push({
+                x: player.x + player.width / 2 - bulletWidth / 2,
+                y: player.y,
+                width: bulletWidth,
+                height: bulletHeight,
+                color: '#f1c40f'
+            });
+        }
+
+        // 绘制和更新子弹
+        function updateBullets() {
+            for (let i = 0; i < bullets.length; i++) {
+                const bullet = bullets[i];
+                ctx.fillStyle = bullet.color;
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+                
+                bullet.y -= bulletSpeed;
+                
+                // 移除超出屏幕的子弹
+                if (bullet.y + bullet.height < 0) {
+                    bullets.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        // 创建敌机
+        function spawnEnemy() {
+            if (Math.random() < 0.02) {
+                enemies.push({
+                    x: Math.random() * (canvas.width - enemyWidth),
+                    y: -enemyHeight,
+                    width: enemyWidth,
+                    height: enemyHeight,
+                    color: '#e74c3c'
+                });
+            }
+        }
+
+        // 绘制和更新敌机
+        function updateEnemies() {
+            for (let i = 0; i < enemies.length; i++) {
+                const enemy = enemies[i];
+                ctx.fillStyle = enemy.color;
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+                
+                enemy.y += enemySpeed;
+                
+                // 移除超出屏幕的敌机
+                if (enemy.y > canvas.height) {
+                    enemies.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        // 碰撞检测
+        function checkCollisions() {
+            // 子弹与敌机碰撞
+            for (let i = 0; i < bullets.length; i++) {
+                const bullet = bullets[i];
+                for (let j = 0; j < enemies.length; j++) {
+                    const enemy = enemies[j];
+                    if (
+                        bullet.x < enemy.x + enemy.width &&
+                        bullet.x + bullet.width > enemy.x &&
+                        bullet.y < enemy.y + enemy.height &&
+                        bullet.y + bullet.height > enemy.y
+                    ) {
+                        // 碰撞发生
+                        bullets.splice(i, 1);
+                        enemies.splice(j, 1);
+                        score += 10;
+                        scoreElement.textContent = `分数: ${score}`;
+                        i--;
+                        break;
+                    }
+                }
+            }
+            
+            // 玩家与敌机碰撞
+            for (let i = 0; i < enemies.length; i++) {
+                const enemy = enemies[i];
+                if (
+                    player.x < enemy.x + enemy.width &&
+                    player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemy.height &&
+                    player.y + player.height > enemy.y
+                ) {
+                    // 碰撞发生
+                    enemies.splice(i, 1);
+                    lives--;
+                    
+                    if (lives <= 0) {
+                        gameOver();
+                    }
+                    break;
+                }
+            }
+        }
+
+        // 游戏结束
+        function gameOver() {
+            gameRunning = false;
+            gameOverElement.style.display = 'block';
+            restartBtn.style.display = 'block';
+            canvas.style.display = 'none';
+            scoreElement.style.display = 'none';
+        }
+
+        // 清除画布
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // 游戏主循环
+        function gameLoop() {
+            if (!gameRunning) return;
+            
+            clearCanvas();
+            updatePlayer();
+            drawPlayer();
+            updateBullets();
+            spawnEnemy();
+            updateEnemies();
+            checkCollisions();
+            
+            requestAnimationFrame(gameLoop);
+        }
+    </script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+</html>
 
 
+  
+
+</article>
 
 
 
@@ -437,5 +695,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+</body>
 </html>

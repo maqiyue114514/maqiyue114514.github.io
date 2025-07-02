@@ -1,0 +1,828 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="maqiyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="猜数游戏                猜数游戏                               游戏设置                              最小值:                                                   最大值:">
+<meta property="og:type" content="website">
+<meta property="og:title" content="猜数游戏">
+<meta property="og:url" content="https://maqiyue114514.github.io/games/%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F.html">
+<meta property="og:site_name" content="maqiyue&#39;s blog">
+<meta property="og:description" content="猜数游戏                猜数游戏                               游戏设置                              最小值:                                                   最大值:">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-02T13:54:00.000Z">
+<meta property="article:modified_time" content="2025-07-02T14:41:18.484Z">
+<meta property="article:author" content="maqiyue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>猜数游戏 - maqiyue&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4965249_2aax6op7r86.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/glassBg.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"CPP"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+
+</script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>maqiyue&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/games/" target="_self">
+                <i class="iconfont icon-youxi"></i>
+                <span>游戏</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/null') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="猜数游戏"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数游戏</title>
+</head>
+<body>
+    <div class="container">
+        <h1>猜数游戏</h1>
+        
+        <div class="panel">
+            <h3>游戏设置</h3>
+            <div>
+                <label for="minRange">最小值:</label>
+                <input type="number" id="minRange" value="1" min="0">
+                
+                <label for="maxRange">最大值:</label>
+                <input type="number" id="maxRange" value="100" min="1">
+                
+                <button id="setRange">应用范围</button>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <label for="maxAttempts">最大尝试次数:</label>
+                <select id="maxAttempts">
+                    <option value="0">无限制</option>
+                    <option value="5">5次</option>
+                    <option value="10" selected>10次</option>
+                    <option value="15">15次</option>
+                    <option value="20">20次</option>
+                </select>
+                
+                <label for="timeLimit">时间限制:</label>
+                <select id="timeLimit">
+                    <option value="0">无限制</option>
+                    <option value="30">30秒</option>
+                    <option value="60">1分钟</option>
+                    <option value="120">2分钟</option>
+                    <option value="300">5分钟</option>
+                </select>
+            </div>
+            
+            <div class="difficulty-options" style="margin-top: 10px;">
+                <button class="difficulty-btn" data-difficulty="easy">简单</button>
+                <button class="difficulty-btn active-difficulty" data-difficulty="medium">中等</button>
+                <button class="difficulty-btn" data-difficulty="hard">困难</button>
+                <button class="difficulty-btn" data-difficulty="custom">自定义</button>
+            </div>
+        </div>
+        
+        <div id="gameArea" style="display: none;">
+            <div class="panel">
+                <h3>游戏进行中</h3>
+                <p>猜一个 <span id="currentRange"></span> 之间的数字</p>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-label">尝试次数</div>
+                        <div class="stat-value" id="attemptCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">剩余尝试</div>
+                        <div class="stat-value" id="remainingAttempts">10</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">剩余时间</div>
+                        <div class="stat-value" id="timer">--:--</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <input type="number" id="guessInput" placeholder="输入你的猜测">
+                    <button id="submitGuess">猜!</button>
+                    <button id="hintBtn">提示</button>
+                </div>
+                
+                <div id="message"></div>
+                <div id="hintArea" class="hint-text"></div>
+                
+                <div id="guessHistory">
+                    <p>猜测记录将显示在这里</p>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <button id="newGame">新游戏</button>
+                    <button id="giveUp">放弃</button>
+                    <button id="cheatBtn" style="background-color: #e74c3c;">显示答案</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 游戏变量
+        let targetNumber;
+        let attempts = 0;
+        let minRange = 1;
+        let maxRange = 100;
+        let maxAttempts = 10;
+        let timeLimit = 0;
+        let timeLeft = 0;
+        let timerInterval;
+        let gameActive = false;
+        let guessHistory = [];
+        let difficulty = "medium";
+        
+        // DOM元素
+        const minRangeInput = document.getElementById('minRange');
+        const maxRangeInput = document.getElementById('maxRange');
+        const setRangeBtn = document.getElementById('setRange');
+        const gameArea = document.getElementById('gameArea');
+        const guessInput = document.getElementById('guessInput');
+        const submitGuessBtn = document.getElementById('submitGuess');
+        const messageDiv = document.getElementById('message');
+        const attemptsDiv = document.getElementById('attempts');
+        const currentRangeSpan = document.getElementById('currentRange');
+        const newGameBtn = document.getElementById('newGame');
+        const maxAttemptsSelect = document.getElementById('maxAttempts');
+        const timeLimitSelect = document.getElementById('timeLimit');
+        const attemptCountEl = document.getElementById('attemptCount');
+        const remainingAttemptsEl = document.getElementById('remainingAttempts');
+        const timerEl = document.getElementById('timer');
+        const guessHistoryEl = document.getElementById('guessHistory');
+        const giveUpBtn = document.getElementById('giveUp');
+        const cheatBtn = document.getElementById('cheatBtn');
+        const hintBtn = document.getElementById('hintBtn');
+        const hintArea = document.getElementById('hintArea');
+        const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置难度级别按钮事件
+            difficultyBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    difficultyBtns.forEach(b => b.classList.remove('active-difficulty'));
+                    this.classList.add('active-difficulty');
+                    difficulty = this.dataset.difficulty;
+                    applyDifficultySettings();
+                });
+            });
+            
+            // 应用默认难度设置
+            applyDifficultySettings();
+        });
+        
+        // 应用难度设置
+        function applyDifficultySettings() {
+            switch(difficulty) {
+                case 'easy':
+                    minRangeInput.value = 1;
+                    maxRangeInput.value = 50;
+                    maxAttemptsSelect.value = 10;
+                    timeLimitSelect.value = 120;
+                    break;
+                case 'medium':
+                    minRangeInput.value = 1;
+                    maxRangeInput.value = 100;
+                    maxAttemptsSelect.value = 10;
+                    timeLimitSelect.value = 60;
+                    break;
+                case 'hard':
+                    minRangeInput.value = 1;
+                    maxRangeInput.value = 200;
+                    maxAttemptsSelect.value = 7;
+                    timeLimitSelect.value = 30;
+                    break;
+                case 'custom':
+                    // 保留当前的自定义设置
+                    break;
+            }
+        }
+        
+        // 设置数字范围
+        setRangeBtn.addEventListener('click', function() {
+            minRange = parseInt(minRangeInput.value);
+            maxRange = parseInt(maxRangeInput.value);
+            
+            if (minRange >= maxRange) {
+                alert("最大值必须大于最小值");
+                return;
+            }
+            
+            maxAttempts = parseInt(maxAttemptsSelect.value);
+            timeLimit = parseInt(timeLimitSelect.value);
+            
+            currentRangeSpan.textContent = `${minRange} - ${maxRange}`;
+            startNewGame();
+            gameArea.style.display = 'block';
+        });
+        
+        // 开始新游戏
+        function startNewGame() {
+            targetNumber = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+            attempts = 0;
+            guessHistory = [];
+            gameActive = true;
+            
+            guessInput.value = '';
+            messageDiv.textContent = '';
+            hintArea.textContent = '';
+            guessHistoryEl.innerHTML = '<p>猜测记录将显示在这里</p>';
+            guessInput.focus();
+            
+            // 更新尝试次数显示
+            attemptCountEl.textContent = attempts;
+            remainingAttemptsEl.textContent = maxAttempts === 0 ? '∞' : maxAttempts;
+            
+            // 设置计时器
+            if (timeLimit > 0) {
+                timeLeft = timeLimit;
+                updateTimerDisplay();
+                clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 1000);
+            } else {
+                timerEl.textContent = '--:--';
+            }
+            
+            // 启用/禁用按钮
+            submitGuessBtn.disabled = false;
+            giveUpBtn.disabled = false;
+            cheatBtn.disabled = false;
+            hintBtn.disabled = false;
+            
+            console.log("目标数字: ", targetNumber); // 调试用
+        }
+        
+        // 更新计时器
+        function updateTimer() {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                gameOver(false, "时间到了! 游戏结束。");
+            }
+        }
+        
+        // 更新计时器显示
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // 当时间少于10秒时改变颜色
+            if (timeLeft <= 10) {
+                timerEl.style.color = "#e74c3c";
+            } else {
+                timerEl.style.color = "#2c3e50";
+            }
+        }
+        
+        // 提交猜测
+        submitGuessBtn.addEventListener('click', checkGuess);
+        guessInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkGuess();
+            }
+        });
+        
+        function checkGuess() {
+            if (!gameActive) return;
+            
+            const userGuess = parseInt(guessInput.value);
+            
+            if (isNaN(userGuess)) {
+                showMessage("请输入一个有效的数字!", "red");
+                return;
+            }
+            
+            if (userGuess < minRange || userGuess > maxRange) {
+                showMessage(`请输入 ${minRange} 到 ${maxRange} 之间的数字!`, "red");
+                return;
+            }
+            
+            attempts++;
+            attemptCountEl.textContent = attempts;
+            
+            if (maxAttempts > 0) {
+                const remaining = maxAttempts - attempts;
+                remainingAttemptsEl.textContent = remaining <= 0 ? 0 : remaining;
+            }
+            
+            // 添加到猜测历史
+            addToGuessHistory(userGuess);
+            
+            if (userGuess === targetNumber) {
+                gameOver(true, `恭喜你! 猜对了! 数字确实是 ${targetNumber}`);
+            } else if (userGuess < targetNumber) {
+                showMessage("太小了，再试一次!", "blue");
+            } else {
+                showMessage("太大了，再试一次!", "red");
+            }
+            
+            // 检查是否超过最大尝试次数
+            if (maxAttempts > 0 && attempts >= maxAttempts) {
+                gameOver(false, `很遗憾，你已经用完所有 ${maxAttempts} 次尝试机会。正确答案是 ${targetNumber}`);
+            }
+            
+            guessInput.value = '';
+            guessInput.focus();
+        }
+        
+        // 显示消息
+        function showMessage(msg, color) {
+            messageDiv.textContent = msg;
+            messageDiv.style.backgroundColor = color === "red" ? "#ffebee" : 
+                                             color === "blue" ? "#e3f2fd" : "#e8f5e9";
+            messageDiv.style.color = color === "red" ? "#c62828" : 
+                                    color === "blue" ? "#1565c0" : "#2e7d32";
+        }
+        
+        // 添加到猜测历史
+        function addToGuessHistory(guess) {
+            const guessItem = document.createElement('div');
+            guessItem.className = 'guess-item';
+            
+            if (guess === targetNumber) {
+                guessItem.classList.add('correct');
+                guessItem.textContent = `✓ ${guess} (正确!)`;
+            } else if (guess > targetNumber) {
+                guessItem.classList.add('high');
+                guessItem.textContent = `↓ ${guess} (太高了)`;
+            } else {
+                guessItem.classList.add('low');
+                guessItem.textContent = `↑ ${guess} (太低了)`;
+            }
+            
+            // 如果历史记录还是初始提示，清除它
+            if (guessHistoryEl.firstChild && guessHistoryEl.firstChild.tagName === 'P') {
+                guessHistoryEl.innerHTML = '';
+            }
+            
+            guessHistoryEl.insertBefore(guessItem, guessHistoryEl.firstChild);
+            guessHistory.push(guess);
+        }
+        
+        // 游戏结束
+        function gameOver(success, message) {
+            gameActive = false;
+            clearInterval(timerInterval);
+            showMessage(message, success ? "green" : "red");
+            
+            submitGuessBtn.disabled = true;
+            giveUpBtn.disabled = true;
+            cheatBtn.disabled = true;
+            hintBtn.disabled = true;
+        }
+        
+        // 新游戏按钮
+        newGameBtn.addEventListener('click', startNewGame);
+        
+        // 放弃按钮
+        giveUpBtn.addEventListener('click', function() {
+            if (confirm("确定要放弃当前游戏吗？")) {
+                gameOver(false, `游戏结束。正确答案是 ${targetNumber}`);
+            }
+        });
+        
+        // 作弊按钮
+        cheatBtn.addEventListener('click', function() {
+            if (confirm("确定要查看答案吗？这会结束当前游戏。")) {
+                gameOver(false, `正确答案是 ${targetNumber}`);
+            }
+        });
+        
+        // 提示按钮
+        hintBtn.addEventListener('click', function() {
+            if (!gameActive) return;
+            
+            // 根据游戏进度提供不同的提示
+            let hint = "";
+            const range = maxRange - minRange;
+            
+            if (attempts === 0) {
+                // 第一次提示
+                hint = `数字在 ${minRange} 到 ${maxRange} 之间`;
+            } else if (attempts < 3) {
+                // 早期提示
+                hint = `数字是 ${targetNumber % 2 === 0 ? "偶数" : "奇数"}`;
+            } else if (attempts < 5) {
+                // 中期提示
+                const tensDigit = Math.floor(targetNumber / 10);
+                hint = `十位数是 ${tensDigit} 或 ${tensDigit + 1}`;
+            } else {
+                // 后期提示
+                const difference = Math.abs(guessHistory[guessHistory.length - 1] - targetNumber);
+                hint = `你离正确答案相差 ${difference}`;
+            }
+            
+            hintArea.textContent = `提示: ${hint}`;
+        });
+    </script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script><!-- hexo injector body_end end --></body>
+</html>
+
+<div class="giscus"></div>
+<script src="https://giscus.app/client.js"
+        data-repo="maqiyue114514/maqiyue114514.github.io"
+        data-repo-id="R_kgDOO_BDlA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO_BDlM4Crztf"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  <div class="runtime-counter">
+    <span id="timeDate">载入天数...</span>
+    <span id="times">载入时分秒...</span>
+    <script>
+      function createtime() {
+        const grt = new Date("2025-7-2");
+        const now = new Date();
+        const diff = now - grt;
+        
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+        const minutes = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+        const seconds = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+  
+        document.getElementById("timeDate").innerHTML = `🚀 已运行 ${days} 天`;
+        document.getElementById("times").innerHTML = `${hours} 时 ${minutes} 分 ${seconds} 秒`;
+      }
+      setInterval(createtime, 1000);
+    </script>
+  </div>
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/cursor/particle-explosion.js"></script>
+<script src="/js/backgroundisze.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
