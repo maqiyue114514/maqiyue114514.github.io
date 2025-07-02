@@ -464,7 +464,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/07/01/%E7%AD%9B%E6%B3%95%E3%80%81%E7%AD%9B%E6%B3%95%E6%B1%82%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E3%80%81%E5%9B%A0%E6%95%B0%E4%B8%AA%E6%95%B0/" target="_self">
         <div>
-          筛法基础 给定 nnn，求出 111 ~ nnn 中所有的质数，封装成 get_prime(int n) 的数组。  暴力 不就是验证质数 nnn 遍吗？ 123456789101112131415int p[N], cnt;bool is_prime(int x)&#123;	if(x == 1) return false;	for(int i = 2; i * i &lt;= x; i++)
+          筛法基础 给定 nnn，求出 111 ~ nnn 中所有的质数，封装成 get_prime(int n) 的数组。  暴力 不就是验证质数 nnn 遍吗？ int p[N], cnt; bool is_prime(int x) &#123; 	if(x == 1) return false; 	for(int i = 2; i * i &lt;= x; i++) 		if(x % i == 0)
         </div>
       </a>
 
@@ -571,9 +571,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%A2%98%E8%A7%A3/">#题解</a>
-            
               <a href="/tags/%E6%A0%91/">#树</a>
+            
+              <a href="/tags/%E9%A2%98%E8%A7%A3/">#题解</a>
             
               <a href="/tags/GESP/">#GESP</a>
             
@@ -597,7 +597,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/05/31/P1345-USACO16OPEN-Splitting-the-Field-G-from-maqiyue/" target="_self">
         <div>
-          教练要求做的题，没想到可以发题解。  题意 将 nnn 个点分为 222 个矩阵，使其面积最小。  做法 先按照距离 (0,0)(0,0)(0,0) 点的 xxx 或 yyy 的差值递增排序（按 xxx 分一次, yyy 分执行一次）。 再枚举从那个点分为两部分，算出面积即可。 在计算面积面积时需要知道区间最大值和最小值，需要用到 ST 表。 注意：不开 long long 见祖宗。  代码 12
+          教练要求做的题，没想到可以发题解。  题意 将 nnn 个点分为 222 个矩阵，使其面积最小。  做法 先按照距离 (0,0)(0,0)(0,0) 点的 xxx 或 yyy 的差值递增排序（按 xxx 分一次, yyy 分执行一次）。 再枚举从那个点分为两部分，算出面积即可。 在计算面积面积时需要知道区间最大值和最小值，需要用到 ST 表。 注意：不开 long long 见祖宗。  代码 #i
         </div>
       </a>
 
@@ -765,7 +765,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/04/10/%E9%A2%98%E8%A7%A3%EF%BC%9AP10316-SHUPC-2024-%E4%B8%BA%E7%BE%8E%E5%A5%BD%E7%9A%84%E4%B8%96%E7%95%8C%E7%8C%AE%E4%B8%8A%E7%88%86%E7%84%B0/" target="_self">
         <div>
-          美好的一天从写题解开始。 1感谢 @jhdrgfj 的思路  思路 很显然，设 fi,jf_{i,j}fi,j​ 为在第 iii 天造成 jjj 点伤害。 但是，每一天都是一个 01 背包，任意两天的魔力值都是互不影响的，所以考虑每一天一次 dp。 设 fif_ifi​ 为将魔力值提高到 iii 的最小花费（当天），就是求 01 背包。  code 123456789101112131415161
+          美好的一天从写题解开始。 感谢 @jhdrgfj 的思路  思路 很显然，设 fi,jf_{i,j}fi,j​ 为在第 iii 天造成 jjj 点伤害。 但是，每一天都是一个 01 背包，任意两天的魔力值都是互不影响的，所以考虑每一天一次 dp。 设 fif_ifi​ 为将魔力值提高到 iii 的最小花费（当天），就是求 01 背包。  code #include&lt;bits/stdc++.h
         </div>
       </a>
 

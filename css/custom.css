@@ -1,73 +1,11 @@
-/* 代码框整体样式 */
+/* 深色背景与圆角 */
 .highlight {
+    background: #292D3E;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin: 1rem 0;
-  }
-  
-  /* 代码字体和背景 */
-  .highlight pre {
-    font-family: 'Fira Code', monospace;
-    background: #2d2d2d !important;
-  }
-  
-  /* 复制按钮样式 */
-  .code-copy {
-    top: 10px !important;
-    right: 10px !important;
-    opacity: 0.5;
-  }
-  .code-copy:hover {
-    opacity: 1;
-  }
-  
-  /* 暗色模式适配 */
-  [data-theme="dark"] .highlight {
-    background: #1e1e1e !important;
-  }
-  .highlight::before {
-    content: ' ';
-    position: absolute;
-    top: 12px;
-    left: 15px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #ff5f56;
-    box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
-  }
-  /* 确保行号与代码对齐 */
-.highlight .gutter {
-    padding-right: 10px;
-    text-align: right;
-  }
-  .highlight .code {
-    padding-left: 10px;
-  }
-  /* 防止行号换行 */
-  .highlight .line {
-    white-space: pre;
-  }
-  /* 修复行号错位 */
-.highlight table {
-    width: auto !important;
-  }
-  .highlight .gutter pre {
-    padding-right: 15px;
-    text-align: right;
-  }
-  /* 移除重复行号 */
-  .line-numbers-rows span {
-    display: none !important;
-  }
-  /* Mac风格代码框 */
-.highlight {
-    background: #292D3E; /* 深色背景 */
-    border-radius: 8px;  /* 圆角 */
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3); /* 阴影 */
-    padding-top: 30px;  /* 顶部留白给控件 */
+    padding-top: 30px; /* 顶部留白给控件 */
     position: relative;
     overflow: hidden;
+    margin: 1em 0;
   }
   
   /* Mac窗口控件（红黄绿圆点） */
@@ -79,24 +17,40 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #FF5F56; /* 红色 */
-    box-shadow: 20px 0 #FFBD2E, 40px 0 #27C93F; /* 黄色和绿色 */
+    background: #FF5F56;
+    box-shadow: 20px 0 #FFBD2E, 40px 0 #27C93F;
   }
   
-  /* 代码字体和颜色 */
+  /* 代码字体优化 */
   .highlight pre {
-    font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
     font-size: 14px;
-    line-height: 1.5;
-    color: #E1E4E8; /* 基础文字颜色 */
+    color: #E1E4E8;
     padding: 0 16px 16px;
-    margin: 0;
     overflow-x: auto;
   }
   
   /* 语法高亮配色（类似VS Code Dark+） */
   .highlight .hljs-keyword { color: #569CD6; }  /* 关键字蓝色 */
-  .highlight .hljs-built_in { color: #4EC9B0; } /* 内置类型青色 */
-  .highlight .hljs-number { color: #B5CEA8; }   /* 数字绿色 */
-  .highlight .hljs-comment { color: #6A9955; }  /* 注释绿色 */
   .highlight .hljs-string { color: #CE9178; }   /* 字符串橙色 */
+  .highlight .hljs-comment { color: #6A9955; }  /* 注释绿色 */
+    /* 确保行号与代码对齐 */
+.highlight .gutter {
+    padding-right: 10px;
+    text-align: right;
+  }
+  .highlight .code {
+    padding-left: 10px;
+  }
+  /* 防止行号换行 */
+  .highlight .line {
+    white-space: pre;
+  }
+  .highlight::after {
+    content: attr(data-language);
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    color: #7F7F7F;
+    font-size: 12px;
+  }
