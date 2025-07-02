@@ -48,8 +48,6 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
-
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
@@ -84,7 +82,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"CPP"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -95,13 +93,23 @@
   <script  src="/js/color-schema.js" ></script>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+
 
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
 
 </script>
-<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -256,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          476 字
+          425 字
         
       </span>
     
@@ -330,72 +338,7 @@
 <li>验证，如果今天的钱都不够满足今天的需求（也就是玩 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">m</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span></span></span></span> 次），就直接返回 <code>false</code>。</li>
 </ol>
 <h2 id="代码实现"><a class="markdownIt-Anchor" href="#代码实现"></a> 代码实现</h2>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt;
-using namespace std;
-#define int long long&#x2F;&#x2F;不开long long见祖宗
-int n, a[1000010], b[1000010], p[1000010];
-bool check(int x)
-&#123;
-    int now &#x3D; 0, sum &#x3D; 0;&#x2F;&#x2F;now为当天可以玩的次数，sum为当前有的钱
-    for(int i &#x3D; 1; i &lt;&#x3D; n; i++)
-    &#123;
-        sum +&#x3D; b[i];&#x2F;&#x2F;增加钱
-        if(p[i])&#x2F;&#x2F;如果后面有比今天a[i]更优的
-        &#123;
-            &#x2F;&#x2F;我的a_i是在i~p[i]中最优的
-            int need &#x3D; (p[i] - i) * x;
-            if(now &lt; need)&#x2F;&#x2F;如果当前不够
-            &#123;
-                int t &#x3D; need - now;
-                int buy &#x3D; min((t + a[i] - 1) &#x2F; a[i], sum);
-                now +&#x3D; buy * a[i];
-                sum -&#x3D; buy;
-            &#125;
-        &#125;
-        else
-            now +&#x3D; sum * a[i], sum &#x3D; 0;&#x2F;&#x2F;当前最优，全部兑换完
-        now -&#x3D; x;
-        if(now &lt; 0) return false;
-    &#125;
-    return true;
-&#125;
-int binary()
-&#123;
-    int l &#x3D; 0, r &#x3D; 1e12, mid, ans &#x3D; -1;
-    while(l &lt;&#x3D; r)
-    &#123;
-        mid &#x3D; (l + r) &#x2F; 2;
-        if(check(mid)) l &#x3D; mid + 1, ans &#x3D; mid;
-        else r &#x3D; mid - 1;
-    &#125;
-    return ans;
-&#125;
-signed main()
-&#123;
-    int T;
-    cin &gt;&gt; T;
-    while(T--)
-    &#123;
-        cin &gt;&gt; n;
-        for(int i &#x3D; 1; i &lt;&#x3D; n; i++)
-            cin &gt;&gt; a[i];
-        for(int i &#x3D; 1; i &lt;&#x3D; n; i++)
-            cin &gt;&gt; b[i];
-        &#x2F;*预处理p*&#x2F;
-        stack&lt;int&gt; s;
-        for(int i &#x3D; n; i &gt;&#x3D; 1; i--)
-        &#123;
-            while(!s.empty() &amp;&amp; a[s.top()] &lt;&#x3D; a[i]) s.pop();
-            if(s.empty()) p[i] &#x3D; 0;
-            else p[i] &#x3D; s.top();
-            s.push(i);
-        &#125;
-        &#x2F;*******&#x2F;
-        int ans &#x3D; binary();
-        cout &lt;&lt; ans &lt;&lt; endl;
-    &#125;
-    return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long<span class="hljs-comment">//不开long long见祖宗</span></span><br><span class="hljs-type">int</span> n, a[<span class="hljs-number">1000010</span>], b[<span class="hljs-number">1000010</span>], p[<span class="hljs-number">1000010</span>];<br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> now = <span class="hljs-number">0</span>, sum = <span class="hljs-number">0</span>;<span class="hljs-comment">//now为当天可以玩的次数，sum为当前有的钱</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br>        sum += b[i];<span class="hljs-comment">//增加钱</span><br>        <span class="hljs-keyword">if</span>(p[i])<span class="hljs-comment">//如果后面有比今天a[i]更优的</span><br>        &#123;<br>            <span class="hljs-comment">//我的a_i是在i~p[i]中最优的</span><br>            <span class="hljs-type">int</span> need = (p[i] - i) * x;<br>            <span class="hljs-keyword">if</span>(now &lt; need)<span class="hljs-comment">//如果当前不够</span><br>            &#123;<br>                <span class="hljs-type">int</span> t = need - now;<br>                <span class="hljs-type">int</span> buy = <span class="hljs-built_in">min</span>((t + a[i] - <span class="hljs-number">1</span>) / a[i], sum);<br>                now += buy * a[i];<br>                sum -= buy;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>            now += sum * a[i], sum = <span class="hljs-number">0</span>;<span class="hljs-comment">//当前最优，全部兑换完</span><br>        now -= x;<br>        <span class="hljs-keyword">if</span>(now &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">binary</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1e12</span>, mid, ans = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(l &lt;= r)<br>    &#123;<br>        mid = (l + r) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(mid)) l = mid + <span class="hljs-number">1</span>, ans = mid;<br>        <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> T;<br>    cin &gt;&gt; T;<br>    <span class="hljs-keyword">while</span>(T--)<br>    &#123;<br>        cin &gt;&gt; n;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>            cin &gt;&gt; a[i];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>            cin &gt;&gt; b[i];<br>        <span class="hljs-comment">/*预处理p*/</span><br>        stack&lt;<span class="hljs-type">int</span>&gt; s;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; i--)<br>        &#123;<br>            <span class="hljs-keyword">while</span>(!s.<span class="hljs-built_in">empty</span>() &amp;&amp; a[s.<span class="hljs-built_in">top</span>()] &lt;= a[i]) s.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span>(s.<span class="hljs-built_in">empty</span>()) p[i] = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">else</span> p[i] = s.<span class="hljs-built_in">top</span>();<br>            s.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>        <span class="hljs-comment">/*******/</span><br>        <span class="hljs-type">int</span> ans = <span class="hljs-built_in">binary</span>();<br>        cout &lt;&lt; ans &lt;&lt; endl;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
@@ -722,8 +665,6 @@ signed main()
   });
 </script>
 
-
-  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 

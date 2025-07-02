@@ -52,8 +52,6 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
-
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
@@ -88,7 +86,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"CPP"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -99,13 +97,23 @@
   <script  src="/js/color-schema.js" ></script>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+
 
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
 
 </script>
-<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -260,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          856 字
+          788 字
         
       </span>
     
@@ -271,7 +279,7 @@
         
         
         
-          8 分钟
+          7 分钟
         
       </span>
     
@@ -363,67 +371,9 @@
 <h2 id="预处理"><a class="markdownIt-Anchor" href="#预处理"></a> 预处理</h2>
 <p>我们需要 2 次 dfs，分别用于记录重孩子和打上 DFS 序。</p>
 <p>具体讲解在注释里看吧。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">void dfs1(int u, int f)&#x2F;&#x2F;u：当前的编号，f:父亲节点
-&#123;
-	dep[u] &#x3D; dep[f] + 1;&#x2F;&#x2F;记录深度
-	fa[u] &#x3D; f;&#x2F;&#x2F;记录父亲
-	siz[u] &#x3D; 1;&#x2F;&#x2F;初始化儿子数量
-	int maxson &#x3D; 0;&#x2F;&#x2F;记录最重孩子编号
-	for(int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)&#x2F;&#x2F;遍历所有边
-	&#123;
-		int v &#x3D; e[i].v;
-		if(v &#x3D;&#x3D; f) continue;
-		dfs1(v, u);&#x2F;&#x2F;继续递归
-		siz[u] +&#x3D; siz[v];&#x2F;&#x2F;更新子节点数量
-		if(siz[v] &gt; maxson)&#x2F;&#x2F;更新重孩子
-			son[u] &#x3D; v, maxson &#x3D; siz[v];
-	&#125;
-&#125;
-void dfs2(int u, int topf)&#x2F;&#x2F;topf：这条重链的顶端
-&#123;
-	id[u] &#x3D; ++tot;&#x2F;&#x2F;打上DFS序
-	tw[tot] &#x3D; w[u];&#x2F;&#x2F;更新权值
-	top[u] &#x3D; topf;&#x2F;&#x2F;记录
-	if(!son[u]) return;&#x2F;&#x2F;结束
-	dfs2(son[u], topf);&#x2F;&#x2F;递归重孩子
-	for(int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)
-	&#123;
-		int v &#x3D; e[i].v;
-		if(v &#x3D;&#x3D; fa[u] || v &#x3D;&#x3D; son[u]) continue;
-		dfs2(v, v);&#x2F;&#x2F;遍历轻孩子
-	&#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> f)</span><span class="hljs-comment">//u：当前的编号，f:父亲节点</span></span><br><span class="hljs-function"></span>&#123;<br>	dep[u] = dep[f] + <span class="hljs-number">1</span>;<span class="hljs-comment">//记录深度</span><br>	fa[u] = f;<span class="hljs-comment">//记录父亲</span><br>	siz[u] = <span class="hljs-number">1</span>;<span class="hljs-comment">//初始化儿子数量</span><br>	<span class="hljs-type">int</span> maxson = <span class="hljs-number">0</span>;<span class="hljs-comment">//记录最重孩子编号</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = hd[u]; i; i = e[i].nxt)<span class="hljs-comment">//遍历所有边</span><br>	&#123;<br>		<span class="hljs-type">int</span> v = e[i].v;<br>		<span class="hljs-keyword">if</span>(v == f) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-built_in">dfs1</span>(v, u);<span class="hljs-comment">//继续递归</span><br>		siz[u] += siz[v];<span class="hljs-comment">//更新子节点数量</span><br>		<span class="hljs-keyword">if</span>(siz[v] &gt; maxson)<span class="hljs-comment">//更新重孩子</span><br>			son[u] = v, maxson = siz[v];<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs2</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> topf)</span><span class="hljs-comment">//topf：这条重链的顶端</span></span><br><span class="hljs-function"></span>&#123;<br>	id[u] = ++tot;<span class="hljs-comment">//打上DFS序</span><br>	tw[tot] = w[u];<span class="hljs-comment">//更新权值</span><br>	top[u] = topf;<span class="hljs-comment">//记录</span><br>	<span class="hljs-keyword">if</span>(!son[u]) <span class="hljs-keyword">return</span>;<span class="hljs-comment">//结束</span><br>	<span class="hljs-built_in">dfs2</span>(son[u], topf);<span class="hljs-comment">//递归重孩子</span><br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = hd[u]; i; i = e[i].nxt)<br>	&#123;<br>		<span class="hljs-type">int</span> v = e[i].v;<br>		<span class="hljs-keyword">if</span>(v == fa[u] || v == son[u]) <span class="hljs-keyword">continue</span>;<br>		<span class="hljs-built_in">dfs2</span>(v, v);<span class="hljs-comment">//遍历轻孩子</span><br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="查找和赋值"><a class="markdownIt-Anchor" href="#查找和赋值"></a> 查找和赋值</h2>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int qyrange(int u, int v)
-&#123;
-	int ans &#x3D; 0;
-	while(top[u] !&#x3D; top[v])
-	&#123;
-		if(dep[top[u]] &lt; dep[top[v]]) &#x2F;&#x2F;让u更深
-			swap(u, v);
-		ans +&#x3D; query(1, 1, n, id[top[u]], id[u]);&#x2F;&#x2F;增加
-		ans %&#x3D; mod;
-		u &#x3D; fa[top[u]]; 
-	&#125;
-	if(dep[u] &gt; dep[v]) swap(u, v);
-	ans +&#x3D; query(1, 1, n, id[u], id[v]);
-	ans %&#x3D; mod;
-	return ans;
-&#125;
-
-void uptrange(int u, int v, int k)
-&#123;
-	k %&#x3D; mod;
-	while(top[u] !&#x3D; top[v])
-	&#123;
-		if(dep[top[u]] &lt; dep[top[v]]) 
-			swap(u, v);
-		update(1, 1, n, id[top[u]], id[u], k);
-		u &#x3D; fa[top[u]]; 
-	&#125;
-	if(dep[u] &gt; dep[v]) swap(u, v);
-	update(1, 1, n, id[u], id[v], k);
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">qyrange</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(top[u] != top[v])<br>	&#123;<br>		<span class="hljs-keyword">if</span>(dep[top[u]] &lt; dep[top[v]]) <span class="hljs-comment">//让u更深</span><br>			<span class="hljs-built_in">swap</span>(u, v);<br>		ans += <span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n, id[top[u]], id[u]);<span class="hljs-comment">//增加</span><br>		ans %= mod;<br>		u = fa[top[u]]; <br>	&#125;<br>	<span class="hljs-keyword">if</span>(dep[u] &gt; dep[v]) <span class="hljs-built_in">swap</span>(u, v);<br>	ans += <span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n, id[u], id[v]);<br>	ans %= mod;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">uptrange</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	k %= mod;<br>	<span class="hljs-keyword">while</span>(top[u] != top[v])<br>	&#123;<br>		<span class="hljs-keyword">if</span>(dep[top[u]] &lt; dep[top[v]]) <br>			<span class="hljs-built_in">swap</span>(u, v);<br>		<span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n, id[top[u]], id[u], k);<br>		u = fa[top[u]]; <br>	&#125;<br>	<span class="hljs-keyword">if</span>(dep[u] &gt; dep[v]) <span class="hljs-built_in">swap</span>(u, v);<br>	<span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n, id[u], id[v], k);<br>&#125;<br></code></pre></td></tr></table></figure>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
@@ -755,8 +705,6 @@ void uptrange(int u, int v, int k)
   });
 </script>
 
-
-  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 

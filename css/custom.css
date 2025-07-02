@@ -36,3 +36,67 @@
     background: #ff5f56;
     box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
   }
+  /* 确保行号与代码对齐 */
+.highlight .gutter {
+    padding-right: 10px;
+    text-align: right;
+  }
+  .highlight .code {
+    padding-left: 10px;
+  }
+  /* 防止行号换行 */
+  .highlight .line {
+    white-space: pre;
+  }
+  /* 修复行号错位 */
+.highlight table {
+    width: auto !important;
+  }
+  .highlight .gutter pre {
+    padding-right: 15px;
+    text-align: right;
+  }
+  /* 移除重复行号 */
+  .line-numbers-rows span {
+    display: none !important;
+  }
+  /* Mac风格代码框 */
+.highlight {
+    background: #292D3E; /* 深色背景 */
+    border-radius: 8px;  /* 圆角 */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3); /* 阴影 */
+    padding-top: 30px;  /* 顶部留白给控件 */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Mac窗口控件（红黄绿圆点） */
+  .highlight::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FF5F56; /* 红色 */
+    box-shadow: 20px 0 #FFBD2E, 40px 0 #27C93F; /* 黄色和绿色 */
+  }
+  
+  /* 代码字体和颜色 */
+  .highlight pre {
+    font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #E1E4E8; /* 基础文字颜色 */
+    padding: 0 16px 16px;
+    margin: 0;
+    overflow-x: auto;
+  }
+  
+  /* 语法高亮配色（类似VS Code Dark+） */
+  .highlight .hljs-keyword { color: #569CD6; }  /* 关键字蓝色 */
+  .highlight .hljs-built_in { color: #4EC9B0; } /* 内置类型青色 */
+  .highlight .hljs-number { color: #B5CEA8; }   /* 数字绿色 */
+  .highlight .hljs-comment { color: #6A9955; }  /* 注释绿色 */
+  .highlight .hljs-string { color: #CE9178; }   /* 字符串橙色 */

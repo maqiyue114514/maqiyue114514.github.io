@@ -32,8 +32,8 @@
 <meta property="article:modified_time" content="2025-07-01T01:28:08.593Z">
 <meta property="article:author" content="maqiyue">
 <meta property="article:tag" content="题解">
-<meta property="article:tag" content="堆">
 <meta property="article:tag" content="二分">
+<meta property="article:tag" content="堆">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/oeizu2p7.png">
   
@@ -50,8 +50,6 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
@@ -87,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"CPP"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -98,13 +96,23 @@
   <script  src="/js/color-schema.js" ></script>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+
 
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
 
 </script>
-<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -259,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.1k 字
         
       </span>
     
@@ -346,106 +354,18 @@
 <h1 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h1>
 <p>思路讲完了，代码又该怎么实现呢（天数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span>）？</p>
 <p>首先，如果 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mi>p</mi><mo>−</mo><mi>q</mi><mo stretchy="false">)</mo><mo>×</mo><mi>k</mi><mo>≥</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">(n-p-q)\times k \geq m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83041em;vertical-align:-0.13597em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span> 那么一定可以吃完，因为如果普通的人吃 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 天都能吃完那算上有限制的人也一定能吃完。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">if((long long)(n - cn - pn) * k &gt;&#x3D; m)&#x2F;&#x2F;注意使用long long
-	return true; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">if</span>((<span class="hljs-type">long</span> <span class="hljs-type">long</span>)(n - cn - pn) * k &gt;= m)<span class="hljs-comment">//注意使用long long</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <br></code></pre></td></tr></table></figure>
 <p>然后，枚举挑剔的人能吃的菜，从中选出<strong>最贵</strong>给挑剔的人吃掉。<br />
 其中，选出最贵的菜可以使用优先队列（<code>priority_queue</code>）。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">priority_queue &lt;point&gt; q;
-int sum &#x3D; 1;
-for(int i &#x3D; 1; i &lt;&#x3D; cn; i++)
-&#123;
-	while(sum &lt;&#x3D; m &amp;&amp; a[sum].x &gt;&#x3D; c[i])
-		q.push(a[sum++]);
-	for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; (!q.empty()); j++) q.pop(); 
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">priority_queue &lt;point&gt; q;<br><span class="hljs-type">int</span> sum = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= cn; i++)<br>&#123;<br>	<span class="hljs-keyword">while</span>(sum &lt;= m &amp;&amp; a[sum].x &gt;= c[i])<br>		q.<span class="hljs-built_in">push</span>(a[sum++]);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= k &amp;&amp; (!q.<span class="hljs-built_in">empty</span>()); j++) q.<span class="hljs-built_in">pop</span>(); <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>选出剩下的菜和挑剔的人不能吃的菜放到一个数组里。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int cnt &#x3D; 0;
-while(!q.empty())
-&#123;
-	s[++cnt] &#x3D; q.top();
-	q.pop();
-&#125; 
-for(int i &#x3D; sum; i &lt;&#x3D; m; i++)
-	s[++cnt] &#x3D; a[i];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())<br>&#123;<br>	s[++cnt] = q.<span class="hljs-built_in">top</span>();<br>	q.<span class="hljs-built_in">pop</span>();<br>&#125; <br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = sum; i &lt;= m; i++)<br>	s[++cnt] = a[i];<br></code></pre></td></tr></table></figure>
 <p>按价格排序，在剩下的菜把穷人能吃的给穷人吃。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">sort(s + 1, s + cnt + 1);
-int top &#x3D; 1;
-for(int i &#x3D; 1; i &lt;&#x3D; pn; i++)
-&#123;
-	while(top &lt;&#x3D; cnt &amp;&amp; s[top].y &lt;&#x3D; p[i]) q.push(s[top++]);
-	for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; q.size(); j++) q.pop();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">sort</span>(s + <span class="hljs-number">1</span>, s + cnt + <span class="hljs-number">1</span>);<br><span class="hljs-type">int</span> top = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= pn; i++)<br>&#123;<br>	<span class="hljs-keyword">while</span>(top &lt;= cnt &amp;&amp; s[top].y &lt;= p[i]) q.<span class="hljs-built_in">push</span>(s[top++]);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= k &amp;&amp; q.<span class="hljs-built_in">size</span>(); j++) q.<span class="hljs-built_in">pop</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>判断剩下的菜普通人能否吃完。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int res &#x3D; qq.size() + cnt - top + 1;
-return(res &lt;&#x3D; (n - p - q) * k);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> res = qq.<span class="hljs-built_in">size</span>() + cnt - top + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">return</span>(res &lt;= (n - p - q) * k);<br></code></pre></td></tr></table></figure>
 <h1 id="最终代码"><a class="markdownIt-Anchor" href="#最终代码"></a> 最终代码</h1>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt; I AK IOI.
-using namespace std;
-int n, m, cn, pn, c[50010], p[50010];
-struct point&#123;
-	int x, y;
-	bool operator &lt; (point t) const
-	&#123;
-		return y &lt; t.y;
-	&#125;
-&#125;a[200010], s[200010];
-
-bool cmp(point x, point y)&#123;
-	return x.x &gt; y.x;
-&#125;
-bool check(int k)
-&#123;
-	if((long long)(n - cn - pn) * k &gt;&#x3D; m)
-		return true; 
-	priority_queue &lt;point&gt; q;
-	int sum &#x3D; 1;
-	for(int i &#x3D; 1; i &lt;&#x3D; cn; i++)
-	&#123;
-		while(sum &lt;&#x3D; m &amp;&amp; a[sum].x &gt;&#x3D; c[i]) q.push(a[sum++]);
-		for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; (!q.empty()); j++) q.pop(); 
-	&#125;
-	
-	int cnt &#x3D; 0;
-	while(!q.empty())
-	&#123;
-		s[++cnt] &#x3D; q.top();
-		q.pop();
-	&#125; 
-	for(int i &#x3D; sum; i &lt;&#x3D; m; i++)
-		s[++cnt] &#x3D; a[i];
-	sort(s + 1, s + cnt + 1);
-	int top &#x3D; 1;
-	for(int i &#x3D; 1; i &lt;&#x3D; pn; i++)
-	&#123;
-		while(top &lt;&#x3D; cnt &amp;&amp; s[top].y &lt;&#x3D; p[i]) q.push(s[top++]);
-		for(int j &#x3D; 1; j &lt;&#x3D; k &amp;&amp; q.size(); j++) q.pop();
-	&#125;
-	int res &#x3D; q.size() + cnt - top + 1;
-	return(res &lt;&#x3D; (n - cn - pn) * k);
-&#125;
-int main()
-&#123;
-	cin &gt;&gt; n &gt;&gt; m &gt;&gt; cn &gt;&gt; pn;
-	for(int i &#x3D; 1; i &lt;&#x3D; m; i++) cin &gt;&gt; a[i].x &gt;&gt; a[i].y;
-	for(int i &#x3D; 1; i &lt;&#x3D; cn; i++) cin &gt;&gt; c[i];
-	for(int i &#x3D; 1; i &lt;&#x3D; pn; i++) cin &gt;&gt; p[i];
-	
-	sort(a + 1, a + m + 1, cmp);
-	
-	sort(c + 1, c + cn + 1, greater&lt;int&gt;());
-	
-	sort(p + 1, p + pn + 1);
-	
-	int l &#x3D; 1, r &#x3D; m, mid, ans &#x3D; -1;
-	while(l &lt;&#x3D; r)
-	&#123;
-		mid &#x3D; (l + r) &gt;&gt; 1;
-		if(check(mid)) ans &#x3D; mid, r &#x3D; mid - 1;
-		else l &#x3D; mid + 1;
-	&#125;
-	cout &lt;&lt; ans;
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span> I AK IOI.</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n, m, cn, pn, c[<span class="hljs-number">50010</span>], p[<span class="hljs-number">50010</span>];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">point</span>&#123;<br>	<span class="hljs-type">int</span> x, y;<br>	<span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span> &lt; (point t) <span class="hljs-type">const</span><br>	&#123;<br>		<span class="hljs-keyword">return</span> y &lt; t.y;<br>	&#125;<br>&#125;a[<span class="hljs-number">200010</span>], s[<span class="hljs-number">200010</span>];<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(point x, point y)</span></span>&#123;<br>	<span class="hljs-keyword">return</span> x.x &gt; y.x;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>((<span class="hljs-type">long</span> <span class="hljs-type">long</span>)(n - cn - pn) * k &gt;= m)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <br>	priority_queue &lt;point&gt; q;<br>	<span class="hljs-type">int</span> sum = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= cn; i++)<br>	&#123;<br>		<span class="hljs-keyword">while</span>(sum &lt;= m &amp;&amp; a[sum].x &gt;= c[i]) q.<span class="hljs-built_in">push</span>(a[sum++]);<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= k &amp;&amp; (!q.<span class="hljs-built_in">empty</span>()); j++) q.<span class="hljs-built_in">pop</span>(); <br>	&#125;<br>	<br>	<span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())<br>	&#123;<br>		s[++cnt] = q.<span class="hljs-built_in">top</span>();<br>		q.<span class="hljs-built_in">pop</span>();<br>	&#125; <br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = sum; i &lt;= m; i++)<br>		s[++cnt] = a[i];<br>	<span class="hljs-built_in">sort</span>(s + <span class="hljs-number">1</span>, s + cnt + <span class="hljs-number">1</span>);<br>	<span class="hljs-type">int</span> top = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= pn; i++)<br>	&#123;<br>		<span class="hljs-keyword">while</span>(top &lt;= cnt &amp;&amp; s[top].y &lt;= p[i]) q.<span class="hljs-built_in">push</span>(s[top++]);<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= k &amp;&amp; q.<span class="hljs-built_in">size</span>(); j++) q.<span class="hljs-built_in">pop</span>();<br>	&#125;<br>	<span class="hljs-type">int</span> res = q.<span class="hljs-built_in">size</span>() + cnt - top + <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">return</span>(res &lt;= (n - cn - pn) * k);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m &gt;&gt; cn &gt;&gt; pn;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++) cin &gt;&gt; a[i].x &gt;&gt; a[i].y;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= cn; i++) cin &gt;&gt; c[i];<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= pn; i++) cin &gt;&gt; p[i];<br>	<br>	<span class="hljs-built_in">sort</span>(a + <span class="hljs-number">1</span>, a + m + <span class="hljs-number">1</span>, cmp);<br>	<br>	<span class="hljs-built_in">sort</span>(c + <span class="hljs-number">1</span>, c + cn + <span class="hljs-number">1</span>, <span class="hljs-built_in">greater</span>&lt;<span class="hljs-type">int</span>&gt;());<br>	<br>	<span class="hljs-built_in">sort</span>(p + <span class="hljs-number">1</span>, p + pn + <span class="hljs-number">1</span>);<br>	<br>	<span class="hljs-type">int</span> l = <span class="hljs-number">1</span>, r = m, mid, ans = <span class="hljs-number">-1</span>;<br>	<span class="hljs-keyword">while</span>(l &lt;= r)<br>	&#123;<br>		mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(mid)) ans = mid, r = mid - <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">else</span> l = mid + <span class="hljs-number">1</span>;<br>	&#125;<br>	cout &lt;&lt; ans;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
@@ -496,9 +416,9 @@ int main()
       
         <a href="/tags/%E9%A2%98%E8%A7%A3/" class="print-no-link">#题解</a>
       
-        <a href="/tags/%E5%A0%86/" class="print-no-link">#堆</a>
-      
         <a href="/tags/%E4%BA%8C%E5%88%86/" class="print-no-link">#二分</a>
+      
+        <a href="/tags/%E5%A0%86/" class="print-no-link">#堆</a>
       
     </div>
   
@@ -772,8 +692,6 @@ int main()
   });
 </script>
 
-
-  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 

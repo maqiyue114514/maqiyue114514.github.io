@@ -55,8 +55,6 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
-
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
@@ -91,7 +89,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"maqiyue114514.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"CPP"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -102,13 +100,23 @@
   <script  src="/js/color-schema.js" ></script>
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+
 
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
 
 </script>
-<meta name="generator" content="Hexo 7.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -263,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.2k 字
         
       </span>
     
@@ -356,89 +364,16 @@ Tarjan是这样操作的：<br />
 <li>是图的根</li>
 </ul>
 <p>实现代码：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;u为当前边的起点，v为终点，root为根
-if (!dfn[u])
-	low[u] &#x3D; min(low[u], low[v]);
-else if (u !&#x3D; root)
-	low[u] &#x3D; min(low[u], dfn[v]);
-else
-  low[u] &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//u为当前边的起点，v为终点，root为根</span><br><span class="hljs-keyword">if</span> (!dfn[u])<br>	low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (u != root)<br>	low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br><span class="hljs-keyword">else</span><br>  low[u] = <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
 <p>我们发现当点是根时，不需要特判，因为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 是图中最小的 <code>low</code> 和 <code>dfn</code>。</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;u为当前边的起点，v为终点，root为根
-if (!dfn[u])
-	low[u] &#x3D; min(low[u], low[v]);
-else
-	low[u] &#x3D; min(low[u], dfn[v]);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//u为当前边的起点，v为终点，root为根</span><br><span class="hljs-keyword">if</span> (!dfn[u])<br>	low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br><span class="hljs-keyword">else</span><br>	low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br></code></pre></td></tr></table></figure>
 <h3 id="实现初始化-dfn-和-low"><a class="markdownIt-Anchor" href="#实现初始化-dfn-和-low"></a> 实现初始化 <code>dfn</code> 和 <code>low</code></h3>
 <p>因为可能是非连通图，所以可能有多个根，调用时的代码如下：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">int main()
-&#123;
-	&#x2F;&#x2F;……
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (!dfn[i])
-			tarjan(i, i);
-	&#x2F;&#x2F;……
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (!dfn[i])<br>			<span class="hljs-built_in">tarjan</span>(i, i);<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>用链式前向星存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;hd[i]为最后一条以i点为起点的边的编号
-&#x2F;&#x2F;e[i].v为编号为i这条边的终点
-&#x2F;&#x2F;e[i].nxt为下一条以i这条边的起点为起点的边
-void tarjan(int u,int root)
-&#123;
-	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
-	for (int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)
-	&#123;
-		int v &#x3D; e[i].v;
-		if (!dfn[u])
-		&#123;
-			tarjan(v, root);&#x2F;&#x2F;因为这个点还未更新
-			low[u] &#x3D; min(low[u], low[v]);
-		&#125;
-		else
-		&#123;
-			low[u] &#x3D; min(low[u], dfn[v]);
-		&#125;
-	&#125;
-&#125;
-&#x2F;&#x2F;……
-int main()
-&#123;
-	&#x2F;&#x2F;……
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (!dfn[i])
-			tarjan(i, i);
-	&#x2F;&#x2F;……
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//hd[i]为最后一条以i点为起点的边的编号</span><br><span class="hljs-comment">//e[i].v为编号为i这条边的终点</span><br><span class="hljs-comment">//e[i].nxt为下一条以i这条边的起点为起点的边</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> root)</span></span><br><span class="hljs-function"></span>&#123;<br>	dfn[u] = low[u] = ++cnt;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = hd[u]; i; i = e[i].nxt)<br>	&#123;<br>		<span class="hljs-type">int</span> v = e[i].v;<br>		<span class="hljs-keyword">if</span> (!dfn[u])<br>		&#123;<br>			<span class="hljs-built_in">tarjan</span>(v, root);<span class="hljs-comment">//因为这个点还未更新</span><br>			low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>		&#125;<br>	&#125;<br>&#125;<br><span class="hljs-comment">//……</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (!dfn[i])<br>			<span class="hljs-built_in">tarjan</span>(i, i);<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>用 <code>vector</code> 存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">&#x2F;&#x2F;e[u][i]为起点为u的第i条边的终点
-void tarjan(int u,int root)
-&#123;
-	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
-	for (auto v : e[u])
-	&#123;
-		if (!dfn[u])
-		&#123;
-			tarjan(v, root);&#x2F;&#x2F;因为这个点还未更新，所以遍历这个点
-			low[u] &#x3D; min(low[u], low[v]);
-		&#125;
-		else
-		&#123;
-			low[u] &#x3D; min(low[u], dfn[v]);
-		&#125;
-	&#125;
-&#125;
-&#x2F;&#x2F;……
-int main()
-&#123;
-	&#x2F;&#x2F;……
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (!dfn[i])
-			tarjan(i, i);
-	&#x2F;&#x2F;……
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//e[u][i]为起点为u的第i条边的终点</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u,<span class="hljs-type">int</span> root)</span></span><br><span class="hljs-function"></span>&#123;<br>	dfn[u] = low[u] = ++cnt;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> v : e[u])<br>	&#123;<br>		<span class="hljs-keyword">if</span> (!dfn[u])<br>		&#123;<br>			<span class="hljs-built_in">tarjan</span>(v, root);<span class="hljs-comment">//因为这个点还未更新，所以遍历这个点</span><br>			low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>		&#125;<br>	&#125;<br>&#125;<br><span class="hljs-comment">//……</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (!dfn[i])<br>			<span class="hljs-built_in">tarjan</span>(i, i);<br>	<span class="hljs-comment">//……</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h1 id="割点"><a class="markdownIt-Anchor" href="#割点"></a> 割点</h1>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3388"><img src="https://img.shields.io/badge/%E6%A8%A1%E6%9D%BF%E9%A2%98-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%89%B2%E7%82%B9%EF%BC%88%E5%89%B2%E9%A1%B6%EF%BC%89-blue" srcset="/img/loading.gif" lazyload alt="" /> <img src="https://img.shields.io/badge/%E9%9A%BE%E5%BA%A6-%E6%99%AE%E5%8F%8A+/%E6%8F%90%E9%AB%98-green" srcset="/img/loading.gif" lazyload alt="" /></a></p>
 <h2 id="判定割点"><a class="markdownIt-Anchor" href="#判定割点"></a> 判定割点</h2>
@@ -450,103 +385,10 @@ int main()
 <img src="https://cdn.luogu.com.cn/upload/image_hosting/gejydkn2.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <h2 id="实现-2"><a class="markdownIt-Anchor" href="#实现-2"></a> 实现</h2>
 <p>用链式前向星存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt;
-using namespace std;
-const int N &#x3D; 20010, M &#x3D; 100010;
-int n, m, hd[N], tot, dfn[N], low[N], cnt;
-bool iscut[N];&#x2F;&#x2F;为i这个点是否为割点
-struct edge &#123;
-	int v, nxt;
-&#125;e[M &lt;&lt; 1];
-void add_edge(int u, int v)
-&#123;
-	e[++tot] &#x3D; edge&#123; v,hd[u] &#125;;
-	hd[u] &#x3D; tot;
-	e[++tot] &#x3D; edge&#123; u,hd[v] &#125;;
-	hd[v] &#x3D; tot;
-&#125;
-void tarjan(int u, int root)
-&#123;
-	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
-	int sum &#x3D; 0;
-	for (int i &#x3D; hd[u]; i; i &#x3D; e[i].nxt)
-	&#123;
-		int v &#x3D; e[i].v;
-		if (!dfn[v])
-		&#123;
-			sum++;&#x2F;&#x2F;子节点+1
-			tarjan(v, root), low[u] &#x3D; min(low[u], low[v]);
-			if (u !&#x3D; root &amp;&amp; dfn[u] &lt;&#x3D; low[v]) iscut[u] &#x3D; true;
-		&#125;
-		else
-			low[u] &#x3D; min(low[u], dfn[v]);
-	&#125;
-	if (u &#x3D;&#x3D; root &amp;&amp; sum &gt; 1) iscut[u] &#x3D; true;
-&#125;
-int main()
-&#123;
-	cin &gt;&gt; n &gt;&gt; m;
-	for (int i &#x3D; 1, u, v; i &lt;&#x3D; m; i++)
-		scanf(&quot;%d%d&quot;, &amp;u, &amp;v), add_edge(u, v);
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (!dfn[i])
-			tarjan(i, i);
-	int ans &#x3D; 0;
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		ans +&#x3D; iscut[i];
-	cout &lt;&lt; ans &lt;&lt; endl;
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (iscut[i])
-			cout &lt;&lt; i &lt;&lt; &quot; &quot;;
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">20010</span>, M = <span class="hljs-number">100010</span>;<br><span class="hljs-type">int</span> n, m, hd[N], tot, dfn[N], low[N], cnt;<br><span class="hljs-type">bool</span> iscut[N];<span class="hljs-comment">//为i这个点是否为割点</span><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">edge</span> &#123;<br>	<span class="hljs-type">int</span> v, nxt;<br>&#125;e[M &lt;&lt; <span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v)</span></span><br><span class="hljs-function"></span>&#123;<br>	e[++tot] = edge&#123; v,hd[u] &#125;;<br>	hd[u] = tot;<br>	e[++tot] = edge&#123; u,hd[v] &#125;;<br>	hd[v] = tot;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> root)</span></span><br><span class="hljs-function"></span>&#123;<br>	dfn[u] = low[u] = ++cnt;<br>	<span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = hd[u]; i; i = e[i].nxt)<br>	&#123;<br>		<span class="hljs-type">int</span> v = e[i].v;<br>		<span class="hljs-keyword">if</span> (!dfn[v])<br>		&#123;<br>			sum++;<span class="hljs-comment">//子节点+1</span><br>			<span class="hljs-built_in">tarjan</span>(v, root), low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br>			<span class="hljs-keyword">if</span> (u != root &amp;&amp; dfn[u] &lt;= low[v]) iscut[u] = <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>			low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (u == root &amp;&amp; sum &gt; <span class="hljs-number">1</span>) iscut[u] = <span class="hljs-literal">true</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, u, v; i &lt;= m; i++)<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;u, &amp;v), <span class="hljs-built_in">add_edge</span>(u, v);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (!dfn[i])<br>			<span class="hljs-built_in">tarjan</span>(i, i);<br>	<span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		ans += iscut[i];<br>	cout &lt;&lt; ans &lt;&lt; endl;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (iscut[i])<br>			cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/195364463">AC记录</a><br />
 用 <code>vector</code> 存图的童鞋看这：</p>
-<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">#include&lt;bits&#x2F;stdc++.h&gt;
-using namespace std;
-const int N &#x3D; 20010, M &#x3D; 100010;
-int n, m, dfn[N], low[N], cnt;
-bool iscut[N];
-vector&lt;int&gt; e[N];
-void add_edge(int u, int v)
-&#123;
-	e[u].push_back(v);
-	e[v].push_back(u);
-&#125;
-void tarjan(int u, int root)
-&#123;
-	dfn[u] &#x3D; low[u] &#x3D; ++cnt;
-	int sum &#x3D; 0;
-	for (auto v : e[u])
-	&#123;
-		if (!dfn[v])
-		&#123;
-			sum++;&#x2F;&#x2F;子节点+1
-			tarjan(v, root), low[u] &#x3D; min(low[u], low[v]);
-			if (u !&#x3D; root &amp;&amp; dfn[u] &lt;&#x3D; low[v]) iscut[u] &#x3D; true;
-		&#125;
-		else
-			low[u] &#x3D; min(low[u], dfn[v]);
-	&#125;
-	if (u &#x3D;&#x3D; root &amp;&amp; sum &gt; 1) iscut[u] &#x3D; true;
-&#125;
-int main()
-&#123;
-	cin &gt;&gt; n &gt;&gt; m;
-	for (int i &#x3D; 1, u, v; i &lt;&#x3D; m; i++)
-		scanf(&quot;%d%d&quot;, &amp;u, &amp;v), add_edge(u, v);
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (!dfn[i])
-			tarjan(i, i);
-	int ans &#x3D; 0;
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		ans +&#x3D; iscut[i];
-	cout &lt;&lt; ans &lt;&lt; endl;
-	for (int i &#x3D; 1; i &lt;&#x3D; n; i++)
-		if (iscut[i])
-			cout &lt;&lt; i &lt;&lt; &quot; &quot;;
-	return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">20010</span>, M = <span class="hljs-number">100010</span>;<br><span class="hljs-type">int</span> n, m, dfn[N], low[N], cnt;<br><span class="hljs-type">bool</span> iscut[N];<br>vector&lt;<span class="hljs-type">int</span>&gt; e[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add_edge</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> v)</span></span><br><span class="hljs-function"></span>&#123;<br>	e[u].<span class="hljs-built_in">push_back</span>(v);<br>	e[v].<span class="hljs-built_in">push_back</span>(u);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-type">int</span> u, <span class="hljs-type">int</span> root)</span></span><br><span class="hljs-function"></span>&#123;<br>	dfn[u] = low[u] = ++cnt;<br>	<span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> v : e[u])<br>	&#123;<br>		<span class="hljs-keyword">if</span> (!dfn[v])<br>		&#123;<br>			sum++;<span class="hljs-comment">//子节点+1</span><br>			<span class="hljs-built_in">tarjan</span>(v, root), low[u] = <span class="hljs-built_in">min</span>(low[u], low[v]);<br>			<span class="hljs-keyword">if</span> (u != root &amp;&amp; dfn[u] &lt;= low[v]) iscut[u] = <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>			low[u] = <span class="hljs-built_in">min</span>(low[u], dfn[v]);<br>	&#125;<br>	<span class="hljs-keyword">if</span> (u == root &amp;&amp; sum &gt; <span class="hljs-number">1</span>) iscut[u] = <span class="hljs-literal">true</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, u, v; i &lt;= m; i++)<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;u, &amp;v), <span class="hljs-built_in">add_edge</span>(u, v);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (!dfn[i])<br>			<span class="hljs-built_in">tarjan</span>(i, i);<br>	<span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		ans += iscut[i];<br>	cout &lt;&lt; ans &lt;&lt; endl;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>		<span class="hljs-keyword">if</span> (iscut[i])<br>			cout &lt;&lt; i &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/record/195364698">AC记录</a></p>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
@@ -879,8 +721,6 @@ int main()
   });
 </script>
 
-
-  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
