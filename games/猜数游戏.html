@@ -19,15 +19,15 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="猜数游戏                猜数游戏                               游戏设置                              最小值:                                                   最大值:">
+    <meta name="description" content="高级猜数游戏              h1, h2, h3 {             color: #2c3e50;         }         h1 {             text-align: center;             margin-bottom: 25px;         }         h2 {">
 <meta property="og:type" content="website">
 <meta property="og:title" content="猜数游戏">
 <meta property="og:url" content="https://maqiyue114514.github.io/games/%E7%8C%9C%E6%95%B0%E6%B8%B8%E6%88%8F.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
-<meta property="og:description" content="猜数游戏                猜数游戏                               游戏设置                              最小值:                                                   最大值:">
+<meta property="og:description" content="高级猜数游戏              h1, h2, h3 {             color: #2c3e50;         }         h1 {             text-align: center;             margin-bottom: 25px;         }         h2 {">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-02T13:54:00.000Z">
-<meta property="article:modified_time" content="2025-07-02T14:41:18.484Z">
+<meta property="article:modified_time" content="2025-07-03T00:57:46.382Z">
 <meta property="article:author" content="maqiyue">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4965249_2aax6op7r86.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4965249_tvso69wuvx.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -208,6 +208,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/useful/" target="_self">
+                <i class="iconfont icon-tuijian"></i>
+                <span>有用的</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -271,11 +283,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>猜数游戏</title>
+    <title>高级猜数游戏</title>
+    <style>
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+        .panel h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        input, select, button {
+            padding: 10px 15px;
+            margin: 8px 5px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        button:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        #message {
+            margin: 20px 0;
+            font-weight: bold;
+            min-height: 24px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        #attempts {
+            margin: 15px 0;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        #guessHistory {
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        .guess-item {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            background-color: #ecf0f1;
+        }
+        .correct {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .high {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .low {
+            background-color: #3498db;
+            color: white;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .stat-box {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .difficulty-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .difficulty-btn {
+            margin: 5px;
+            padding: 8px 15px;
+        }
+        .active-difficulty {
+            background-color: #27ae60;
+        }
+        #timer {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        #hintBtn {
+            background-color: #f39c12;
+        }
+        #hintBtn:hover {
+            background-color: #d35400;
+        }
+        .hint-text {
+            color: #f39c12;
+            font-style: italic;
+        }
+        .rules-section {
+            margin-top: 40px;
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .rules-list {
+            padding-left: 20px;
+        }
+        .rules-list li {
+            margin-bottom: 10px;
+        }
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background: #eee;
+            border: none;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .tab-btn.active {
+            background: #3498db;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .rules-toggle {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #rulesContent {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        #rulesContent.expanded {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>猜数游戏</h1>
+        <h1>高级猜数游戏</h1>
         
         <div class="panel">
             <h3>游戏设置</h3>
@@ -324,16 +533,16 @@
                 
                 <div class="stats">
                     <div class="stat-box">
-                        <div class="stat-label">尝试次数</div>
                         <div class="stat-value" id="attemptCount">0</div>
+                        <div class="stat-label">尝试次数</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-label">剩余尝试</div>
                         <div class="stat-value" id="remainingAttempts">10</div>
+                        <div class="stat-label">剩余尝试</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-label">剩余时间</div>
                         <div class="stat-value" id="timer">--:--</div>
+                        <div class="stat-label">剩余时间</div>
                     </div>
                 </div>
                 
@@ -356,6 +565,144 @@
                     <button id="cheatBtn" style="background-color: #e74c3c;">显示答案</button>
                 </div>
             </div>
+        </div>
+
+        <div class="rules-toggle">
+            <button id="toggleRules" style="background-color: #9b59b6;">显示/隐藏游戏规则</button>
+        </div>
+
+        <div id="rulesContent" class="rules-section">
+            <h2>猜数游戏规则</h2>
+            
+            <h3>游戏目标</h3>
+            <p>猜出计算机随机生成的秘密数字。</p>
+            
+            <h3>基本规则</h3>
+            <ol class="rules-list">
+                <li>计算机会在您设定的范围内随机生成一个整数作为秘密数字</li>
+                <li>您需要在有限的尝试次数或时间内猜出这个数字</li>
+                <li>每次猜测后，计算机会给出反馈，告诉您猜测的数字是"太大"、"太小"还是"正确"</li>
+                <li>根据反馈调整您的下一次猜测，直到猜中数字或用完所有尝试机会</li>
+            </ol>
+            
+            <h3>游戏设置选项</h3>
+            
+            <h4>数字范围</h4>
+            <ul class="rules-list">
+                <li>您可以自定义秘密数字的最小值和最大值</li>
+                <li>默认范围是1-100</li>
+                <li>最大值必须大于最小值</li>
+            </ul>
+            
+            <h4>难度级别</h4>
+            <p>游戏提供四种预设难度：</p>
+            <table>
+                <tr>
+                    <th>难度</th>
+                    <th>数字范围</th>
+                    <th>最大尝试次数</th>
+                    <th>时间限制</th>
+                </tr>
+                <tr>
+                    <td>简单模式</td>
+                    <td>1-50</td>
+                    <td>10次</td>
+                    <td>2分钟</td>
+                </tr>
+                <tr>
+                    <td>中等模式</td>
+                    <td>1-100</td>
+                    <td>10次</td>
+                    <td>1分钟</td>
+                </tr>
+                <tr>
+                    <td>困难模式</td>
+                    <td>1-200</td>
+                    <td>7次</td>
+                    <td>30秒</td>
+                </tr>
+                <tr>
+                    <td>自定义模式</td>
+                    <td colspan="3">可自由设置所有参数</td>
+                </tr>
+            </table>
+            
+            <h4>限制条件</h4>
+            <ul class="rules-list">
+                <li><strong>最大尝试次数</strong>：可选择无限制或5/10/15/20次</li>
+                <li><strong>时间限制</strong>：可选择无限制或30秒/1分钟/2分钟/5分钟</li>
+            </ul>
+            
+            <h3>游戏界面功能</h3>
+            
+            <h4>猜测输入框</h4>
+            <ul class="rules-list">
+                <li>输入您的猜测数字</li>
+                <li>按"猜!"按钮或回车键提交</li>
+            </ul>
+            
+            <h4>提示按钮</h4>
+            <ul class="rules-list">
+                <li>根据游戏进度提供不同级别的提示</li>
+                <li>早期提示：数字的奇偶性</li>
+                <li>中期提示：十位数范围</li>
+                <li>后期提示：与正确答案的差值</li>
+            </ul>
+            
+            <h4>游戏统计</h4>
+            <ul class="rules-list">
+                <li>当前尝试次数</li>
+                <li>剩余尝试次数</li>
+                <li>剩余时间(有时间限制时)</li>
+            </ul>
+            
+            <h4>猜测历史</h4>
+            <ul class="rules-list">
+                <li>记录所有猜测及其结果</li>
+                <li>用颜色和箭头标示每次猜测是太高(↓红色)、太低(↑蓝色)还是正确(✓绿色)</li>
+            </ul>
+            
+            <h4>控制按钮</h4>
+            <ul class="rules-list">
+                <li><strong>新游戏</strong>：重新开始游戏</li>
+                <li><strong>放弃</strong>：结束当前游戏并显示答案</li>
+                <li><strong>显示答案</strong>：直接查看正确答案(会结束游戏)</li>
+            </ul>
+            
+            <h3>游戏结束条件</h3>
+            
+            <h4>胜利条件</h4>
+            <ul class="rules-list">
+                <li>猜中秘密数字</li>
+                <li>显示祝贺信息和所用尝试次数</li>
+            </ul>
+            
+            <h4>失败条件</h4>
+            <ul class="rules-list">
+                <li>用完所有尝试次数仍未猜中</li>
+                <li>时间限制到仍未猜中(有时间限制时)</li>
+                <li>主动放弃游戏</li>
+                <li>使用"显示答案"功能</li>
+            </ul>
+            
+            <h3>策略建议</h3>
+            <ul class="rules-list">
+                <li><strong>二分查找法</strong>：每次猜测范围的中间值，可以最快缩小可能范围</li>
+                <li><strong>观察历史记录</strong>：根据之前的反馈调整猜测范围，避免重复无效猜测</li>
+                <li><strong>合理使用提示</strong>：当不确定时使用提示功能，但注意提示会随着游戏进度变化</li>
+                <li><strong>时间管理</strong>：有时间限制时注意控制每次猜测的时间，不要在一个猜测上花费太多时间</li>
+            </ul>
+            
+            <h3>注意事项</h3>
+            <ol class="rules-list">
+                <li>输入的数字必须在设定的范围内</li>
+                <li>只能输入整数</li>
+                <li>游戏过程中可以随时开始新游戏</li>
+                <li>放弃或查看答案会立即结束当前游戏</li>
+                <li>提示功能不会减少您的尝试次数</li>
+            </ol>
+            
+            <p style="text-align: center; font-weight: bold; margin-top: 30px;">祝您游戏愉快！看看您能用多少次尝试猜中秘密数字！</p>
         </div>
     </div>
 
@@ -395,6 +742,8 @@
         const hintBtn = document.getElementById('hintBtn');
         const hintArea = document.getElementById('hintArea');
         const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+        const toggleRulesBtn = document.getElementById('toggleRules');
+        const rulesContent = document.getElementById('rulesContent');
         
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
@@ -406,6 +755,11 @@
                     difficulty = this.dataset.difficulty;
                     applyDifficultySettings();
                 });
+            });
+            
+            // 规则切换按钮
+            toggleRulesBtn.addEventListener('click', function() {
+                rulesContent.classList.toggle('expanded');
             });
             
             // 应用默认难度设置

@@ -19,15 +19,15 @@
   <meta name="author" content="maqiyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="猜数游戏           可以自义定范围的猜数游戏。  去玩猜数游戏！">
+    <meta name="description" content=".game-card {     font-family: &#39;Segoe UI&#39;, system-ui, sans-serif;     max-width: 320px;     margin: 20px auto;     text-align: center;     background: linear-gradient(135deg, rgba(40, 40, 60, 0.8)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="游戏">
 <meta property="og:url" content="https://maqiyue114514.github.io/games/index.html">
 <meta property="og:site_name" content="maqiyue&#39;s blog">
-<meta property="og:description" content="猜数游戏           可以自义定范围的猜数游戏。  去玩猜数游戏！">
+<meta property="og:description" content=".game-card {     font-family: &#39;Segoe UI&#39;, system-ui, sans-serif;     max-width: 320px;     margin: 20px auto;     text-align: center;     background: linear-gradient(135deg, rgba(40, 40, 60, 0.8)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-07-02T12:39:59.000Z">
-<meta property="article:modified_time" content="2025-07-02T14:47:21.667Z">
+<meta property="article:modified_time" content="2025-07-03T02:51:29.987Z">
 <meta property="article:author" content="maqiyue">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4965249_2aax6op7r86.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_4965249_tvso69wuvx.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -208,6 +208,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/useful/" target="_self">
+                <i class="iconfont icon-tuijian"></i>
+                <span>有用的</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -266,16 +278,88 @@
 
 <article class="page-content">
   
-<div style="font-family: 'Segoe UI', sans-serif; max-width: 300px; margin: 0 auto; text-align: center; background:rgba(0, 0, 0, 0); border-radius: 15px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);">
-    
-<h1 style="color: white; margin: 10px 0 5px; font:;font-size: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">猜数游戏</h1>
-    
-<div style="color: white; margin-bottom: 15px; letter-spacing: 1px; font-weight: 300;">
-    可以自义定范围的猜数游戏。
+<style>
+  .game-card {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    max-width: 320px;
+    margin: 20px auto;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(40, 40, 60, 0.8) 0%, rgba(20, 20, 40, 0.9) 100%);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  }
+  
+  .game-title {
+    color: #fff;
+    margin: 10px 0 8px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+  }
+  
+  .game-description {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+    letter-spacing: 0.8px;
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  
+  .game-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #6e45e2 0%, #89d4cf 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .game-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #7d55e8 0%, #97e4e0 100%);
+  }
+</style>
+
+<div class="game-card">
+  <h1 class="game-title">猜数游戏</h1>
+  <div class="game-description">
+    可以自定义范围的猜数游戏，挑战你的直觉和逻辑能力！
+  </div>
+  <a href="/games/猜数游戏" class="game-button">去玩猜数游戏！</a>
 </div>
-<a href="/games/猜数游戏"><button>去玩猜数游戏！</button></a>
+
+<div class="game-card">
+  <h1 class="game-title">飞行射击游戏</h1>
+  <div class="game-description">
+    刺激的飞行射击游戏，体验空中战斗的快感！
+  </div>
+  <a href="/games/飞行射击游戏" class="game-button">去玩飞行射击游戏！</a>
 </div>
-<br>
+<div class="game-card">
+  <h1 class="game-title">贪吃蛇游戏</h1>
+  <div class="game-description">
+    刺激的贪吃蛇游戏，体验贪吃蛇游戏的快感！
+  </div>
+  <a href="/games/贪吃蛇游戏" class="game-button">去玩贪吃蛇游戏！</a>
+</div>
 <div class="giscus"></div>
 <script src="https://giscus.app/client.js"
         data-repo="maqiyue114514/maqiyue114514.github.io"
