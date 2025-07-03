@@ -1,0 +1,58 @@
+/* Mac风格代码框 - 适配.code-wrapper */
+.code-wrapper {
+    position: relative;
+    background: #f5f5f5; /* 代码框背景色 */
+    border-radius: 8px;
+    padding-top: 30px;
+    margin: 1em 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Mac风格顶部圆点按钮 */
+  .code-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    background: #ff5f56; /* 红色按钮 */
+    border-radius: 50%;
+    box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f; /* 黄色和绿色按钮 */
+  }
+  
+  /* 代码语言标签 */
+  .code-wrapper::after {
+    content: attr(data-language);
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    color: #666;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* 代码区域样式 */
+  .code-wrapper pre {
+    margin: 0;
+    padding: 15px;
+    background: transparent !important;
+  }
+  
+  /* 行号样式 */
+  .code-wrapper .line-numbers {
+    padding-right: 10px;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 深色模式适配 */
+  [data-user-color-scheme='dark'] .code-wrapper {
+    background: #252525;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  [data-user-color-scheme='dark'] .code-wrapper::after {
+    color: #aaa;
+  }
