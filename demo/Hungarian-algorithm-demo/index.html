@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>匈牙利算法可视化</title>
+    <style>
+        .node-left { fill: #4CAF50; }
+        .node-right { fill: #2196F3; }
+        .edge { stroke: #ccc; stroke-width: 2; }
+        .matched { stroke: #FF5722; stroke-width: 3; }
+        .active { stroke: #FFC107; stroke-width: 4; }
+        .node-text { fill: white; font-family: Arial; font-weight: bold; }
+        button { margin: 5px; padding: 8px 15px; }
+    </style>
+</head>
+<body>
+    <svg width="600" height="400" id="bipartiteGraph"></svg>
+    <div>
+        <button onclick="nextStep()">下一步</button>
+        <button onclick="reset()">重置</button>
+        <span id="status">点击"下一步"开始算法演示</span>
+    </div>
+
+    <script>
+        // 二分图数据：左部点集U，右部点集V，边集E
+        const graph = {
+            U: ['A', 'B', 'C'],
+            V: ['1', '2', '3'],
+            edges: [
+                ['A', '1'], ['A', '2'],
+                ['B', '2'], ['B', '3'],
+                ['C', '1'], ['C', '3']
+            ]
+        };
+
+        // 布局参数
+        const layout = {
+            leftX: 100,    // 左部X坐标
+            rightX: 400,   // 右部X坐标
+            startY: 80,    // 起始Y坐标
+            spacing: 80    // 节点间距
+        };
+
+        // 算法状态
+        let currentStep = 0;
+        let matching = {};
+        let visited = new Set();
+
+        // 初始化SVG
+        const svg = document.getElementById('bipartiteGraph');
+        
+        // 绘制二分图
+        function drawGraph() {
+            // 清空SVG
+            svg.innerHTML = '';
+            
+            // 绘制边
+            graph.edges.forEach(([u, v]) => {
+                const uIndex = graph.U.indexOf(u);
+                const vIndex = graph.V.indexOf(v);
+                const y1 = layout.startY + uIndex * layout.spacing;
+                const y2 = layout.startY + vIndex * layout.spacing;
+                
+                const edge = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                edge.setAttribute('class', 'edge');
+                edge.setAttribute('x1', layout.leftX);
+                edge.setAttribute('y1', y1);
+                edge.setAttribute('x2', layout.rightX);
+                edge.setAttribute('y2', y2);
+                edge.setAttribute('id', `edge-${u}-${v}`);
+                svg.appendChild(edge);
+            });
+
+            // 绘制左部节点
+            graph.U.forEach((node, i) => {
+                const y = layout.startY + i * layout.spacing;
+                drawNode(node, layout.leftX, y, 'node-left');
+            });
+
+            // 绘制右部节点
+            graph.V.forEach((node, i) => {
+                const y = layout.startY + i * layout.spacing;
+                drawNode(node, layout.rightX, y, 'node-right');
+            });
+        }
+
+        // 绘制节点
+        function drawNode(label, x, y, className) {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', x);
+            circle.setAttribute('cy', y);
+            circle.setAttribute('r', 20);
+            circle.setAttribute('class', className);
+            circle.setAttribute('id', `node-${label}`);
+            
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', x);
+            text.setAttribute('y', y + 5);
+            text.setAttribute('class', 'node-text');
+            text.setAttribute('text-anchor', 'middle');
+            text.textContent = label;
+            
+            group.appendChild(circle);
+            group.appendChild(text);
+            svg.appendChild(group);
+        }
+
+        // 匈牙利算法步骤演示
+        function nextStep() {
+            const status = document.getElementById('status');
+            
+            switch(currentStep) {
+                case 0:
+                    status.textContent = "步骤1: 从左部点A开始，尝试匹配右部点1";
+                    highlightEdge('A', '1', true);
+                    break;
+                case 1:
+                    status.textContent = "步骤2: 点1未匹配，A-1匹配成功";
+                    setMatching('A', '1');
+                    break;
+                case 2:
+                    status.textContent = "步骤3: 从左部点B开始，尝试匹配右部点2";
+                    highlightEdge('B', '2', true);
+                    break;
+                case 3:
+                    status.textContent = "步骤4: 点2未匹配，B-2匹配成功";
+                    setMatching('B', '2');
+                    break;
+                case 4:
+                    status.textContent = "步骤5: 从左部点C开始，尝试匹配右部点1";
+                    highlightEdge('C', '1', true);
+                    break;
+                case 5:
+                    status.textContent = "步骤6: 点1已匹配A，尝试为A重新匹配";
+                    highlightEdge('A', '2', true);
+                    break;
+                case 6:
+                    status.textContent = "步骤7: 点2已匹配B，尝试为B重新匹配";
+                    highlightEdge('B', '3', true);
+                    break;
+                case 7:
+                    status.textContent = "步骤8: 点3未匹配，调整匹配完成";
+                    adjustMatching();
+                    break;
+                case 8:
+                    status.textContent = "算法完成！找到最大匹配：A-1, B-3, C-2";
+                    showFinalResult();
+                    break;
+            }
+            currentStep++;
+        }
+
+        // 高亮边
+        function highlightEdge(u, v, isActive) {
+            // 重置所有边样式
+            document.querySelectorAll('.edge').forEach(edge => {
+                edge.classList.remove('active');
+            });
+            
+            if (u && v) {
+                const edge = document.getElementById(`edge-${u}-${v}`);
+                if (edge) {
+                    edge.classList.add(isActive ? 'active' : 'matched');
+                }
+            }
+        }
+
+        // 设置匹配
+        function setMatching(u, v) {
+            matching[u] = v;
+            matching[v] = u;
+            highlightEdge(u, v, false);
+            document.getElementById(`edge-${u}-${v}`).classList.add('matched');
+        }
+
+        // 调整匹配
+        function adjustMatching() {
+            // C-1匹配，但1已匹配A → 尝试A-2匹配，但2已匹配B → 尝试B-3匹配成功
+            matching['C'] = '1';
+            matching['B'] = '3';  // B改匹配3
+            matching['A'] = '2';   // A改匹配2
+            
+            // 更新所有匹配边的显示
+            Object.keys(matching).forEach(key => {
+                if (key.length === 1) { // 左部点
+                    highlightEdge(key, matching[key], false);
+                }
+            });
+        }
+
+        // 显示最终结果
+        function showFinalResult() {
+            const matches = graph.U.map(u => `${u}-${matching[u]}`).join(', ');
+            document.getElementById('status').textContent = 
+                `找到最大匹配：${matches} | 匹配数：${graph.U.filter(u => matching[u]).length}`;
+        }
+
+        // 重置演示
+        function reset() {
+            currentStep = 0;
+            matching = {};
+            visited.clear();
+            document.getElementById('status').textContent = "点击'下一步'开始算法演示";
+            drawGraph();
+        }
+
+        // 初始化
+        drawGraph();
+    </script>
+</body>
+</html>
