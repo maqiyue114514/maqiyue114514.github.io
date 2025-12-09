@@ -1,0 +1,306 @@
+/* 基本样式 */
+body {
+    font-family: 'Microsoft YaHei', Arial, "Consolas";
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 标题样式 */
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #34495e;
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* 表单样式 */
+form {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: left;
+}
+
+label {
+    display: inline-block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* 按钮样式 */
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .sidebar {
+        width: 100%;
+        min-width: auto;
+        border-left: none;
+        border-top: 2px solid #e0e0e0;
+        padding-left: 0;
+        padding-top: 30px;
+        margin-top: 30px;
+        position: static;
+    }
+    
+    table {
+        width: 100%;
+    }
+    
+    .records-table {
+        width: 100%;
+    }
+}
+
+/* 两栏布局样式 */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+/* 左侧主要内容区 */
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 右侧侧边栏 */
+.sidebar {
+    width: 350px;
+    min-width: 300px;
+    border-left: 2px solid #e0e0e0;
+    padding-left: 30px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin: 0 auto;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+/* 添加小组 */
+#add-group {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* 添加/删除小组标题和表单水平布局 */
+#add-group h2 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 20px 0 0;
+    border-bottom: none;
+}
+
+#add-group-form,
+#sub-group-form {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 10px;
+}
+
+/* 颁奖台容器 */
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 200px;
+    margin: 30px 0;
+    gap: 10px;
+    overflow: hidden;
+}
+
+/* 颁奖台通用样式 */
+.podium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    min-width: 0;
+    max-width: 120px;
+}
+
+/* 第一名样式 */
+.first-place {
+    height: 125px;
+    background-color: #ffd700; /* 金色 */
+}
+
+/* 第二名样式 */
+.second-place {
+    height: 100px;
+    background-color: #c0c0c0; /* 银色 */
+}
+
+/* 第三名样式 */
+.third-place {
+    height: 75px;
+    background-color: #cd7f32; /* 铜色 */
+}
+
+/* 排名数字 */
+.rank {
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 小组名称 */
+.group-name {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+/* 积分 */
+.score {
+    font-size: 20px;
+}
+
+/* 剩余小组列表 */
+.remaining-groups {
+    margin-top: 20px;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 剩余小组项 */
+.group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* 无小组提示 */
+.no-groups {
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+    color: #666;
+}
+
+/* 加分减分记录表样式 */
+.records-table {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.records-table th,
+.records-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.records-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+.records-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.records-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* 分数变化样式 */
+.positive-score {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.negative-score {
+    color: #f44336;
+    font-weight: bold;
+}
