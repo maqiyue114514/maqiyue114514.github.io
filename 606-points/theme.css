@@ -203,19 +203,19 @@ th, td {
 
 /* 第一名样式 */
 .first-place {
-    height: 125px;
+    height: 150px;
     background-color: #ffd700; /* 金色 */
 }
 
 /* 第二名样式 */
 .second-place {
-    height: 100px;
+    height: 125px;
     background-color: #c0c0c0; /* 银色 */
 }
 
 /* 第三名样式 */
 .third-place {
-    height: 75px;
+    height: 110px;
     background-color: #cd7f32; /* 铜色 */
 }
 
