@@ -1,4 +1,3 @@
-/* 初始化 */
 const groupList = document.getElementById("group-list");
 const groupRankings = document.getElementById("group-rankings");
 const addScore = document.getElementById("add-score");
@@ -12,8 +11,20 @@ const addGroupForm = document.getElementById("add-group-form");
 const addGroupNameInput = document.getElementById("add-group-name-input");
 const subGroupForm = document.getElementById("sub-group-form");
 const subGroupNameInput = document.getElementById("sub-group-name-input");
+const Version = 1;
 
-// 获取小组数据，确保初始化为空对象
+//获取版本号
+function getVersion() {
+    const version = localStorage.getItem("version");
+    // 如果没有版本号或解析失败，返回0
+    try {
+        return version ? parseInt(JSON.parse(version)) : 0;
+    } catch (e) {
+        return 0;
+    }
+}
+
+// 获取小组数据
 function getGroups() {
     const groups = localStorage.getItem("groups");
     return groups ? JSON.parse(groups) : {};
@@ -55,8 +66,12 @@ function addScoreSubmit(e){
     const reason = addScoreReasonInput.value;
     const record = {"reason": reason, "score": score, "time": Date.now()};
     
+    // 获取当前小组的color字段，确保更新时保留
+    const currentGroup = getItem(groupId);
+    
     setItem(groupId, {
         "name": groupName, 
+        "color": currentGroup.color || "#000000", // 保留原颜色，如果没有则设置默认值
         "score": newScore, 
         "records": getItem(groupId).records.concat(record)
     });
@@ -69,12 +84,16 @@ function addGroupSubmit(e){
     e.preventDefault(); // 阻止表单默认提交行为
     
     const groupName = addGroupNameInput.value.trim();
+    // 获取用户选择的颜色值
+    const groupColor = document.getElementById("add-group-color-input").value;
+    
     if (!groupName) return;
     
     const groups = getGroups();
     const newGroupId = Object.keys(groups).length.toString();
     
-    setItem(newGroupId, {"name": groupName, "score": 0, "records": []});
+    // 添加新小组时使用用户选择的颜色
+    setItem(newGroupId, {"name": groupName, "color": groupColor, "score": 0, "records": []});
     
     window.location.reload();
 }
@@ -83,7 +102,8 @@ function addGroupSubmit(e){
 function subGroupSubmit(e){
     e.preventDefault(); // 阻止表单默认提交行为
     
-    const groupName = subGroupNameInput.value.trim();
+    const subGroupSelect = document.getElementById("sub-group-select");
+    const groupName = subGroupSelect.value;
     if (!groupName) return;
     
     const groups = getGroups();
@@ -111,7 +131,7 @@ function initGroupList(){
     let groupsListHtml = "<table><tr><th>小组名称</th><th>积分</th></tr>";
     
     for(let groupId in groups){
-        groupsListHtml += "<tr><td>" + groups[groupId].name + "</td><td>" + groups[groupId].score + "</td></tr>";
+        groupsListHtml += "<tr><td style='color:" + (groups[groupId].color || "#000000") + "'>" + groups[groupId].name + "</td><td>" + groups[groupId].score + "</td></tr>";
     }
     
     groupsListHtml += "</table>";
@@ -185,9 +205,44 @@ function initAddScoreGroupSelect(){
     const groups = getGroups();
     let optionsHtml = "";
     for(let groupId in groups){
-        optionsHtml += "<option value=\"" + groups[groupId].name + "\">" + groups[groupId].name + "</option>";
+        optionsHtml += "<option value=\"" + groups[groupId].name + "\" style='color:" + (groups[groupId].color || "#000000") + "'>" + groups[groupId].name + "</option>";
     }
     addScoreGroupSelect.innerHTML = optionsHtml;
+    
+    // 设置选择框初始文字颜色为第一个选项的颜色
+    if (addScoreGroupSelect.options.length > 0) {
+        const firstOption = addScoreGroupSelect.options[0];
+        addScoreGroupSelect.style.color = firstOption.style.color;
+    }
+    
+    // 添加change事件监听，当选择变化时更新选择框文字颜色
+    addScoreGroupSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        this.style.color = selectedOption.style.color;
+    });
+}
+
+// 初始化删除小组选项
+function initSubGroupSelect(){
+    const groups = getGroups();
+    let optionsHtml = "";
+    for(let groupId in groups){
+        optionsHtml += "<option value=\"" + groups[groupId].name + "\" style='color:" + (groups[groupId].color || "#000000") + "'>" + groups[groupId].name + "</option>";
+    }
+    const subGroupSelect = document.getElementById("sub-group-select");
+    subGroupSelect.innerHTML = optionsHtml;
+    
+    // 设置选择框初始文字颜色为第一个选项的颜色
+    if (subGroupSelect.options.length > 0) {
+        const firstOption = subGroupSelect.options[0];
+        subGroupSelect.style.color = firstOption.style.color;
+    }
+    
+    // 添加change事件监听，当选择变化时更新选择框文字颜色
+    subGroupSelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        this.style.color = selectedOption.style.color;
+    });
 }
 
 // 初始化加分减分记录
@@ -240,14 +295,72 @@ function initAddScoreRecords(){
     addScoreRecords.innerHTML += recordsHtml;
 }
 
+//检测更新
+function checkVesion(){
+    const version = getVersion();
+    const skipVersion = localStorage.getItem("skipVersion");
+    
+    // 调试：输出当前版本信息
+    console.log('当前版本:', version);
+    console.log('最新版本:', Version);
+    console.log('跳过版本:', skipVersion);
+    
+    // 如果已经跳过当前版本，则不显示更新提示
+    if(skipVersion) {
+        try {
+            const skipVer = parseInt(JSON.parse(skipVersion));
+            if(skipVer === Version) {
+                console.log('已跳过此版本更新');
+                return;
+            }
+        } catch(e) {
+            console.error('跳过版本解析错误:', e);
+            localStorage.removeItem("skipVersion");
+        }
+    }
+    
+    // 版本比较（确保是数字比较）
+    if(version < Version){
+        console.log('发现新版本，准备提示更新');
+        if(confirm("发现新版本" + String(Version) + "，是否更新？")){
+            // 清除跳过版本记录
+            localStorage.removeItem("skipVersion");
+            updateVersion();
+        } else {
+            // 记住用户不想更新的选择
+            localStorage.setItem("skipVersion", JSON.stringify(Version));
+            console.log('用户选择跳过版本:', Version);
+        }
+    } else {
+        console.log('当前已是最新版本');
+    }
+}
+
+
+// 更新
+function updateVersion(){
+    // 添加默认小组
+    saveGroups({});
+    localStorage.setItem("version", JSON.stringify(Version));
+    window.location.reload();
+}
+
+//显示消息
+function showMessage(message, type = "info"){
+    const messageContainer = document.getElementById("message-container");
+    messageContainer.innerHTML = `<div class="message ${type}">${message}</div>`;
+}
+
 // 初始化函数
 function init(){
     addScoreForm.onsubmit = addScoreSubmit;
     addGroupForm.onsubmit = addGroupSubmit;
     subGroupForm.onsubmit = subGroupSubmit;
+    checkVesion();
     initGroupList();
     initGroupRankings();
     initAddScoreGroupSelect();
+    initSubGroupSelect(); // 初始化删除小组选择框
     initAddScoreRecords();
 }
 
