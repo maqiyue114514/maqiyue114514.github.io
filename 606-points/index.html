@@ -9,7 +9,7 @@
 </head>
 <body>
     <header><h1>606加分系统</h1></header>
-    
+    <div id="message-container"></div>
     <!-- 主要内容区和右侧积分栏 -->
     <div class="main-container">
         <!-- 左侧主要内容 -->
@@ -25,7 +25,7 @@
                     <label for="add-score-group-select">选择小组：</label>
                     <select id="add-score-group-select"></select>
                     <label for="add-score-score-input">输入分数：</label>
-                    <input type="number" id="add-score-score-input" min="-10" max="10" step="0.5">
+                    <input type="number" id="add-score-score-input">
                     <label for="add-score-reason-input">原因：</label>
                     <input type="text" id="add-score-reason-input">
                     <button type="submit">加/减分</button>
@@ -44,13 +44,15 @@
                 <form id="add-group-form">
                     <label for="add-group-name-input">输入小组名称：</label>
                     <input type="text" id="add-group-name-input">
+                    <label for="add-group-color-input">选择小组颜色：</label>
+                    <input type="color" id="add-group-color-input" value="#000000">
                     <button type="submit">添加小组</button>
                 </form>
                 <br>
                 <br>
                 <form id="sub-group-form">
-                    <label for="sub-group-name-input">输入小组名称：</label>
-                    <input type="text" id="sub-group-name-input">
+                    <label for="sub-group-select">选择要删除的小组：</label>
+                    <select id="sub-group-select"></select>
                     <button type="submit">删除小组</button>
                 </form>
            </div>
