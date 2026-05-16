@@ -1,0 +1,45 @@
+<!DOCTPE html>
+<head>
+	<meta charset="utf-8">
+	<style>
+		.rotate-grow {
+			display: inline-block;
+			animation: rotateAndGrow 2s infinite alternate ease-in-out;
+		}
+		
+		@keyframes rotateAndGrow {
+			0% {
+				transform: rotate(-5deg) scale(1);
+			}
+			50% {
+				transform: rotate(5deg) scale(1.5);
+			}
+			100% {
+				transform: rotate(-5deg) scale(1);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="dick">
+		<p onclick="play_dick();" style = "cursor:pointer">点的是Gay</p>
+	</div>
+	<script>
+		const dick = document.getElementById("dick");
+		function play_dick(){
+			console.error("Your parents are die.");
+			if(confirm("Are your parents die?")){
+				dick.innerHTML=`<img src=".\\https://hunyuan-prod-1258344703.cos.accelerate.myqcloud.com/multimedia/dc089d93ce5ae64e318e2e7584d28b6f/20260516204035_9084135f0149e1c961affd0709a011d6.jpg?q-sign-algorithm=sha1&q-ak=AKIDYMawUfVERhRmIdoXOxsukVdVo9xWJNPd0eNReuxDiJfDka-VOBSr9PtDda_kCBDr&q-sign-time=1778935235;1778956835&q-key-time=1778935235;1778956835&q-header-list=host&q-url-param-list=&q-signature=a14148886b268c1b742cd1e4590f98d3f41eb40d&x-cos-security-token=2pZH5SGz3Mnz7BNS0H3Cyx4aRr6iDyBa7422c0ff21b0d466d3903a8b8b115c27FB90QWAWNsAmoPsySllZvCL-na8M-GXjPNqG_gwMW_hWCft7yby-ZJ640N_CzYzIN1oDa2KHBL9_hguaIRp8PHiCf4TsO4tVA8DI-4QttqLjdJd6-xJRSrvsbRC29LQxCdqxAUTX53ZeLBILAcAOu5QEADsx-kHx2aicdMQXYQSFdo2_RFOw4B1d0FAN4YwScbFN5AexEjOvadnerS1loeoF2w2Wig96Ue0_AJ1F9gA1YrcbLl0k2QPaoFKnGcjJuGHqpSo5XmG4V9dWsgOd09NT-_sztgtTJ8ExoD4eLcgBdefgp-qHV77FTgCTExJHsMew2l8MXY0v7vLFAQlvbHYXCbHDlOWS7CtU7ZU9hUcPzFl58PdRuS1Yjukd8Mw44F9O-o5vYPjwtJTqQt-liM9MybIi0E-QmmSMkpzDGz5MqBEuuCIzlp97BUwhq4lOfk116mj1fP526RqBBs7oBQJ0-gqFBN6BV9o4PxkWkEvly_uvqSppzj_PdC_4ICu8AgQDH3hFcGudsulUCTAvAx1LeVQlCfChJ1hZhB0Ius1EX8vCDw-Im3QXbOT_kKG2VTIri0Lo8PFjwpUyj7iHkYOA_B5r42xW8tXZOK13NR4BTKYEScxg-XRR50uagb-U_XOwlPz2W1K-ATEsZaHQj1coCjsMTIlZ1gfCzwUhLAjfCwRlFC8f2l7xcjxbrhEoHb277YgTTMsaI0gfGh0zCi1hhKYXbI1Lt9OoEiuZs8EYnU4X5K6Da3PPoHL_vy6bYWcahkyWZbaDhQxve5gCCyoxELfpnkSFtY6cWD0MBrty_fESEmT0exL4hu1IwZvfU093rYZmqu6d3ADhxTWa0uVkuCakO-9qnPW2ctLQF1K2RQFn6_CfxIWkk80z--E_RYfzyEseK3j5lX8wlCFf1bWrFv_90HQQbOWdBgAIs_U"><p>Your parents are die.</p>`;
+			}else{
+				dick.innerHTML=`<img src=".\\https://hunyuan-prod-1258344703.cos.accelerate.myqcloud.com/multimedia/dc089d93ce5ae64e318e2e7584d28b6f/20260516204035_9084135f0149e1c961affd0709a011d6.jpg?q-sign-algorithm=sha1&q-ak=AKIDYMawUfVERhRmIdoXOxsukVdVo9xWJNPd0eNReuxDiJfDka-VOBSr9PtDda_kCBDr&q-sign-time=1778935235;1778956835&q-key-time=1778935235;1778956835&q-header-list=host&q-url-param-list=&q-signature=a14148886b268c1b742cd1e4590f98d3f41eb40d&x-cos-security-token=2pZH5SGz3Mnz7BNS0H3Cyx4aRr6iDyBa7422c0ff21b0d466d3903a8b8b115c27FB90QWAWNsAmoPsySllZvCL-na8M-GXjPNqG_gwMW_hWCft7yby-ZJ640N_CzYzIN1oDa2KHBL9_hguaIRp8PHiCf4TsO4tVA8DI-4QttqLjdJd6-xJRSrvsbRC29LQxCdqxAUTX53ZeLBILAcAOu5QEADsx-kHx2aicdMQXYQSFdo2_RFOw4B1d0FAN4YwScbFN5AexEjOvadnerS1loeoF2w2Wig96Ue0_AJ1F9gA1YrcbLl0k2QPaoFKnGcjJuGHqpSo5XmG4V9dWsgOd09NT-_sztgtTJ8ExoD4eLcgBdefgp-qHV77FTgCTExJHsMew2l8MXY0v7vLFAQlvbHYXCbHDlOWS7CtU7ZU9hUcPzFl58PdRuS1Yjukd8Mw44F9O-o5vYPjwtJTqQt-liM9MybIi0E-QmmSMkpzDGz5MqBEuuCIzlp97BUwhq4lOfk116mj1fP526RqBBs7oBQJ0-gqFBN6BV9o4PxkWkEvly_uvqSppzj_PdC_4ICu8AgQDH3hFcGudsulUCTAvAx1LeVQlCfChJ1hZhB0Ius1EX8vCDw-Im3QXbOT_kKG2VTIri0Lo8PFjwpUyj7iHkYOA_B5r42xW8tXZOK13NR4BTKYEScxg-XRR50uagb-U_XOwlPz2W1K-ATEsZaHQj1coCjsMTIlZ1gfCzwUhLAjfCwRlFC8f2l7xcjxbrhEoHb277YgTTMsaI0gfGh0zCi1hhKYXbI1Lt9OoEiuZs8EYnU4X5K6Da3PPoHL_vy6bYWcahkyWZbaDhQxve5gCCyoxELfpnkSFtY6cWD0MBrty_fESEmT0exL4hu1IwZvfU093rYZmqu6d3ADhxTWa0uVkuCakO-9qnPW2ctLQF1K2RQFn6_CfxIWkk80z--E_RYfzyEseK3j5lX8wlCFf1bWrFv_90HQQbOWdBgAIs_U">`;
+			}
+			break_dick();
+		}
+		function break_dick(){
+			// 在文字外包裹一个带有旋转动画类的span
+			dick.innerHTML = `<img src="https://hunyuan-prod-1258344703.cos.accelerate.myqcloud.com/multimedia/dc089d93ce5ae64e318e2e7584d28b6f/20260516204035_9084135f0149e1c961affd0709a011d6.jpg?q-sign-algorithm=sha1&q-ak=AKIDYMawUfVERhRmIdoXOxsukVdVo9xWJNPd0eNReuxDiJfDka-VOBSr9PtDda_kCBDr&q-sign-time=1778935235;1778956835&q-key-time=1778935235;1778956835&q-header-list=host&q-url-param-list=&q-signature=a14148886b268c1b742cd1e4590f98d3f41eb40d&x-cos-security-token=2pZH5SGz3Mnz7BNS0H3Cyx4aRr6iDyBa7422c0ff21b0d466d3903a8b8b115c27FB90QWAWNsAmoPsySllZvCL-na8M-GXjPNqG_gwMW_hWCft7yby-ZJ640N_CzYzIN1oDa2KHBL9_hguaIRp8PHiCf4TsO4tVA8DI-4QttqLjdJd6-xJRSrvsbRC29LQxCdqxAUTX53ZeLBILAcAOu5QEADsx-kHx2aicdMQXYQSFdo2_RFOw4B1d0FAN4YwScbFN5AexEjOvadnerS1loeoF2w2Wig96Ue0_AJ1F9gA1YrcbLl0k2QPaoFKnGcjJuGHqpSo5XmG4V9dWsgOd09NT-_sztgtTJ8ExoD4eLcgBdefgp-qHV77FTgCTExJHsMew2l8MXY0v7vLFAQlvbHYXCbHDlOWS7CtU7ZU9hUcPzFl58PdRuS1Yjukd8Mw44F9O-o5vYPjwtJTqQt-liM9MybIi0E-QmmSMkpzDGz5MqBEuuCIzlp97BUwhq4lOfk116mj1fP526RqBBs7oBQJ0-gqFBN6BV9o4PxkWkEvly_uvqSppzj_PdC_4ICu8AgQDH3hFcGudsulUCTAvAx1LeVQlCfChJ1hZhB0Ius1EX8vCDw-Im3QXbOT_kKG2VTIri0Lo8PFjwpUyj7iHkYOA_B5r42xW8tXZOK13NR4BTKYEScxg-XRR50uagb-U_XOwlPz2W1K-ATEsZaHQj1coCjsMTIlZ1gfCzwUhLAjfCwRlFC8f2l7xcjxbrhEoHb277YgTTMsaI0gfGh0zCi1hhKYXbI1Lt9OoEiuZs8EYnU4X5K6Da3PPoHL_vy6bYWcahkyWZbaDhQxve5gCCyoxELfpnkSFtY6cWD0MBrty_fESEmT0exL4hu1IwZvfU093rYZmqu6d3ADhxTWa0uVkuCakO-9qnPW2ctLQF1K2RQFn6_CfxIWkk80z--E_RYfzyEseK3j5lX8wlCFf1bWrFv_90HQQbOWdBgAIs_U"><p>Your parents are die.</p>` + 
+				`<p><span class="rotate-grow">play your dick</span></p>`;
+		}
+	</script>
+</body>
+</html>
