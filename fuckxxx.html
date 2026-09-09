@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title id="title">xxx你MM</title>
+</head>
+<body>
+    <div id="inputForm">
+        <input type="text" id="input">
+        <button onclick="input_over()">确定</button>
+    </div>
+    <div id="app"></div>
+    <script>
+        const inputText = document.getElementById("input");
+        const inputForm = document.getElementById("inputForm");
+        const app = document.getElementById("app");
+        const title = document.getElementById("title");
+        function input_over() {
+            const text = inputText.value;
+            inputForm.innerHTML = "";
+            app.innerHTML = `<p>${text}</p>`;
+            title.innerHTML = text;
+        }
+    </script>
+</body>
+</html>
