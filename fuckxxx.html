@@ -2,7 +2,29 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title id="title">xxx你MM</title>
+    <title id="title">fuckxxx</title>
+    <style>
+		.rotate-grow {
+			display: inline-block;
+			animation: rotateAndGrow 2s infinite alternate ease-in-out;
+            color: red;
+            size: 1000px;
+            position: fixed;
+            left: 40%;
+		}
+		
+		@keyframes rotateAndGrow {
+			0% {
+				transform: rotate(-5deg) scale(1);
+			}
+			50% {
+				transform: rotate(5deg) scale(1.5);
+			}
+			100% {
+				transform: rotate(-5deg) scale(1);
+			}
+		}
+	</style>
 </head>
 <body>
     <div id="inputForm">
@@ -18,7 +40,7 @@
         function input_over() {
             const text = inputText.value;
             inputForm.innerHTML = "";
-            app.innerHTML = `<p>${text}</p>`;
+            app.innerHTML = `<p class="rotate-grow">${text}</p>`;
             title.innerHTML = text;
         }
     </script>
