@@ -7,10 +7,11 @@
 		.rotate-grow {
 			display: inline-block;
 			animation: rotateAndGrow 2s infinite alternate ease-in-out;
-            color: red;
+            color: black;
             size: 1000px;
             position: fixed;
             left: 40%;
+            top: 40%;
 		}
 		
 		@keyframes rotateAndGrow {
@@ -18,7 +19,7 @@
 				transform: rotate(-5deg) scale(1);
 			}
 			50% {
-				transform: rotate(5deg) scale(1.5);
+				transform: rotate(5deg) scale(100);
 			}
 			100% {
 				transform: rotate(-5deg) scale(1);
@@ -29,7 +30,9 @@
 <body>
     <div id="inputForm">
         <input type="text" id="input">
-        <button onclick="input_over()">确定</button>
+        <button onclick="input_over()">确定</button><br>
+        <p><button onclick="set_input('XXX你M掉啦')">XXX你M掉啦</button></p>
+        <p><button onclick="set_input('XXX别动我电脑')">XXX别动我电脑</button></p>
     </div>
     <div id="app"></div>
     <script>
@@ -42,6 +45,9 @@
             inputForm.innerHTML = "";
             app.innerHTML = `<p class="rotate-grow">${text}</p>`;
             title.innerHTML = text;
+        }
+        function set_input(str) {
+            inputText.value = str;
         }
     </script>
 </body>
