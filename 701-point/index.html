@@ -1,0 +1,53 @@
+<!-- 郑重声明：本网站由mqy完成，由Deepseek优化了格式 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>701积分系统</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href=".\style.css">
+    <script src="./supabase-js.js"></script>
+</head>
+<body>
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在加载中…</div>
+    </div>
+    <div id="top-bar"></div>
+    <h1 class="title">701积分系统</h1>
+    <p id="show-date"></p>
+    <div class="section-header">
+    <h3>成员名单</h3>
+        <button class="add-member-btn" onclick="addMember()">+ 添加成员</button>
+    </div>
+    <div id="member-list">
+        <table border="1">
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>积分</th>
+                <th>添加积分</th>
+            </tr>
+            <tbody id="member-list-table"></tbody>
+        </table>
+    </div>
+    <h3>排行榜</h3>
+    <div id="member-ranking-list">
+        <div id="top3-ranking-list">
+            <div id="podium"></div>
+        </div>
+        <table border="1">
+            <tr>
+                <th>排名</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>积分</th>
+            </tr>
+            <tbody id="member-ranking-list-table"></tbody>
+        </table>
+    </div>
+    <button onclick="clearSave()">清空数据</button>
+    <button onclick="createSave()">创建初始数据</button>
+    <script src="server.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
