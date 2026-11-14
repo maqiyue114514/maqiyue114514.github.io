@@ -1,53 +1,81 @@
-<!-- 郑重声明：本网站由mqy完成，由Deepseek优化了格式 -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>701积分系统</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href=".\style.css">
+    <title>701积分系统</title>
+    <link rel="stylesheet" href="./style.css">
     <script src="./supabase-js.js"></script>
 </head>
 <body>
+    <div id="auth-overlay">
+        <div class="auth-box">
+            <h2 class="auth-title">701积分系统</h2>
+            <p class="auth-subtitle">请输入访问密码</p>
+            <input type="password" id="password-input" class="auth-input" placeholder="密码" autocomplete="current-password">
+            <button class="auth-btn" onclick="tryLogin()">进入</button>
+            <p id="auth-error" class="auth-error"></p>
+        </div>
+    </div>
+
     <div id="loading-overlay">
         <div class="loading-spinner"></div>
         <div class="loading-text">正在加载中…</div>
     </div>
+
     <div id="top-bar"></div>
+
     <h1 class="title">701积分系统</h1>
     <p id="show-date"></p>
+
     <div class="section-header">
-    <h3>成员名单</h3>
+        <h3>成员名单</h3>
         <button class="add-member-btn" onclick="addMember()">+ 添加成员</button>
     </div>
+
     <div id="member-list">
         <table border="1">
-            <tr>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>积分</th>
-                <th>添加积分</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>积分</th>
+                    <th>添加积分</th>
+                </tr>
+            </thead>
             <tbody id="member-list-table"></tbody>
         </table>
     </div>
+
     <h3>排行榜</h3>
+
     <div id="member-ranking-list">
         <div id="top3-ranking-list">
             <div id="podium"></div>
         </div>
         <table border="1">
-            <tr>
-                <th>排名</th>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>积分</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>积分</th>
+                </tr>
+            </thead>
             <tbody id="member-ranking-list-table"></tbody>
         </table>
     </div>
+
+    <h3>最近操作</h3>
+    <div id="log-list">
+        <ul id="log-list-ul"></ul>
+    </div>
+
+    <a class="nav-link" href="./weekly.html">本周报告 →</a>
     <button onclick="clearSave()">清空数据</button>
     <button onclick="createSave()">创建初始数据</button>
-    <script src="server.js"></script>
-    <script src="index.js"></script>
+    <button onclick="logout()">退出登录</button>
+
+    <script src="./server.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
