@@ -29,7 +29,6 @@
 
     <div class="section-header">
         <h3>成员名单</h3>
-        <button class="add-member-btn" onclick="addMember()">+ 添加成员</button>
     </div>
 
     <div id="member-list">
@@ -44,6 +43,11 @@
             </thead>
             <tbody id="member-list-table"></tbody>
         </table>
+        <div class="reason-add-form">
+            <input type="text" id="new-reason-label" placeholder="新理由，如：迟到">
+            <button onclick="addReason()">添加理由</button>
+        </div>
+        <p id="reason-error" class="add-member-error"></p>
     </div>
 
     <h3>排行榜</h3>
@@ -70,7 +74,18 @@
         <ul id="log-list-ul"></ul>
     </div>
 
-    <a class="nav-link" href="./weekly.html">本周报告 →</a>
+    <div id="add-member-panel">
+        <h3>添加成员</h3>
+        <div class="add-member-form">
+            <input type="number" id="new-member-id" placeholder="学号">
+            <input type="text" id="new-member-name" placeholder="姓名">
+            <input type="number" id="new-member-point" placeholder="初始积分" value="0">
+            <button onclick="addMember()">添加</button>
+        </div>
+        <p id="add-member-error" class="add-member-error"></p>
+    </div>
+
+    <a class="nav-link" href="./report.html">报告 →</a>
     <button onclick="clearSave()">清空数据</button>
     <button onclick="logout()">退出登录</button>
 
