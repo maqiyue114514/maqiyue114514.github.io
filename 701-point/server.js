@@ -71,6 +71,30 @@ async function loadLogFromRemote() {
   return true;
 }
 
+async function loadReasonsFromRemote() {
+  const { data, error } = await supabaseClient
+    .from('reason')
+    .select('label')
+    .order('label');
+  if (error) {
+    console.error('loadReasonsFromRemote error:', error);
+    return false;
+  }
+  localStorage.setItem('reasons', JSON.stringify((data || []).map(r => r.label)));
+  return true;
+}
+
+function getReasons() {
+  const raw = localStorage.getItem('reasons');
+  if (!raw) return [];
+  try { return JSON.parse(raw); } catch (e) { return []; }
+}
+
+async function addReasonToRemote(label) {
+  const { error } = await supabaseClient.from('reason').insert({ label });
+  if (error) throw error;
+}
+
 async function flushLogToRemote() {
   const pending = getLogPending();
   if (pending.length === 0) return true;
