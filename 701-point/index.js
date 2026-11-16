@@ -24,6 +24,7 @@ const dataReadyPromise = (async () => {
         const ok = await loadMemberFromRemote();
         if (!ok) console.warn("云端拉取失败，使用本地缓存");
         await loadLogFromRemote();
+        await loadReasonsFromRemote();
     } catch (e) {
         console.warn("预加载失败，使用本地缓存:", e);
     } finally {
@@ -101,12 +102,17 @@ function showMemberList() {
                     <button onclick="var e=document.getElementById('add-point-input-${i}');e.value=parseInt(e.value||0)+5">+5</button>
                     <button onclick="document.getElementById('add-point-input-${i}').value--">-1</button>
                     <button onclick="var e=document.getElementById('add-point-input-${i}');e.value=parseInt(e.value||0)-5">-5</button>
+                    <details id="reason-picker-${member[i].id}" class="reason-picker row-reason-picker">
+                        <summary class="reason-summary">理由</summary>
+                        <div id="reason-options-${member[i].id}" class="reason-options"></div>
+                    </details>
                     <button onclick="addPoint(${member[i].id}, document.getElementById('add-point-input-${i}').value)">添加</button>
                 </td>
             </tr>\n`;
         }
     }
     memberListTable.innerHTML = html;
+    for (const m of member) renderReasonOptions(m.id);
 }
 
 function showMemberRankingList() {
@@ -165,6 +171,16 @@ function formatTime(iso) {
     return `${d.getMonth() + 1}/${d.getDate()} ${hm}`;
 }
 
+function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+    }[c]));
+}
+
 function showLog() {
     const logs = getLog().slice(0, 10);
     const ul = document.getElementById("log-list-ul");
@@ -175,11 +191,13 @@ function showLog() {
         const plus = log.delta >= 0;
         const sign = plus ? "+" : "";
         const cls = plus ? "plus" : "minus";
+        const reason = log.reason ? `<span class="log-reason">${escapeHtml(log.reason)}</span>` : "";
         html += `<li>
             <span class="log-main">
                 <span class="log-name">${log.member_name}</span>
                 <span class="log-delta ${cls}">${sign}${log.delta}</span>
                 <span class="log-point">→ ${log.point_after} 分</span>
+                ${reason}
             </span>
             <span class="log-time">${formatTime(log.created_at)}</span>
         </li>`;
@@ -190,6 +208,8 @@ function showLog() {
 function addPoint(id, value) {
     const member = getMember();
     const delta = parseInt(value) || 0;
+    const picker = document.getElementById("reason-picker-" + id);
+    const reasons = picker ? getSelectedReasons(picker) : [];
 
     for (let i = 0; i < member.length; i++) {
         if (member[i].id === id) {
@@ -201,6 +221,7 @@ function addPoint(id, value) {
                 member_name: member[i].name,
                 delta: delta,
                 point_after: member[i].point,
+                reason: reasons.join("、"),
             });
 
             showMemberList();
@@ -242,35 +263,115 @@ function hideLoading() {
 function addMember() {
     const member = getMember();
 
-    const idInput = prompt("请输入学号（数字）：");
-    if (idInput === null) return;
-    const id = parseInt(idInput, 10);
+    const idInput = document.getElementById("new-member-id");
+    const nameInput = document.getElementById("new-member-name");
+    const pointInput = document.getElementById("new-member-point");
+    const errorEl = document.getElementById("add-member-error");
+
+    const id = parseInt(idInput.value, 10);
     if (isNaN(id)) {
-        alert("学号必须是数字。");
+        errorEl.textContent = "学号必须是数字。";
         return;
     }
     if (member.some(m => m.id === id)) {
-        alert("学号 " + id + " 已存在，请勿重复添加。");
+        errorEl.textContent = "学号 " + id + " 已存在，请勿重复添加。";
         return;
     }
 
-    const nameInput = prompt("请输入姓名：");
-    if (nameInput === null) return;
-    const name = nameInput.trim();
+    const name = nameInput.value.trim();
     if (!name) {
-        alert("姓名不能为空。");
+        errorEl.textContent = "姓名不能为空。";
         return;
     }
 
-    const pointInput = prompt("请输入初始积分（可留空，默认 0）：", "0");
-    if (pointInput === null) return;
-    let point = parseInt(pointInput, 10);
+    let point = parseInt(pointInput.value, 10);
     if (isNaN(point)) point = 0;
 
     member.push({ id: id, name: name, point: point });
     saveItem("member", JSON.stringify(member));
+
+    idInput.value = "";
+    nameInput.value = "";
+    pointInput.value = "0";
+    errorEl.textContent = "";
+    idInput.focus();
+
     showMemberList();
     showMemberRankingList();
+}
+
+function getSelectedReasons(picker) {
+    return [...picker.querySelectorAll("input[type=\"checkbox\"]:checked")].map(cb => cb.value);
+}
+
+function updateReasonSummary(picker) {
+    const picked = getSelectedReasons(picker);
+    picker.querySelector("summary").textContent = picked.length ? picked.join("、") : "理由";
+}
+
+function renderReasonOptions(rowId) {
+    const picker = document.getElementById("reason-picker-" + rowId);
+    const box = document.getElementById("reason-options-" + rowId);
+    if (!picker || !box) return;
+
+    box.innerHTML = "";
+    const reasons = getReasons();
+
+    if (reasons.length === 0) {
+        const empty = document.createElement("span");
+        empty.className = "reason-empty";
+        empty.textContent = "暂无理由";
+        box.appendChild(empty);
+    } else {
+        for (const r of reasons) {
+            const label = document.createElement("label");
+            label.className = "reason-option";
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.value = r;
+            cb.addEventListener("change", () => updateReasonSummary(picker));
+
+            label.appendChild(cb);
+            label.appendChild(document.createTextNode(r));
+            box.appendChild(label);
+        }
+    }
+    updateReasonSummary(picker);
+}
+
+function renderAllReasonOptions() {
+    for (const m of getMember()) renderReasonOptions(m.id);
+}
+
+async function addReason() {
+    const input = document.getElementById("new-reason-label");
+    const errorEl = document.getElementById("reason-error");
+    const label = input.value.trim();
+
+    if (!label) {
+        errorEl.textContent = "理由不能为空。";
+        return;
+    }
+    if (getReasons().includes(label)) {
+        errorEl.textContent = "该理由已存在。";
+        return;
+    }
+
+    try {
+        await addReasonToRemote(label);
+    } catch (e) {
+        errorEl.textContent = "添加理由失败：" + e.message;
+        return;
+    }
+
+    const reasons = getReasons();
+    reasons.push(label);
+    localStorage.setItem("reasons", JSON.stringify(reasons));
+
+    input.value = "";
+    errorEl.textContent = "";
+    renderAllReasonOptions();
 }
 
 if (isLoggedIn()) {
