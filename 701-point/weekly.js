@@ -98,6 +98,33 @@ async function loadReport() {
     }
 }
 
+function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+    }[c]));
+}
+
+function addReasonCounts(counts, reason) {
+    if (!reason) return;
+    for (const part of reason.split("、")) {
+        const label = part.trim();
+        if (!label) continue;
+        counts.set(label, (counts.get(label) || 0) + 1);
+    }
+}
+
+function formatReasons(counts) {
+    if (!counts || counts.size === 0) return "—";
+    return [...counts.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .map(([label, n]) => (n > 1 ? `${label}×${n}` : label))
+        .join("、");
+}
+
 function aggregate(logs) {
     const map = new Map();
     for (const log of logs) {
@@ -107,11 +134,18 @@ function aggregate(logs) {
                 name: log.member_name,
                 plus: 0,
                 minus: 0,
+                plusReasons: new Map(),
+                minusReasons: new Map(),
             });
         }
         const item = map.get(log.member_id);
-        if (log.delta > 0) item.plus += log.delta;
-        else if (log.delta < 0) item.minus += Math.abs(log.delta);
+        if (log.delta > 0) {
+            item.plus += log.delta;
+            addReasonCounts(item.plusReasons, log.reason);
+        } else if (log.delta < 0) {
+            item.minus += Math.abs(log.delta);
+            addReasonCounts(item.minusReasons, log.reason);
+        }
     }
     return [...map.values()];
 }
@@ -121,7 +155,7 @@ function renderPlusRanking(members) {
     const tbody = document.getElementById("plus-ranking-table");
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="empty-cell">本周暂无加分记录</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-cell">本周暂无加分记录</td></tr>`;
         return;
     }
 
@@ -139,6 +173,7 @@ function renderPlusRanking(members) {
             <td>${m.id}</td>
             <td>${m.name}</td>
             <td class="delta-plus">+${m.plus}</td>
+            <td class="reason-cell">${escapeHtml(formatReasons(m.plusReasons))}</td>
         </tr>`;
     });
     tbody.innerHTML = html;
@@ -149,7 +184,7 @@ function renderMinusRanking(members) {
     const tbody = document.getElementById("minus-ranking-table");
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="empty-cell">本周暂无扣分记录</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-cell">本周暂无扣分记录</td></tr>`;
         return;
     }
 
@@ -166,6 +201,7 @@ function renderMinusRanking(members) {
             <td>${m.id}</td>
             <td>${m.name}</td>
             <td class="delta-minus">-${m.minus}</td>
+            <td class="reason-cell">${escapeHtml(formatReasons(m.minusReasons))}</td>
         </tr>`;
     });
     tbody.innerHTML = html;
